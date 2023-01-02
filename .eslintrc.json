@@ -1,0 +1,83 @@
+{
+    "extends": [
+        "prettier",
+        "plugin:prettier/recommended",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings"
+    ],
+    "plugins": ["prettier", "react", "react-hooks", "import"],
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "no-var": "error",
+        "no-console": "warn",
+        "no-case-declarations": "off",
+        "curly": ["warn", "multi-line", "consistent"],
+        "eqeqeq": "error",
+        "prefer-const": "error",
+        "consistent-return": "warn",
+        "import/prefer-default-export": "off",
+        "import/extensions": "off",
+        "import/export": "error",
+        "import/no-unresolved": ["error", { "amd": true }],
+        "import/order": [
+            "error",
+            {
+                "alphabetize": { "order": "asc", "caseInsensitive": true },
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    "parent",
+                    "sibling",
+                    "index",
+                    "object"
+                ],
+                "newlines-between": "never",
+                "pathGroups": [
+                    {
+                        "pattern": "react",
+                        "group": "builtin",
+                        "position": "before"
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": ["builtin"]
+            }
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            { "devDependencies": true }
+        ],
+        "sort-imports": [
+            "error",
+            {
+                "ignoreDeclarationSort": true
+            }
+        ],
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/extensions": [".js", ".jsx"],
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".json"],
+                "paths": ["src"]
+            }
+        }
+    },
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": "latest",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    }
+}
