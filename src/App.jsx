@@ -1,4 +1,5 @@
 import { useState } from "react"
+import PrevButton from "./prevButton"
 
 function App() {
     const [count, setCount] = useState(0)
@@ -8,7 +9,7 @@ function App() {
     return (
         <div className="py-5 flex flex-col items-center justify-center gap-4 h-screen">
             <h1 className="text-5xl font-black mb-16">Final Project is here</h1>
-
+            <PrevButton></PrevButton>
             <div className="text-xl font-bold">Count is {count}</div>
 
             <div className="flex flex-row items-center justify-center gap-4">
