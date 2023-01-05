@@ -2,7 +2,6 @@ import { useState } from "react"
 
 function App() {
     const [count, setCount] = useState(0)
-
     const plus = () => setCount((c) => c + 1)
     const minus = () => setCount((c) => c - 1)
 
