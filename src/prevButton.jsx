@@ -1,9 +1,11 @@
 import { ChevronLeftIcon } from "@heroicons/react/20/solid"
 
-export default function PrevButton() {
+const PrevButton = () => {
     return (
         <button>
             <ChevronLeftIcon className="h-10 w-10" />
         </button>
     )
 }
+
+export { PrevButton }

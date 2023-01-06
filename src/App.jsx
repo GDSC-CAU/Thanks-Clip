@@ -1,5 +1,5 @@
 import { useState } from "react"
-import PrevButton from "./PrevButton"
+import { PrevButton } from "./PrevButton"
 
 function App() {
     const [count, setCount] = useState(0)
