@@ -1,14 +1,20 @@
-const NextButton = ({ isDisable, text, onClick, type }) => {
-    const btnType = ["red", "white"].includes(type) ? type : "red"
+const NextButton = ({ isDisable, text, onClick, color, size }) => {
+    const commonCss = "px-7 py-3 text-lg border-solid border-2 rounded-full"
+    const sizeType = size === "half" ? "w-1/2" : "w-full"
+    const colorType = {
+        red: "bg-red-400 text-white border-red-400",
+        white: "bg-white text-gray-800 border-gray-800",
+        gray: "bg-gray-300 text-white border-gray-300",
+        disabled: "bg-gray-300 text-gray-600 border-gray-300",
+    }
+
     return (
         <button
             disabled={isDisable}
             className={
                 isDisable
-                    ? "px-7 py-3 w-full bg-gray-300 text-lg text-gray-600 border-solid border-2 border-gray-300 rounded-full"
-                    : btnType === "red"
-                    ? "px-7 py-3 w-full bg-red-400 text-white border-solid border-2 border-red-400 rounded-full"
-                    : "px-7 py-3 w-full bg-white text-xl text-gray-800 border-solid border-2 border-gray-800 rounded-full"
+                    ? `${commonCss} ${colorType.disabled} ${sizeType}`
+                    : `${commonCss} ${colorType[color]} ${sizeType}`
             }
             onClick={onClick}
         >
@@ -17,4 +23,7 @@ const NextButton = ({ isDisable, text, onClick, type }) => {
     )
 }
 
+NextButton.defaultProps = {
+    color: "red",
+}
 export { NextButton }
