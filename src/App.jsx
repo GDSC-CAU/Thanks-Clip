@@ -1,9 +1,9 @@
-import { Router } from "./router"
+import { RouterProvider } from "./router"
 
 const App = () => {
     return (
         <div className="bg-gray-50">
-            <Router />
+            <RouterProvider />
         </div>
     )
 }

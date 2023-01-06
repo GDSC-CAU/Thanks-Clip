@@ -1,8 +1,8 @@
 import { useEffect } from "react"
-import { RouterProvider } from "react-router-dom"
+import { RouterProvider as RRDRouterProvider } from "react-router-dom"
 import { router, routes } from "./config"
 
-const Router = (props) => {
+const RouterProvider = (props) => {
     useEffect(() => {
         const shouldReplaceInvalidAccess =
             window.location.pathname === routes.stepCommon
@@ -12,7 +12,9 @@ const Router = (props) => {
         }
     }, [])
 
-    return <RouterProvider router={router}>{props.children}</RouterProvider>
+    return (
+        <RRDRouterProvider router={router}>{props.children}</RRDRouterProvider>
+    )
 }
 
-export { Router }
+export { RouterProvider }
