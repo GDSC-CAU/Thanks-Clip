@@ -6,9 +6,7 @@ import { Link } from "react-router-dom"
  * @param {LinkToProps}
  */
 const LinkTo = ({ children, ...linkProps }) => (
-    <Link preventScrollReset {...linkProps}>
-        {children}
-    </Link>
+    <Link {...linkProps}>{children}</Link>
 )
 
 export { LinkTo }
