@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom"
-import { LinkTo } from "../../router"
 
 const progressBarWidth = {
     1: "w-1/4",
@@ -18,13 +17,6 @@ const ProgressBar = ({ ...progressBarProps }) => {
                     className={`transition-all duration-300 h-full bg-red-400 rounded-full ${progressBarWidth[step]}`}
                 />
             </div>
-
-            <LinkTo to={`/step/${Number(step) - 1}`}>
-                Step {Number(step) - 1}
-            </LinkTo>
-            <LinkTo to={`/step/${Number(step) + 1}`}>
-                Step {Number(step) + 1}
-            </LinkTo>
         </div>
     )
 }
