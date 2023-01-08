@@ -2,7 +2,7 @@ import { useState } from "react"
 import { KeywordButton } from "../../components/pages/KeywordButton"
 import { KeywordTextList } from "../../components/pages/KeywordTextList"
 
-export default function Step1() {
+export default function Step2() {
     const [KeywordBtnActive, setKeywordBtnActive] = useState(null)
     const toggleActive = (idx) => setKeywordBtnActive(idx)
     return (
