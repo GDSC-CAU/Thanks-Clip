@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button } from "../../components/common/Button"
-import { KeywordButton } from "../../components/pages/KeywordButton"
-import { KeywordTextList } from "../../components/pages/KeywordTextList"
+import { KeywordButton } from "../../components/pages/step2/KeywordButton"
+import { KeywordTextList } from "../../components/pages/step2/KeywordTextList"
 
 export default function Step2() {
     const [activeKeywordNum, setActiveKeywordNum] = useState(0)
