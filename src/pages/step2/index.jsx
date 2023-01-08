@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button } from "../../components/common/Button"
+import { LinkTo } from "../../components/common/LinkTo"
 import { KeywordButton } from "../../components/pages/step2/KeywordButton"
 import { KeywordTextList } from "../../components/pages/step2/KeywordTextList"
 
@@ -11,12 +12,6 @@ export default function Step2() {
     useEffect(() => {
         countActiveKeywordNum()
     }, [isSelected])
-
-    useEffect(() => {
-        if (activeKeywordNum >= 5) {
-            console.log("최대 5개까지만 추가할 수 있습니다")
-        }
-    }, [activeKeywordNum])
 
     const countActiveKeywordNum = () => {
         setActiveKeywordNum(
@@ -43,7 +38,13 @@ export default function Step2() {
                     onClick={handleKeywordButton}
                 ></KeywordButton>
             ))}
-            <Button>계속하기</Button>
+            <LinkTo to="/step/3">
+                <Button
+                    disabled={!(activeKeywordNum >= 2 && activeKeywordNum <= 5)}
+                >
+                    계속하기
+                </Button>
+            </LinkTo>
         </div>
     )
 }
