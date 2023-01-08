@@ -1,12 +1,15 @@
 import { ChevronLeftIcon } from "@heroicons/react/20/solid"
-import { useNavigate } from "react-router-dom"
+import { LinkTo } from "./LinkTo"
 
-const PrevButton = () => {
-    const navigate = useNavigate()
+const PrevButton = ({ step }) => {
+    const prev = step === 1 ? "/" : `/step/${step - 1}`
+
     return (
-        <button onClick={() => navigate(-1)}>
-            <ChevronLeftIcon className="h-10 w-10" />
-        </button>
+        <LinkTo to={prev}>
+            <button type="button">
+                <ChevronLeftIcon className="h-10 w-10 -ml-3" />
+            </button>
+        </LinkTo>
     )
 }
 
