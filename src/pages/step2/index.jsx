@@ -3,15 +3,23 @@ import { KeywordButton } from "../../components/pages/KeywordButton"
 import { KeywordTextList } from "../../components/pages/KeywordTextList"
 
 export default function Step2() {
-    const [KeywordBtnActive, setKeywordBtnActive] = useState(null)
-    const toggleActive = (idx) => setKeywordBtnActive(idx)
+    const [keywordBtnActive, setKeywordBtnActive] = useState(
+        new Array(KeywordTextList.length).fill(false)
+    )
+    const toggleActive = (idx) => {
+        setKeywordBtnActive([
+            ...keywordBtnActive.slice(0, idx),
+            !keywordBtnActive[idx],
+            ...keywordBtnActive.slice(idx + 1),
+        ])
+    }
     return (
         <div>
             {KeywordTextList.map((item, idx) => (
                 <KeywordButton
                     key={idx}
                     id={idx}
-                    isSelected={idx === KeywordBtnActive}
+                    isSelected={keywordBtnActive[idx]}
                     keywordText={item.keywordText}
                     onClick={toggleActive}
                 ></KeywordButton>
