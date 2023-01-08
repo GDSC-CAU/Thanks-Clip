@@ -6,7 +6,7 @@ export default function Step2() {
     const [keywordBtnActive, setKeywordBtnActive] = useState(
         new Array(KeywordTextList.length).fill(false)
     )
-    const toggleActive = (idx) => {
+    const handleKeywordButton = (idx) => {
         setKeywordBtnActive([
             ...keywordBtnActive.slice(0, idx),
             !keywordBtnActive[idx],
@@ -21,7 +21,7 @@ export default function Step2() {
                     id={idx}
                     isSelected={keywordBtnActive[idx]}
                     keywordText={item.keywordText}
-                    onClick={toggleActive}
+                    onClick={handleKeywordButton}
                 ></KeywordButton>
             ))}
         </div>
