@@ -2,45 +2,62 @@ import { useEffect, useState } from "react"
 import { Button } from "../../components/common/Button"
 import { LinkTo } from "../../components/common/LinkTo"
 import { KeywordButton } from "../../components/pages/step2/KeywordButton"
-import { KeywordTextList } from "../../components/pages/step2/KeywordTextList"
+import { KeywordTextList } from "../../components/pages/step2/KeywordTextList.json"
 
 export default function Step2() {
-    const [activeKeywordNum, setActiveKeywordNum] = useState(0)
+    const [keywordList, setKeywordList] = useState([])
+    const [keywordNum, setKeywordNum] = useState(0)
     const [isSelected, setSelect] = useState(
         new Array(KeywordTextList.length).fill(false)
     )
+    console.log(keywordList)
     useEffect(() => {
-        countActiveKeywordNum()
+        countKeywordNum()
+        getKeywordList()
     }, [isSelected])
 
-    const countActiveKeywordNum = () => {
-        setActiveKeywordNum(
-            isSelected.filter((element) => true === element).length
+    const countKeywordNum = () => {
+        setKeywordNum(isSelected.filter((element) => true === element).length)
+    }
+
+    const getKeywordList = () => {
+        const findKeywordIdxs = isSelected
+            .map((item, idx) => {
+                if (item === true) return idx
+                else return -1
+            })
+            .filter((item) => item !== -1)
+        setKeywordList(
+            KeywordTextList.filter((element) =>
+                findKeywordIdxs.includes(element.id)
+            )
         )
     }
 
-    const handleKeywordButton = (idx) => {
+    const handleKeywordButton = (id) => {
         setSelect([
-            ...isSelected.slice(0, idx),
-            !isSelected[idx],
-            ...isSelected.slice(idx + 1),
+            ...isSelected.slice(0, id),
+            !isSelected[id],
+            ...isSelected.slice(id + 1),
         ])
     }
 
     return (
         <div>
-            {KeywordTextList.map((item, idx) => (
+            {KeywordTextList.map((keyword) => (
                 <KeywordButton
-                    key={idx}
-                    id={idx}
-                    isSelected={isSelected[idx]}
-                    keywordText={item.keywordText}
+                    key={keyword.id}
+                    id={keyword.id}
+                    isSelected={isSelected[keyword.id]}
                     onClick={handleKeywordButton}
-                ></KeywordButton>
+                >
+                    {keyword.text}
+                </KeywordButton>
             ))}
             <LinkTo to="/step/3">
                 <Button
-                    disabled={!(activeKeywordNum >= 2 && activeKeywordNum <= 5)}
+                    disabled={!(keywordNum >= 2 && keywordNum <= 5)}
+                    // onClick={handleButton}
                 >
                     계속하기
                 </Button>
