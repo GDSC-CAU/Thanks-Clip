@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button } from "../../components/common/Button"
 import { LinkTo } from "../../components/common/LinkTo"
+import { Title } from "../../components/common/Title"
 import { KeywordButton } from "../../components/pages/step2/KeywordButton"
 import { KeywordTextList } from "../../components/pages/step2/KeywordTextList.json"
 
@@ -44,6 +45,10 @@ export default function Step2() {
 
     return (
         <div>
+            <Title
+                main={"감사 키워드를 골라주세요!"}
+                sub={"2~5개, 콕 집어주세요!"}
+            ></Title>
             {KeywordTextList.map((keyword) => (
                 <KeywordButton
                     key={keyword.id}
