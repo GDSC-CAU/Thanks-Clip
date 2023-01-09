@@ -1,4 +1,5 @@
 import { Composition } from "remotion"
+import { CONFIG } from "../../constant/deployConfig"
 import { RemotionComposition } from "./Composition"
 import "../index.css"
 
@@ -11,7 +12,7 @@ const VIDEO_CONFIG = {
 const RemotionRoot = () => {
     return (
         <Composition
-            id="video"
+            id={CONFIG.VIDEO_COMPOSITION_ID}
             component={RemotionComposition}
             // durationInFrames / fps = video play second [s]
             durationInFrames={90}
