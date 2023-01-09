@@ -44,29 +44,35 @@ export default function Step2() {
     }
 
     return (
-        <div>
-            <Title
-                main={"감사 키워드를 골라주세요!"}
-                sub={"2~5개, 콕 집어주세요!"}
-            ></Title>
-            {KeywordTextList.map((keyword) => (
-                <KeywordButton
-                    key={keyword.id}
-                    id={keyword.id}
-                    isSelected={isSelected[keyword.id]}
-                    onClick={handleKeywordButton}
-                >
-                    {keyword.text}
-                </KeywordButton>
-            ))}
-            <LinkTo to="/step/3">
-                <Button
-                    disabled={!(keywordNum >= 2 && keywordNum <= 5)}
-                    // onClick={handleButton}
-                >
-                    계속하기
-                </Button>
-            </LinkTo>
+        <div className="flex flex-col h-full">
+            <div className="py-10">
+                <Title
+                    main={"감사 키워드를 골라주세요!"}
+                    sub={"2~5개, 콕 집어주세요!"}
+                ></Title>
+            </div>
+            <div className="grid grid-cols-3 gap-y-3.5 gap-x-1.5 mb-10">
+                {KeywordTextList.map((keyword) => (
+                    <KeywordButton
+                        key={keyword.id}
+                        id={keyword.id}
+                        isSelected={isSelected[keyword.id]}
+                        onClick={handleKeywordButton}
+                    >
+                        {keyword.text}
+                    </KeywordButton>
+                ))}
+            </div>
+            <div className="mt-auto mb-16">
+                <LinkTo to="/step/3">
+                    <Button
+                        disabled={!(keywordNum >= 2 && keywordNum <= 5)}
+                        // onClick={handleButton}
+                    >
+                        계속하기
+                    </Button>
+                </LinkTo>
+            </div>
         </div>
     )
 }
