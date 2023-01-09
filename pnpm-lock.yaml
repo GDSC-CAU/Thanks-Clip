@@ -2,14 +2,15 @@ lockfileVersion: 5.4
 
 specifiers:
   '@heroicons/react': ^2.0.13
-  '@remotion/cli': ^3.3.27
-  '@remotion/lambda': ^3.3.27
+  '@remotion/cli': 3.3.27
+  '@remotion/lambda': 3.3.27
   '@remotion/player': ^3.3.27
   '@types/react': ^18.0.26
   '@types/react-dom': ^18.0.10
   '@vitejs/plugin-react-swc': ^3.0.1
   autoprefixer: ^10.4.13
   css-loader: ^6.7.3
+  dotenv: ^16.0.3
   eslint: ^8.31.0
   eslint-config-prettier: ^8.6.0
   eslint-plugin-import: ^2.26.0
@@ -26,7 +27,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router-dom: ^6.6.1
-  remotion: ^3.3.27
+  remotion: 3.3.27
   style-loader: ^3.3.1
   tailwindcss: ^3.2.4
   vite: ^4.0.4
@@ -48,6 +49,7 @@ devDependencies:
   '@vitejs/plugin-react-swc': 3.0.1_vite@4.0.4
   autoprefixer: 10.4.13_postcss@8.4.21
   css-loader: 6.7.3
+  dotenv: 16.0.3
   eslint: 8.31.0
   eslint-config-prettier: 8.6.0_eslint@8.31.0
   eslint-plugin-import: 2.26.0_eslint@8.31.0
@@ -2817,6 +2819,11 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: true
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /dotenv/9.0.2:
