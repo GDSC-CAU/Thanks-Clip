@@ -1,5 +1,5 @@
 import { Config } from "remotion"
-import { webpackOverride } from "./src/video/webpack-override"
+import { webpackOverride } from "./video/webpack-override"
 
 Config.Rendering.setImageFormat("jpeg")
 Config.Output.setOverwriteOutput(true)
