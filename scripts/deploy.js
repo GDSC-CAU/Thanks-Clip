@@ -1,12 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
-//@ts-check
 import path from "path"
 import { deployFunction, deploySite, getOrCreateBucket } from "@remotion/lambda"
-//@ts-ignore
 import chalk from "chalk"
 import dotenv from "dotenv"
-import { CONFIG } from "../constant/deployConfig.js"
+import { DEPLOY_CONFIG } from "../constant/deployConfig.js"
 import {
     getAWSAccountCount,
     getAWSRegions,
@@ -41,8 +39,8 @@ const deployLambdaAndS3Bucket = async () => {
                 const { functionName, alreadyExisted } = await deployFunction({
                     architecture: "arm64",
                     createCloudWatchLogGroup: true,
-                    memorySizeInMb: CONFIG.RAM,
-                    timeoutInSeconds: CONFIG.TIMEOUT,
+                    memorySizeInMb: DEPLOY_CONFIG.RAM,
+                    timeoutInSeconds: DEPLOY_CONFIG.TIMEOUT,
                     region: awsRegion,
                 })
 
@@ -60,10 +58,10 @@ const deployLambdaAndS3Bucket = async () => {
                 })
                 const { serveUrl } = await deploySite({
                     bucketName,
-                    siteName: CONFIG.SITE_NAME,
+                    siteName: DEPLOY_CONFIG.SITE_NAME,
                     entryPoint: path.join(
                         process.cwd(),
-                        CONFIG.VIDEO_ENTRY_POINT
+                        DEPLOY_CONFIG.VIDEO_ENTRY_POINT
                     ),
                     region: awsRegion,
                 })
