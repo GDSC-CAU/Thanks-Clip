@@ -3,7 +3,11 @@
 module.exports = {
     content: ["./app/**/*.{js,jsx}", "./video/**/*.{js,jsx}"],
     theme: {
-        extend: {},
+        extend: {
+            transitionProperty: {
+                modal: "transform, opacity",
+            },
+        },
     },
     plugins: [],
 }

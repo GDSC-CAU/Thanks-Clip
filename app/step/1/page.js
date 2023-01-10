@@ -1,3 +1,3 @@
-export default function Step2() {
-    return <>step2</>
+export default function Step1() {
+    return <>step1</>
 }
