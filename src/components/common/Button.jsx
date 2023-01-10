@@ -20,8 +20,8 @@ const Button = ({
 }) => {
     const buttonSize = size === "full" ? "w-full" : "w-fit"
 
-    const buttonStyle = `${button} ${disabled ? buttonDisabled : ""} ${
-        buttonColor[color]
+    const buttonStyle = `${button}  ${
+        disabled ? buttonDisabled : buttonColor[color]
     } ${buttonSize}`
 
     return (
