@@ -3,42 +3,94 @@
 //@ts-check
 import path from "path"
 import { deployFunction, deploySite, getOrCreateBucket } from "@remotion/lambda"
-// @ts-ignore
+//@ts-ignore
+import chalk from "chalk"
 import dotenv from "dotenv"
 import { CONFIG } from "../constant/deployConfig.js"
+import {
+    getAWSAccountCount,
+    getAWSRegions,
+    setEnvForRemotionAWSDeploy,
+} from "../pages/api/aws.js"
 
 dotenv.config()
 
-const execute = async () => {
-    const { functionName, alreadyExisted } = await deployFunction({
-        architecture: "arm64",
-        createCloudWatchLogGroup: true,
-        memorySizeInMb: CONFIG.RAM,
-        timeoutInSeconds: CONFIG.TIMEOUT,
-        region: CONFIG.DEPLOY_REGION,
-    })
+/**
+ * 등록된 aws계정(N개)에 lambda와 s3 bucket을 배포합니다
+ */
+const deployLambdaAndS3Bucket = async () => {
+    const accountCount = getAWSAccountCount()
+    for (
+        let currentAccountCount = 1;
+        currentAccountCount <= accountCount;
+        currentAccountCount++
+    ) {
+        console.log(
+            chalk.bold.greenBright(
+                "\n----------------------------------------------------------------------------------------------------------\n"
+            )
+        )
+
+        console.log(chalk.bold.greenBright(`account: ${currentAccountCount}`))
+        console.log("\n")
+
+        for (const awsRegion of getAWSRegions()) {
+            try {
+                setEnvForRemotionAWSDeploy(currentAccountCount)
+
+                const { functionName, alreadyExisted } = await deployFunction({
+                    architecture: "arm64",
+                    createCloudWatchLogGroup: true,
+                    memorySizeInMb: CONFIG.RAM,
+                    timeoutInSeconds: CONFIG.TIMEOUT,
+                    region: awsRegion,
+                })
+
+                console.log(`${chalk.bold.greenBright(`${awsRegion}`)}`)
+                console.log(
+                    `${chalk.bold.bgGreen(
+                        alreadyExisted
+                            ? " ✅ Ensured: aws lambda "
+                            : " 🚀 Deployed: aws lambda "
+                    )} "${chalk.bold.underline(functionName)}"`
+                )
+
+                const { bucketName } = await getOrCreateBucket({
+                    region: awsRegion,
+                })
+                const { serveUrl } = await deploySite({
+                    bucketName,
+                    siteName: CONFIG.SITE_NAME,
+                    entryPoint: path.join(
+                        process.cwd(),
+                        CONFIG.VIDEO_ENTRY_POINT
+                    ),
+                    region: awsRegion,
+                })
+
+                console.log(
+                    `${chalk.bold.bgGreen(
+                        " 🚀 Deployed: aws S3 "
+                    )} "${chalk.bold.underline(serveUrl)}"`
+                )
+                console.log("\n")
+            } catch (e) {
+                console.log(
+                    chalk.bold.bgRedBright(
+                        ` error is occurred in ${awsRegion} `
+                    )
+                )
+                console.log(chalk.bold.whiteBright(e))
+                console.log("\n")
+            }
+        }
+    }
+
     console.log(
-        `${
-            alreadyExisted ? "Ensured" : "Deployed"
-        } function "${functionName}" to ${CONFIG.DEPLOY_REGION} in account`
-    )
-    const { bucketName } = await getOrCreateBucket({
-        region: CONFIG.DEPLOY_REGION,
-    })
-    const { serveUrl } = await deploySite({
-        bucketName,
-        siteName: CONFIG.SITE_NAME,
-        entryPoint: path.join(process.cwd(), CONFIG.VIDEO_ENTRY_POINT),
-        region: CONFIG.DEPLOY_REGION,
-    })
-    console.log(
-        `Deployed site to ${CONFIG.DEPLOY_REGION} in account under ${serveUrl}`
+        chalk.bold.greenBright(
+            "\n----------------------------------------------------------------------------------------------------------\n"
+        )
     )
 }
 
-execute()
-    .then(() => process.exit(0))
-    .catch((err) => {
-        console.error(err)
-        process.exit(1)
-    })
+await deployLambdaAndS3Bucket()

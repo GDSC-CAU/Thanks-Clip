@@ -1,56 +1,123 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-console */
-//@ts-check
 import { getAwsClient } from "@remotion/lambda"
-// @ts-ignore
+import chalk from "chalk"
 import dotenv from "dotenv"
-import { CONFIG } from "../constant/deployConfig.js"
+import {
+    getAWSAccountCount,
+    getAWSRegions,
+    setEnvForRemotionAWSDeploy,
+} from "../pages/api/aws.js"
 
 dotenv.config()
 
-const execute = async () => {
-    const { client, sdk } = getAwsClient({
-        region: CONFIG.DEPLOY_REGION,
-        service: "servicequotas",
-    })
+const LAMBDA_CONCURRENCY_LIMIT_QUOTA = "L-B99A9384"
 
-    const quota = await client.send(
-        new sdk.GetServiceQuotaCommand({
-            QuotaCode: "L-B99A9384",
-            ServiceCode: "lambda",
-        })
-    )
+const accountCount = getAWSAccountCount()
 
-    console.log(CONFIG.DEPLOY_REGION, quota.Quota?.Value)
+console.log(
+    "\n",
+    chalk.bold.whiteBright(
+        `Found ${accountCount} accounts. Increase concurrency limit...`
+    ),
+    "\n"
+)
 
-    if ((quota.Quota?.Value ?? 0) < 1000) {
-        console.log(`Quota for ${CONFIG.DEPLOY_REGION} is not 1000!`)
-        const openCases = await client.send(
-            new sdk.ListRequestedServiceQuotaChangeHistoryByQuotaCommand({
-                QuotaCode: "L-B99A9384",
-                ServiceCode: "lambda",
-            })
+/**
+ * 등록된 aws계정(N개)에 lambda concurrency limit 제한량을 1000으로 올리는 요청을 합니다
+ * @note 동영상 렌더링 속도를 올리기 위해 필요한 과정입니다
+ */
+const increaseLambdaQuota = async () => {
+    for (
+        let currentAccountCount = 1;
+        currentAccountCount <= accountCount;
+        currentAccountCount++
+    ) {
+        console.log(
+            chalk.bold.whiteBright(
+                "\n----------------------------------------------------------------------------------------------------------\n"
+            )
         )
-        const openCase = openCases.RequestedQuotas?.find(
-            (r) => r.Status === "CASE_OPENED"
-        )
-        if (openCase) {
-            console.log("already requested, skipping")
+
+        console.log(chalk.bold.whiteBright(`account: ${currentAccountCount}`))
+        console.log("\n")
+
+        for (const awsRegion of getAWSRegions()) {
+            try {
+                setEnvForRemotionAWSDeploy(currentAccountCount)
+
+                const { client, sdk } = getAwsClient({
+                    region: awsRegion,
+                    service: "servicequotas",
+                })
+
+                const lambdaQuota = await client.send(
+                    new sdk.GetServiceQuotaCommand({
+                        ServiceCode: "lambda",
+                        QuotaCode: LAMBDA_CONCURRENCY_LIMIT_QUOTA,
+                    })
+                )
+
+                console.log(
+                    chalk.bold.bgYellowBright(
+                        ` ${awsRegion} currency limit: ${lambdaQuota.Quota?.Value} `
+                    )
+                )
+
+                if ((lambdaQuota.Quota?.Value ?? 0) < 1000) {
+                    console.log(
+                        chalk.bold.redBright(
+                            `lambda quota is not 1000 in ${currentAccountCount} ${awsRegion}`
+                        )
+                    )
+
+                    const openCases = await client.send(
+                        new sdk.ListRequestedServiceQuotaChangeHistoryByQuotaCommand(
+                            {
+                                ServiceCode: "lambda",
+                                QuotaCode: LAMBDA_CONCURRENCY_LIMIT_QUOTA,
+                            }
+                        )
+                    )
+                    const openCase = openCases.RequestedQuotas?.find(
+                        (r) => r.Status === "CASE_OPENED"
+                    )
+
+                    if (openCase) {
+                        console.log(`already requested in ${awsRegion}...`)
+                        continue
+                    }
+
+                    await client.send(
+                        new sdk.RequestServiceQuotaIncreaseCommand({
+                            ServiceCode: "lambda",
+                            DesiredValue: 1000,
+                            QuotaCode: LAMBDA_CONCURRENCY_LIMIT_QUOTA,
+                        })
+                    )
+
+                    console.log(
+                        chalk.bold.greenBright(
+                            "lambda function quota increased to 1000"
+                        )
+                    )
+                }
+            } catch (e) {
+                console.log(
+                    chalk.bold.bgRedBright(
+                        ` error is occurred in ${awsRegion} `
+                    )
+                )
+
+                console.log(chalk.bold(e))
+            }
         }
-        await client.send(
-            new sdk.RequestServiceQuotaIncreaseCommand({
-                QuotaCode: "L-B99A9384",
-                DesiredValue: 1000,
-                ServiceCode: "lambda",
-            })
-        )
-        console.log("requested increase to 1000")
     }
+
+    console.log(
+        chalk.bold.whiteBright(
+            "\n----------------------------------------------------------------------------------------------------------\n"
+        )
+    )
 }
 
-execute()
-    .then(() => process.exit(0))
-    .catch((err) => {
-        console.error(err)
-        process.exit(1)
-    })
+await increaseLambdaQuota()
