@@ -45,7 +45,7 @@ dependencies:
   '@remotion/lambda': 3.3.27_aupnqacurc7f6p3mpxem2jpbxu
   '@remotion/player': 3.3.27_biqbaboplfbrettd7655fr4n2y
   cookies-next: 2.1.1
-  jotai: 1.12.1_react@18.2.0
+  jotai: 1.13.0_react@18.2.0
   next: 13.1.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -4514,12 +4514,13 @@ packages:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  /jotai/1.12.1_react@18.2.0:
-    resolution: {integrity: sha512-t6gsYM1WkQHMOazaZYLykCA+fh9KPDGrA+tDYzDeV0268QsCqmX6S4lO46uswgt1LGUeG0EDFGuMd9ac8cWNTA==}
+  /jotai/1.13.0_react@18.2.0:
+    resolution: {integrity: sha512-SPTO46Jw1aJTp2i18tiKgk++nKNKJTMNw4qYFy9QRTydceWvD2Eys+YgB7cb1S6pzbM9i0Ik/y7Yl7IH8k9Lig==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@babel/core': '*'
       '@babel/template': '*'
+      jotai-devtools: '*'
       jotai-immer: '*'
       jotai-optics: '*'
       jotai-redux: '*'
@@ -4533,6 +4534,8 @@ packages:
       '@babel/core':
         optional: true
       '@babel/template':
+        optional: true
+      jotai-devtools:
         optional: true
       jotai-immer:
         optional: true
@@ -5740,8 +5743,8 @@ packages:
       end-of-stream: 1.4.4
       once: 1.4.0
 
-  /punycode/2.1.1:
-    resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
+  /punycode/2.2.0:
+    resolution: {integrity: sha512-LN6QV1IJ9ZhxWTNdktaPClrNfp8xdSAYS0Zk2ddX7XsXZAxckMHPCBcHRo0cTcEIgYPRiGEkmji3Idkh2yFtYw==}
     engines: {node: '>=6'}
 
   /queue-microtask/1.2.3:
@@ -6435,7 +6438,7 @@ packages:
   /tr46/1.0.1:
     resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
     dependencies:
-      punycode: 2.1.1
+      punycode: 2.2.0
     dev: false
 
   /traverse/0.3.9:
@@ -6532,7 +6535,7 @@ packages:
   /uri-js/4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
-      punycode: 2.1.1
+      punycode: 2.2.0
 
   /url-join/0.0.1:
     resolution: {integrity: sha512-H6dnQ/yPAAVzMQRvEvyz01hhfQL5qRWSEt7BX8t9DqnPw9BjMb64fjIRq76Uvf1hkHp+mTZvEVJ5guXOT0Xqaw==}
