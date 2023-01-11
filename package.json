@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@heroicons/react": "^2.0.13",
+        "@next/font": "^13.1.1",
         "@remotion/bundler": "3.3.27",
         "@remotion/cli": "3.3.27",
         "@remotion/lambda": "3.3.27",
