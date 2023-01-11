@@ -8,8 +8,8 @@ import { Container } from "./Container"
 
 // const toolbarOptions = ["type", "color", "font", "sticker"]
 const ToolBar = (props) => {
-    const handleClick = (iconType) => {
-        props.handleClickOptions(iconType)
+    const handleClick = (selectedType) => {
+        props.handleClickOptions(selectedType)
     }
     return (
         <div className="flex flex-cols gap-1 justify-end absolute right-0 top-0">

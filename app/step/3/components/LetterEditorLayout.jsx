@@ -4,10 +4,10 @@ import { EditorToolBar } from "./EditorToolBar"
 import { ToolBar } from "./ToolBar"
 
 const LetterEditorLayout = (props) => {
-    const [select, setSelect] = useState("")
+    const [selectedOption, setSelectedOption] = useState("")
 
     const handleClickOptions = (option) => {
-        setSelect(option)
+        setSelectedOption(option)
     }
 
     return (
@@ -15,9 +15,9 @@ const LetterEditorLayout = (props) => {
             {props.children}
             <ToolBar
                 handleClickOptions={handleClickOptions}
-                selectedOption={select}
+                selectedOption={selectedOption}
             ></ToolBar>
-            <EditorToolBar selectedOption={select}></EditorToolBar>
+            <EditorToolBar selectedOption={selectedOption}></EditorToolBar>
         </div>
     )
 }
