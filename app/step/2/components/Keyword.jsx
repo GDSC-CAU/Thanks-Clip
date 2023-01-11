@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useEffect, useState } from "react"
 import { KeywordButton } from "./KeywordButton"
 import { KeywordTextList } from "./KeywordTextList.json"
@@ -8,15 +10,6 @@ const Keyword = () => {
     const [isSelected, setSelect] = useState(
         new Array(KeywordTextList.length).fill(false)
     )
-
-    useEffect(() => {
-        countKeywordNum()
-        getKeywordList()
-    }, [isSelected, getKeywordList, countKeywordNum])
-
-    const countKeywordNum = useCallback(() => {
-        setKeywordNum(isSelected.filter((element) => true === element).length)
-    }, [isSelected])
 
     const getKeywordList = useCallback(() => {
         const findKeywordIndex = isSelected
@@ -32,6 +25,10 @@ const Keyword = () => {
         )
     }, [isSelected])
 
+    const countKeywordNum = useCallback(() => {
+        setKeywordNum(isSelected.filter((element) => true === element).length)
+    }, [isSelected])
+
     const handleKeywordButton = (id) => {
         setSelect([
             ...isSelected.slice(0, id),
@@ -39,6 +36,11 @@ const Keyword = () => {
             ...isSelected.slice(id + 1),
         ])
     }
+
+    useEffect(() => {
+        countKeywordNum()
+        getKeywordList()
+    }, [isSelected, getKeywordList, countKeywordNum])
 
     return (
         <>

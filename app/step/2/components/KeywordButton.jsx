@@ -7,7 +7,10 @@ const keywordBtnSelected =
 const KeywordButton = ({ children, id, isSelected, onClick }) => {
     const keywordBtnStyle = `${isSelected ? keywordBtnSelected : keywordBtn}`
     return (
-        <button className={keywordBtnStyle} onClick={() => onClick(id)}>
+        <button
+            className={`hover:scale-[101%] active:scale-95 transition ${keywordBtnStyle}`}
+            onClick={() => onClick(id)}
+        >
             {children}
         </button>
     )
