@@ -1,19 +1,16 @@
 import Link from "next/link"
 import { Button } from "../../common/Button"
 import { Title } from "../../common/Title"
-// import { SetCustomName } from "./components/SetCustomName"
-import { LetterEditorLayout } from "./components/LetterEditorLayout"
+import { Letter } from "./components/Letter"
 
 export default function Step3() {
     return (
         <>
             <div className="py-10">
-                <Title main={"편지지를 꾸며볼까요?"} />
+                <Title main="편지지를 꾸며볼까요?" />
             </div>
 
-            <LetterEditorLayout>
-                <div className="w-full min-h-[30rem] h-3/4">letter</div>
-            </LetterEditorLayout>
+            <Letter />
 
             <div className="mt-auto mb-5">
                 <Link href="/step/4">
