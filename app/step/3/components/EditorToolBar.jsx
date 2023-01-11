@@ -1,8 +1,7 @@
 import { Container } from "./Container"
 const EditorToolBar = (props) => {
     return (
-        // 처음 활성화되었을 때,
-        <div className="">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2">
             <Container isEditorToolBar>{props.selectedOption}</Container>
         </div>
     )

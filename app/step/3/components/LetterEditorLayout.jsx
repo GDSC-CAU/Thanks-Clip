@@ -11,7 +11,8 @@ const LetterEditorLayout = (props) => {
     }
 
     return (
-        <div className="bg-red-300 flex flex-col w-full h-fit relative">
+        // height -> f-fit
+        <div className="bg-red-300 flex flex-col h-96 w-full relative">
             {props.children}
             <ToolBar
                 handleClickOptions={handleClickOptions}
