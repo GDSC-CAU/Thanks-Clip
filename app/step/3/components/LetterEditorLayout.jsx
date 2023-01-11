@@ -1,7 +1,8 @@
 "use client"
+
 import { useState } from "react"
 import { EditorToolBar } from "./EditorToolBar"
-import { ToolBar } from "./ToolBar"
+import { EditorToolBarSelector } from "./EditorToolBarSelector"
 
 const LetterEditorLayout = (props) => {
     const [selectedOption, setSelectedOption] = useState("")
@@ -11,13 +12,15 @@ const LetterEditorLayout = (props) => {
     }
 
     return (
-        <div className="flex flex-col h-96 w-full relative">
+        <div className="flex flex-col h-fit w-full relative">
             {props.children}
-            <ToolBar
+
+            <EditorToolBarSelector
                 handleClickOptions={handleClickOptions}
                 selectedOption={selectedOption}
-            ></ToolBar>
-            <EditorToolBar selectedOption={selectedOption}></EditorToolBar>
+            />
+
+            <EditorToolBar selectedOption={selectedOption} />
         </div>
     )
 }
