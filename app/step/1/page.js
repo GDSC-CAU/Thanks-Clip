@@ -1,3 +1,5 @@
+import { LetterForm } from "./components/LetterForm"
+
 export default function Step1() {
-    return <>step1</>
+    return <LetterForm />
 }
