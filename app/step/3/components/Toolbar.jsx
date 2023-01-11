@@ -7,7 +7,7 @@ import {
 import { Container } from "./Container"
 
 // const toolbarOptions = ["type", "color", "font", "sticker"]
-const Toolbar = (props) => {
+const ToolBar = (props) => {
     const handleClick = (iconType) => {
         props.handleClickOptions(iconType)
     }
@@ -65,4 +65,4 @@ const Toolbar = (props) => {
     )
 }
 
-export { Toolbar }
+export { ToolBar }
