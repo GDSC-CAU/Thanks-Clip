@@ -2,9 +2,14 @@
 // import { Button } from "../../common/Button"
 // import { Title } from "../../common/Title"
 // import { SetCustomName } from "./components/SetCustomName"
+import { LetterEditorLayout } from "./components/LetterEditorLayout"
 
 export default function Step3() {
-    return <div>Step3</div>
+    return (
+        <div className="mt-10">
+            <LetterEditorLayout></LetterEditorLayout>
+        </div>
+    )
 }
 
 /* <div className="flex flex-col justify-between items-start h-full"> 

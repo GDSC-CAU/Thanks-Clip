@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react"
 import { EditorToolBar } from "./EditorToolBar"
 import { ToolBar } from "./ToolBar"
