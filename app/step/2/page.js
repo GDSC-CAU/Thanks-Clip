@@ -15,10 +15,9 @@ export default function Step2() {
             <div className="grid grid-cols-3 gap-y-3.5 gap-x-1.5 mb-10">
                 <Keyword />
             </div>
-            <div className="mt-auto mb-16">
-                <Link href="/step/3">
+            <div className="mt-auto mb-5">
+                <Link href="/step/4">
                     <Button
-                    // disabled={!(keywordNum >= 2 && keywordNum <= 5)}
                     // onClick={handleButton}
                     >
                         계속하기
