@@ -16,8 +16,9 @@ export default function Step2() {
                 <Keyword />
             </div>
             <div className="mt-auto mb-5">
-                <Link href="/step/4">
+                <Link href="/step/3">
                     <Button
+                    // disabled={!(keywordNum >= 2 && keywordNum <= 5)}
                     // onClick={handleButton}
                     >
                         계속하기

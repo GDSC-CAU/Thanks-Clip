@@ -14,9 +14,8 @@ export default function Step3() {
                 <LetterEditorLayout></LetterEditorLayout>
             </div>
             <div className="mt-auto mb-5">
-                <Link href="/step/3">
+                <Link href="/step/4">
                     <Button
-                    // disabled={!(keywordNum >= 2 && keywordNum <= 5)}
                     // onClick={handleButton}
                     >
                         계속하기
