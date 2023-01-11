@@ -1,23 +1,25 @@
 import Link from "next/link"
 import { Button } from "../../common/Button"
 import { Title } from "../../common/Title"
-import { SetCustomName } from "./components/SetCustomName"
+// import { SetCustomName } from "./components/SetCustomName"
+import { LetterEditorLayout } from "./components/LetterEditorLayout"
 
 export default function Step3() {
     return (
-        <div className="flex flex-col justify-between items-start h-full">
-            <Title
-                main="이름을 설정해보세요!"
-                sub="remotion 비디오가 렌더링 해줍니다!"
-            />
+        <>
+            <div className="py-10">
+                <Title main={"편지지를 꾸며볼까요?"} />
+            </div>
 
-            <SetCustomName />
+            <LetterEditorLayout>
+                <div className="w-full min-h-[30rem] h-3/4">letter</div>
+            </LetterEditorLayout>
 
-            <Link href="/step/4" className="w-full">
-                <Button color="red" size="full">
-                    Clip이 완성되었어요!
-                </Button>
-            </Link>
-        </div>
+            <div className="mt-auto mb-5">
+                <Link href="/step/4">
+                    <Button>계속하기</Button>
+                </Link>
+            </div>
+        </>
     )
 }
