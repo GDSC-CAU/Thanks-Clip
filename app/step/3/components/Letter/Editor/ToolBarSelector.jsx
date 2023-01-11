@@ -4,8 +4,7 @@ import {
     PencilSquareIcon,
     SparklesIcon,
 } from "@heroicons/react/24/solid"
-import { Container } from "./Container"
-// import { Container } from "./Container"
+import { Container } from "../../common/Container"
 
 const icon = {
     type: (className) => <DocumentIcon className={className} />,
@@ -22,12 +21,12 @@ const EditorToolBarSelectorButton = ({ handleClick, selectedOption, type }) => {
             onClick={() => {
                 handleClick(type)
             }}
-            className={`rounded-full hover:bg-gray-50 border transition p-2 active:scale-90 ${
+            className={`rounded-full hover:bg-gray-50 border transition gap-2 p-1 md:p-2 active:scale-90 ${
                 isActive ? "border-red-200" : "border-transparent"
             }`}
         >
             {icon[type](
-                `h-6 w-6 transition ${
+                `h-5 w-5 transition ${
                     isActive ? "text-red-400" : "text-gray-900"
                 }`
             )}
@@ -40,7 +39,7 @@ const EditorToolBarSelector = (props) => {
         props.handleClickOptions(selectedType)
     }
     return (
-        <Container className="flex flex-cols gap-1 justify-end absolute right-0 top-0">
+        <Container className="flex flex-cols gap-2 justify-end absolute right-1 top-1">
             {toolBarType.map((type) => (
                 <EditorToolBarSelectorButton
                     handleClick={handleClick}

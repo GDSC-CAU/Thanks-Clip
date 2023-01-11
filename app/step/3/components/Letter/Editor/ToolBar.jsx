@@ -1,4 +1,5 @@
-import { Container } from "./Container"
+import { Container } from "../../common/Container"
+
 const EditorToolBar = (props) => {
     const isActive = props.selectedOption !== ""
     return (
