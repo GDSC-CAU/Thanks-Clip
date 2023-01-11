@@ -7,6 +7,11 @@ module.exports = {
             transitionProperty: {
                 modal: "transform, opacity",
             },
+            fontFamily: {
+                "main-cute": "var(--font-main-cute)",
+                "main-hand": "var(--font-main-hand)",
+                "main-sans": "var(--font-main-sans)",
+            },
         },
     },
     plugins: [],
