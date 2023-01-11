@@ -6,7 +6,8 @@
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:import/errors",
-        "plugin:import/warnings"
+        "plugin:import/warnings",
+        "next/core-web-vitals"
     ],
     "plugins": ["prettier", "react", "react-hooks", "import"],
     "env": {

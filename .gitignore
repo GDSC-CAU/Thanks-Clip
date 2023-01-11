@@ -12,6 +12,7 @@ dist
 dist-ssr
 out
 *.local
+.next
 
 # Editor directories and files
 .vscode/*
@@ -23,4 +24,7 @@ out
 *.njsproj
 *.sln
 *.sw?
+
+# Env
+.env
 

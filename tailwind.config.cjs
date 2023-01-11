@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line no-undef
 module.exports = {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    content: ["./app/**/*.{js,jsx}", "./video/**/*.{js,jsx}"],
     theme: {
         extend: {
             transitionProperty: {
