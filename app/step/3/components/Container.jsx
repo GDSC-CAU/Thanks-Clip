@@ -1,9 +1,9 @@
-const Container = ({ children, onClick, isEditorToolBar = false }) => {
-    const toolBarStyle = `${
-        isEditorToolBar ? "h-20 w-fit px-7 py-4 " : "h-10 w-10 px-1.5 py-1.5"
-    }  flex flex-cols items-align justify-center shadow-md shadow-gray-500/20 rounded-full`
+const Container = ({ children, onClick, className }) => {
     return (
-        <div className={toolBarStyle} onClick={onClick}>
+        <div
+            className={`${className} bg-white shadow-lg rounded-full px-2 py-1 border border-gray-100 select-none transform-gpu`}
+            onClick={onClick}
+        >
             {children}
         </div>
     )
