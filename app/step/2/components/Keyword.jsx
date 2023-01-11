@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import { KeywordButton } from "./KeywordButton"
-import { KeywordTextList } from "./KeywordTextList.json"
+import { KeywordTextList } from "./KeywordTextList"
 
 const Keyword = () => {
     const [, setKeywordList] = useState([])
