@@ -10,21 +10,21 @@ import ActiveSansFontIcon from "../../../../../../public/fontIcon/sans_red.svg"
 const font = {
     cute: (isActive) =>
         isActive ? (
-            <Image src={ActiveCuteFontIcon} alt=""></Image>
+            <Image className="mx-3" src={ActiveCuteFontIcon} alt=""></Image>
         ) : (
-            <Image src={CuteFontIcon} alt=""></Image>
+            <Image className="mx-3" src={CuteFontIcon} alt=""></Image>
         ),
     hand: (isActive) =>
         isActive ? (
-            <Image src={ActiveHandFontIcon} alt=""></Image>
+            <Image className="mx-3" src={ActiveHandFontIcon} alt=""></Image>
         ) : (
-            <Image src={HandFontIcon} alt=""></Image>
+            <Image className="mx-3" src={HandFontIcon} alt=""></Image>
         ),
     sans: (isActive) =>
         isActive ? (
-            <Image src={ActiveSansFontIcon} alt=""></Image>
+            <Image className="mx-3" src={ActiveSansFontIcon} alt=""></Image>
         ) : (
-            <Image src={SansFontIcon} alt=""></Image>
+            <Image className="mx-3" src={SansFontIcon} alt=""></Image>
         ),
 }
 
@@ -50,7 +50,7 @@ const FontToolBar = () => {
         setSelectedFont(font)
     }
     return (
-        <div className="flex flex-cols">
+        <div className="flex items-center justify-center">
             {fontType.map((type, idx) => (
                 <FontSelectorButton
                     handleClickFont={handleClickFont}
