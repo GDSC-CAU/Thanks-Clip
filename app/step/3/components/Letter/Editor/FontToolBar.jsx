@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useAtom } from "jotai"
 import Image from "next/image"
+import { store } from "../../../../../../atoms"
 import CuteFontIcon from "../../../../../../public/fontIcon/cute_black.svg"
 import ActiveCuteFontIcon from "../../../../../../public/fontIcon/cute_red.svg"
 import HandFontIcon from "../../../../../../public/fontIcon/hand_black.svg"
@@ -32,6 +33,7 @@ const fontType = Object.keys(font)
 
 const FontSelectorButton = ({ handleClickFont, selectedFont, type }) => {
     const isActive = selectedFont === type
+
     return (
         <div
             onClick={() => {
@@ -44,17 +46,17 @@ const FontSelectorButton = ({ handleClickFont, selectedFont, type }) => {
 }
 
 const FontToolBar = () => {
-    const [selectedFont, setSelectedFont] = useState("")
-
+    const [letter, setLetter] = useAtom(store.letter)
+    console.log(letter)
     const handleClickFont = (font) => {
-        setSelectedFont(font)
+        setLetter((letter) => ({ ...letter, font: font }))
     }
     return (
         <div className="flex items-center justify-center">
             {fontType.map((type, idx) => (
                 <FontSelectorButton
                     handleClickFont={handleClickFont}
-                    selectedFont={selectedFont}
+                    selectedFont={letter.font}
                     type={type}
                     key={idx}
                 />
