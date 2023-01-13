@@ -8,10 +8,44 @@ const LetterText = () => {
     const fontType = `font-main-${letter.font}`
 
     return (
-        <div>
-            <div className={fontType}>To. {letter.to}</div>
-            <div className={fontType}>{letter.letter}</div>
-            <div className={fontType}>From. {letter.from}</div>
+        <div
+            style={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+            }}
+        >
+            <div
+                className={fontType}
+                style={{
+                    height: "22%",
+                    fontSize: "1.1rem",
+                    lineHeight: "1.5rem",
+                }}
+            >
+                To. {letter.to}
+            </div>
+            <div
+                className={fontType}
+                style={{
+                    height: "70%",
+                    fontSize: "1.1rem",
+                    lineHeight: "1.5rem",
+                }}
+            >
+                {letter.letter}
+            </div>
+            <div
+                className={fontType}
+                style={{
+                    height: "11%",
+                    textAlign: "right",
+                    fontSize: "1.1rem",
+                    lineHeight: "1.5rem",
+                }}
+            >
+                From. {letter.from}
+            </div>
         </div>
     )
 }
