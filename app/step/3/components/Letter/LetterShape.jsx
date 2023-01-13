@@ -148,18 +148,21 @@ const LetterHole = ({ children }) => {
                 filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
                 width: "296px",
                 height: "296px",
+                display: "flex",
+                flexDirection: "column",
             }}
         >
             <Holes />
             <div
                 style={{
+                    flex: "1 1 0%",
                     padding: "0 1rem 2rem 1rem",
-                    height: "100%",
                     backgroundColor: "#ffffff",
                 }}
             >
                 <div
                     style={{
+                        width: "100%",
                         height: "100%",
                         padding: "0 1rem",
                         background:
