@@ -2,11 +2,9 @@ import { useCallback, useEffect, useState } from "react"
 import { KeywordButton } from "./KeywordButton"
 import { KeywordTextList } from "./KeywordTextList"
 
-const Keyword = (props) => {
+const Keyword = ({ getKeywordNum }) => {
     const [keywordNum, setKeywordNum] = useState(0)
     const [, setKeywordList] = useState([])
-
-    props.getKeywordNum(keywordNum)
 
     const [isSelected, setSelect] = useState(
         new Array(KeywordTextList.length).fill(false)
@@ -28,6 +26,7 @@ const Keyword = (props) => {
 
     const countKeywordNum = useCallback(() => {
         setKeywordNum(isSelected.filter((element) => true === element).length)
+        getKeywordNum(keywordNum)
     }, [isSelected])
 
     const handleKeywordButton = (id) => {
