@@ -31,7 +31,7 @@ const Movable = ({ position, children, size, isActive, onPointerEnter }) => {
                 width: size,
                 height: size,
                 transform: `translate(${position.x}px, ${position.y}px)`,
-                opacity: isActive ? "0.55" : "1",
+                opacity: isActive ? 0.5 : 1,
                 transition: "opacity ease 0.25s",
                 zIndex: 100,
                 pointerEvents: isActive ? "none" : "auto",
@@ -51,7 +51,7 @@ const StaticStickers = ({ size, stickers }) => (
         style={{
             width: size,
             height: size,
-            zIndex: 10,
+            zIndex: 0,
             backgroundColor: "transparent",
         }}
     >
@@ -86,7 +86,7 @@ const StickerManager = ({ size, stickerSize, active = false }) => {
             style={{
                 width: size,
                 height: size,
-                zIndex: 10,
+                zIndex: 0,
                 backgroundColor: "transparent",
             }}
             onPointerDown={(e) => {
