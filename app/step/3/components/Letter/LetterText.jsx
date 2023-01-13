@@ -5,14 +5,13 @@ import { store } from "../../../../../atoms"
 
 const LetterText = () => {
     const [letter] = useAtom(store.letter)
-    const to = letter.to
-    const from = letter.from
-    const letterText = letter.letter
+    const fontType = `font-main-${letter.font}`
+
     return (
         <div>
-            <div>{to}</div>
-            <div>{from}</div>
-            <div>{letterText}</div>
+            <div className={fontType}>To. {letter.to}</div>
+            <div className={fontType}>{letter.letter}</div>
+            <div className={fontType}>From. {letter.from}</div>
         </div>
     )
 }
