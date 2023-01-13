@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react"
 import { Canvas } from "./Canvas"
 import { EditorToolBar, EditorToolBarSelector } from "./Editor"
 import { StickerManager } from "./Editor/Stickers/StickerManager"
+import { LetterShape } from "./LetterShape"
+import { LetterText } from "./LetterText"
 
 const useCanvasSize = ({ containerRef }) => {
     const [size, setSize] = useState(0)
@@ -41,6 +43,10 @@ const Letter = () => {
             className="flex items-center justify-center h-fit w-full relative"
         >
             <Canvas size={size}>
+                <LetterShape>
+                    <LetterText />
+                </LetterShape>
+
                 <StickerManager
                     size={size}
                     stickerSize={75}

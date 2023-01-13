@@ -20,10 +20,14 @@ const Canvas = ({ children, size }) => {
             style={{
                 width: size,
                 height: size,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+                backgroundColor: "transparent",
+                transition: "ease opacity 300ms",
+                opacity: isMounted ? 100 : 0,
             }}
-            className={`${
-                isMounted ? "opacity-100" : "opacity-0"
-            } relative bg-transparent transition duration-300`}
         >
             {children}
         </div>

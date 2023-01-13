@@ -1,4 +1,5 @@
 import { Container } from "../../common/Container"
+import { FontToolBar } from "./FontToolBar"
 import { StickerEditor } from "./Stickers/StickerEditor"
 
 const EditorToolBar = ({ selectedOption }) => {
@@ -11,6 +12,7 @@ const EditorToolBar = ({ selectedOption }) => {
                     : "opacity-0 scale-0 translate-y-12 pointer-events-none"
             } absolute bottom-3 left-1/2 -translate-x-1/2 transition-all duration-300`}
         >
+            {selectedOption === "font" && <FontToolBar />}
             {selectedOption === "sticker" && <StickerEditor />}
         </Container>
     )
