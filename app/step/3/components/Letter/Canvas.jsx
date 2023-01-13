@@ -14,14 +14,13 @@ const useMounted = () => {
 
 const Canvas = ({ children, size }) => {
     const { isMounted } = useMounted()
-    const canvasSize = {
-        width: `${size}px`,
-        height: `${size}px`,
-    }
 
     return (
         <div
-            style={canvasSize}
+            style={{
+                width: size,
+                height: size,
+            }}
             className={`${
                 isMounted ? "opacity-100" : "opacity-0"
             } relative bg-transparent transition duration-300`}
