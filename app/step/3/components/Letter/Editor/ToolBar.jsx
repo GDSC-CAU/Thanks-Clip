@@ -1,7 +1,8 @@
 import { Container } from "../../common/Container"
+import { StickerEditor } from "./Stickers/StickerEditor"
 
-const EditorToolBar = (props) => {
-    const isActive = props.selectedOption !== ""
+const EditorToolBar = ({ selectedOption }) => {
+    const isActive = selectedOption !== "none"
     return (
         <Container
             className={`flex items-center justify-center h-16 max-h-[4rem] ${
@@ -10,7 +11,7 @@ const EditorToolBar = (props) => {
                     : "opacity-0 scale-0 translate-y-12 pointer-events-none"
             } absolute bottom-3 left-1/2 -translate-x-1/2 transition-all duration-300`}
         >
-            {props.selectedOption}
+            {selectedOption === "sticker" && <StickerEditor />}
         </Container>
     )
 }
