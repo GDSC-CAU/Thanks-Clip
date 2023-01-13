@@ -1,12 +1,13 @@
-"use client"
-
 import { useCallback, useEffect, useState } from "react"
 import { KeywordButton } from "./KeywordButton"
 import { KeywordTextList } from "./KeywordTextList"
 
-const Keyword = () => {
+const Keyword = (props) => {
+    const [keywordNum, setKeywordNum] = useState(0)
     const [, setKeywordList] = useState([])
-    const [, setKeywordNum] = useState(0)
+
+    props.getKeywordNum(keywordNum)
+
     const [isSelected, setSelect] = useState(
         new Array(KeywordTextList.length).fill(false)
     )
