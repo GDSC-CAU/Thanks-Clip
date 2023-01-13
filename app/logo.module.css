@@ -1,0 +1,49 @@
+.airplane {
+    position: absolute;
+    top: 11.3rem;
+    right: 6.7rem;
+    opacity: 100;
+    animation: moveTo 3s ease-out;
+}
+
+@keyframes moveTo {
+    0% {
+        top: 13rem;
+        right: 3rem;
+        opacity: 0;
+    }
+    30% {
+        top: 13rem;
+        right: 3rem;
+        opacity: 0;
+    }
+    100% {
+        top: 11.3rem;
+        right: 6.7rem;
+        opacity: 100;
+    }
+}
+
+.logo {
+    fill: none;
+    stroke-width: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    stroke-dasharray: 450;
+    stroke-dashoffset: 0;
+    animation: logoDash 5s ease-in forwards;
+}
+
+@keyframes logoDash {
+    from {
+        stroke: #ea6d6d6d;
+        stroke-dashoffset: 450;
+        stroke-width: 0;
+    }
+    to {
+        stroke: #ea6e6d;
+        stroke-dashoffset: 0;
+        stroke-width: 10;
+    }
+}
