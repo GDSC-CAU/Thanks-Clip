@@ -62,6 +62,7 @@ const LetterTorn = ({ children }) => {
     return (
         <div
             style={{
+                position: "absolute",
                 filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
                 width: "296px",
                 height: "296px",
@@ -95,48 +96,50 @@ const LetterTorn = ({ children }) => {
 
 const LetterOverlap = ({ children }) => {
     return (
-        <div
-            style={{
-                filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
-                width: "296px",
-                height: "296px",
-                position: "relative",
-            }}
-        >
+        <div style={{ position: "absolute" }}>
             <div
                 style={{
-                    filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.08)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
-                    width: "280px",
-                    height: "280px",
-                    padding: "2rem",
-                    position: "absolute",
-                    transform: "rotate(-2deg)",
-                    backgroundColor: "#ffffff",
-                    zIndex: 1,
+                    position: "relative",
+                    filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
+                    width: "296px",
+                    height: "296px",
                 }}
             >
-                {children}
-            </div>
+                <div
+                    style={{
+                        position: "absolute",
+                        filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.08)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
+                        width: "280px",
+                        height: "280px",
+                        padding: "2rem",
+                        transform: "rotate(-2deg)",
+                        backgroundColor: "#ffffff",
+                        zIndex: 1,
+                    }}
+                >
+                    {children}
+                </div>
 
-            <div
-                style={{
-                    filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.08)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
-                    width: "280px",
-                    height: "280px",
-                    position: "absolute",
-                    backgroundColor: "#ffffff",
-                }}
-            />
-            <div
-                style={{
-                    filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
-                    width: "280px",
-                    height: "280px",
-                    position: "absolute",
-                    transform: "rotate(2deg)",
-                    backgroundColor: "#ffffff",
-                }}
-            />
+                <div
+                    style={{
+                        position: "absolute",
+                        filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.08)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
+                        width: "280px",
+                        height: "280px",
+                        backgroundColor: "#ffffff",
+                    }}
+                />
+                <div
+                    style={{
+                        position: "absolute",
+                        filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
+                        width: "280px",
+                        height: "280px",
+                        transform: "rotate(2deg)",
+                        backgroundColor: "#ffffff",
+                    }}
+                />
+            </div>
         </div>
     )
 }
@@ -145,6 +148,7 @@ const LetterHole = ({ children }) => {
     return (
         <div
             style={{
+                position: "absolute",
                 filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
                 width: "296px",
                 height: "296px",
