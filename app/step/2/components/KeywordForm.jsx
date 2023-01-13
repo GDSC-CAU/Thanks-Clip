@@ -6,6 +6,7 @@ import { Title } from "../../../common/Title"
 import { Keyword } from "./Keyword"
 
 const KeywordForm = () => {
+    const [keywordNum, setKeywordNum] = useState(0)
     const [isDisabled, setIsDisabled] = useState(false)
     const getKeywordNum = (x) => {
         setIsDisabled(!(x >= 2 && x <= 5))
@@ -20,11 +21,21 @@ const KeywordForm = () => {
                 />
             </div>
             <div className="grid grid-cols-3 gap-y-3.5 gap-x-1.5 mb-10">
-                <Keyword getKeywordNum={getKeywordNum} />
+                <Keyword
+                    keywordNum={keywordNum}
+                    setKeywordNum={setKeywordNum}
+                    getKeywordNum={getKeywordNum}
+                />
             </div>
             <div className="mt-auto mb-5">
                 <Link href="/step/3">
-                    <Button disabled={isDisabled}>계속하기</Button>
+                    <Button disabled={isDisabled}>
+                        {keywordNum === 0 && "키워드를 골라볼까요?"}
+                        {keywordNum === 1 && "키워드를 더 선택해보아요"}
+                        {keywordNum >= 2 &&
+                            keywordNum <= 5 &&
+                            "편지 만드러 가보기"}
+                    </Button>
                 </Link>
             </div>
         </div>

@@ -2,8 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 import { KeywordButton } from "./KeywordButton"
 import { KeywordTextList } from "./KeywordTextList"
 
-const Keyword = ({ getKeywordNum }) => {
-    const [keywordNum, setKeywordNum] = useState(0)
+const Keyword = ({ getKeywordNum, keywordNum, setKeywordNum }) => {
     const [, setKeywordList] = useState([])
 
     const [isSelected, setSelect] = useState(
