@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Canvas } from "./Canvas"
 import { EditorToolBar, EditorToolBarSelector } from "./Editor"
-import { LetterText } from "./LetterText"
+import { LetterShape } from "./LetterShape"
 
 const useCanvasSize = ({ containerRef }) => {
     const [size, setSize] = useState(0)
@@ -40,7 +40,7 @@ const Letter = () => {
             className="flex items-center justify-center h-fit w-full relative"
         >
             <Canvas size={size}>
-                <LetterText></LetterText>
+                <LetterShape />
             </Canvas>
 
             <EditorToolBarSelector
