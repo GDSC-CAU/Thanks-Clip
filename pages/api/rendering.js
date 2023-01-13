@@ -1,6 +1,6 @@
+//@ts-check
 /* eslint-disable consistent-return */
 /* eslint-disable no-undef */
-//@ts-check
 /* eslint-disable no-console */
 import { getRenderProgress, renderMediaOnLambda } from "@remotion/lambda/client"
 import { DEPLOY_CONFIG } from "../../constant/deployConfig.js"
