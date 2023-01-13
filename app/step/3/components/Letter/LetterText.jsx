@@ -8,51 +8,51 @@ const fontList = {
     sans: "font-main-sans",
 }
 
+const LetterTextStatic = ({ from, to, letter, className = "" }) => (
+    <div
+        style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+        }}
+        className={className}
+    >
+        <div
+            style={{
+                height: "22%",
+                fontSize: "1.1rem",
+                lineHeight: "1.5rem",
+            }}
+        >
+            To. {to}
+        </div>
+        <div
+            style={{
+                height: "70%",
+                fontSize: "1.1rem",
+                lineHeight: "1.5rem",
+            }}
+        >
+            {letter}
+        </div>
+        <div
+            style={{
+                height: "11%",
+                textAlign: "right",
+                fontSize: "1.1rem",
+                lineHeight: "1.5rem",
+            }}
+        >
+            From. {from}
+        </div>
+    </div>
+)
+
 const LetterText = () => {
     const letter = useAtomValue(store.letter)
     const fontType = fontList[letter.font]
 
-    return (
-        <div
-            style={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-            }}
-        >
-            <div
-                className={fontType}
-                style={{
-                    height: "22%",
-                    fontSize: "1.1rem",
-                    lineHeight: "1.5rem",
-                }}
-            >
-                To. {letter.to}
-            </div>
-            <div
-                className={fontType}
-                style={{
-                    height: "70%",
-                    fontSize: "1.1rem",
-                    lineHeight: "1.5rem",
-                }}
-            >
-                {letter.letter}
-            </div>
-            <div
-                className={fontType}
-                style={{
-                    height: "11%",
-                    textAlign: "right",
-                    fontSize: "1.1rem",
-                    lineHeight: "1.5rem",
-                }}
-            >
-                From. {letter.from}
-            </div>
-        </div>
-    )
+    return <LetterTextStatic {...letter} className={fontType} />
 }
 
-export { LetterText }
+export { LetterText, LetterTextStatic }
