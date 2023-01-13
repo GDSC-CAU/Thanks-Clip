@@ -43,7 +43,7 @@ const Letter = () => {
         >
             <Canvas size={size}>
                 <LetterShape>
-                    <LetterText></LetterText>
+                    <LetterText />
                 </LetterShape>
             </Canvas>
 

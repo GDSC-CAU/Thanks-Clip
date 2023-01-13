@@ -1,11 +1,16 @@
 "use client"
-// import { useState } from "react"
-import { useAtom } from "jotai"
+import { useAtomValue } from "jotai"
 import { store } from "../../../../../atoms"
 
+const fontList = {
+    cute: "font-main-cute",
+    hand: "font-main-hand",
+    sans: "font-main-sans",
+}
+
 const LetterText = () => {
-    const [letter] = useAtom(store.letter)
-    const fontType = `font-main-${letter.font}`
+    const letter = useAtomValue(store.letter)
+    const fontType = fontList[letter.font]
 
     return (
         <div
