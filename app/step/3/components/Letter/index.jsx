@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Canvas } from "./Canvas"
 import { EditorToolBar, EditorToolBarSelector } from "./Editor"
+import { StickerManager } from "./Editor/Stickers/StickerManager"
 import { LetterShape } from "./LetterShape"
 import { LetterText } from "./LetterText"
 
@@ -24,17 +25,18 @@ const useCanvasSize = ({ containerRef }) => {
         size,
     }
 }
-
+/**@typedef {"type" | "color" | "font" | "sticker" | "none"} SelectedOption */
+/**@type {SelectedOption} */
+const value = "none"
 const Letter = () => {
-    const [selectedOption, setSelectedOption] = useState("")
+    const [selectedOption, setSelectedOption] = useState(value)
 
     const handleClickOptions = (option) => {
         setSelectedOption(option)
     }
 
-    const letterContainerRef = useRef()
+    const letterContainerRef = useRef(null)
     const { size } = useCanvasSize({ containerRef: letterContainerRef })
-
     return (
         <div
             ref={letterContainerRef}
@@ -44,6 +46,13 @@ const Letter = () => {
                 <LetterShape>
                     <LetterText />
                 </LetterShape>
+
+                <StickerManager
+                    size={size}
+                    active={selectedOption === "sticker"}
+                    stickerSize={24}
+                    clickActiveAreaRatio={1.5}
+                />
             </Canvas>
 
             <EditorToolBarSelector

@@ -69,6 +69,7 @@ const LetterTorn = ({ children, color }) => {
     return (
         <div
             style={{
+                position: "absolute",
                 filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
                 width: "296px",
                 height: "296px",
@@ -101,48 +102,50 @@ const LetterTorn = ({ children, color }) => {
 
 const LetterOverlap = ({ children, color }) => {
     return (
-        <div
-            style={{
-                filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
-                width: "296px",
-                height: "296px",
-                position: "relative",
-            }}
-        >
+        <div style={{ position: "absolute" }}>
             <div
                 style={{
-                    filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.08)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
-                    width: "280px",
-                    height: "280px",
-                    padding: "2rem",
-                    position: "absolute",
-                    transform: "rotate(-2deg)",
-                    backgroundColor: `${colors[color]}`,
-                    zIndex: 1,
+                    position: "relative",
+                    filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
+                    width: "296px",
+                    height: "296px",
                 }}
             >
-                {children}
-            </div>
+                <div
+                    style={{
+                        position: "absolute",
+                        filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.08)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
+                        width: "280px",
+                        height: "280px",
+                        padding: "2rem",
+                        transform: "rotate(-2deg)",
+                        backgroundColor: `${colors[color]}`,
+                        zIndex: 1,
+                    }}
+                >
+                    {children}
+                </div>
 
-            <div
-                style={{
-                    filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.08)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
-                    width: "280px",
-                    height: "280px",
-                    position: "absolute",
-                    backgroundColor: `${colors[color]}`,
-                }}
-            />
-            <div
-                style={{
-                    filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
-                    width: "280px",
-                    height: "280px",
-                    position: "absolute",
-                    transform: "rotate(2deg)",
-                    backgroundColor: `${colors[color]}`,
-                }}
-            />
+                <div
+                    style={{
+                        position: "absolute",
+                        filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.08)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
+                        width: "280px",
+                        height: "280px",
+                        backgroundColor: `${colors[color]}`,
+                    }}
+                />
+                <div
+                    style={{
+                        position: "absolute",
+                        filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
+                        width: "280px",
+                        height: "280px",
+                        transform: "rotate(2deg)",
+                        backgroundColor: `${colors[color]}`,
+                    }}
+                />
+            </div>
         </div>
     )
 }
@@ -151,6 +154,7 @@ const LetterHole = ({ children, color }) => {
     return (
         <div
             style={{
+                position: "absolute",
                 filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.2)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))",
                 width: "296px",
                 height: "296px",

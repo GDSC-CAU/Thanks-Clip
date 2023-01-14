@@ -21,7 +21,7 @@ const EditorToolBarSelectorButton = ({ handleClick, selectedOption, type }) => {
             onClick={() => {
                 handleClick(type)
             }}
-            className={`rounded-full hover:bg-gray-50 border transition gap-2 p-1 md:p-2 active:scale-90 ${
+            className={`rounded-full z-50 hover:bg-gray-50 border transition gap-2 p-1 md:p-2 active:scale-90 ${
                 isActive ? "border-red-200" : "border-transparent"
             }`}
         >
@@ -39,7 +39,7 @@ const EditorToolBarSelector = (props) => {
         props.handleClickOptions(selectedType)
     }
     return (
-        <Container className="flex flex-cols gap-2 justify-end absolute right-1 top-1">
+        <Container className="flex flex-cols gap-2 justify-end absolute right-1 -top-5">
             {toolBarType.map((type) => (
                 <EditorToolBarSelectorButton
                     handleClick={handleClick}
