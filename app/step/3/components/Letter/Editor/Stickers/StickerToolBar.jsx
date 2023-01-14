@@ -8,7 +8,7 @@ import { useStickerManager } from "./useStickerManager"
 
 const stickerTypes = ["heart", "circle", "star"]
 
-const StickerEditor = () => {
+const StickerToolBar = () => {
     const { action } = useStickerManager()
     const activeSticker = useAtomValue(store.activeSticker)
     const isDisabled = activeSticker === -1
@@ -83,4 +83,4 @@ const StickerEditorButton = ({
     )
 }
 
-export { StickerEditor }
+export { StickerToolBar }
