@@ -21,8 +21,8 @@ const useStickerManager = () => {
                 const newSticker = {
                     type,
                     position: {
-                        x: getRandomNumber(50, 200),
-                        y: getRandomNumber(50, 200),
+                        x: getRandomNumber(100, 300),
+                        y: getRandomNumber(100, 300),
                     },
                     isActive: true,
                 }
