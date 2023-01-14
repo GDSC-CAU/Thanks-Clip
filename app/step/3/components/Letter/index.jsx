@@ -49,8 +49,9 @@ const Letter = () => {
 
                 <StickerManager
                     size={size}
-                    stickerSize={75}
                     active={selectedOption === "sticker"}
+                    stickerSize={24}
+                    clickActiveAreaRatio={1.5}
                 />
             </Canvas>
 
