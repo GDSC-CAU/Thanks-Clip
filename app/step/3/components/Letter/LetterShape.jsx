@@ -2,11 +2,11 @@ import { useAtomValue } from "jotai"
 import { store } from "../../../../../atoms"
 
 const colors = {
+    white: "#ffffff",
+    ivory: "#f2f3ec",
     red: "#fff1f2",
     yellow: "#fefce6",
-    blue: "#e8ffff",
-    purple: "#f6f3ff",
-    white: "#ffffff",
+    blue: "#dffaff",
 }
 
 const Hole = ({ color }) => {
