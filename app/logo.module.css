@@ -1,31 +1,37 @@
 .airplane {
     position: absolute;
-    top: 41.2%;
-    right: 26.5%;
+    top: 0;
+    right: 0;
     width: 18.5%;
     opacity: 100;
-    animation: moveTo 3s ease-out;
+    animation: airplaneMove 3s ease forwards;
+    will-change: transform;
 }
 
-.st0{fill:#B4B5B5;}
-.st1{fill:#EEEEEF;}
-.st2{fill:#DBDCDC;}
+.st0 {
+    fill: #b4b5b5;
+}
+.st1 {
+    fill: #eeeeef;
+}
+.st2 {
+    fill: #dbdcdc;
+}
 
-@keyframes moveTo {
+@keyframes airplaneMove {
     0% {
-        top: 46.9%;
-        right: 21.8%;
+        transform: translate(-80%, 270%) scale(0.5) rotate(20deg);
         opacity: 0;
     }
-    30% {
-        top: 46.9%;
-        right: 21.8%;
-        opacity: 0;
+
+    50% {
+        transform: translate(-110%, 240%) scale(0.75) rotate(15deg);
+        opacity: 0.25;
     }
+
     100% {
-        top: 41.2%;
-        right: 26.5%;
-        opacity: 100;
+        transform: translate(-145.5%, 225%) scale(1) rotate(0deg);
+        opacity: 1;
     }
 }
 
@@ -38,7 +44,8 @@
     stroke-miterlimit: 10;
     stroke-dasharray: 450;
     stroke-dashoffset: 0;
-    animation: logoDash 5s ease-in forwards;
+    will-change: stroke, stroke-dashoffset, stroke-width;
+    animation: logoDash 3s ease-in forwards;
 }
 
 @keyframes logoDash {

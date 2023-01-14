@@ -18,11 +18,12 @@ const Logo = (props) => (
         />
     </svg>
 )
-const Airplane = (props) => (
+
+const LogoAirplane = (props) => (
     <svg
         className={style.airplane}
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 566.9 566.9"
+        viewBox="0 0 567 567"
         {...props}
     >
         <polygon
@@ -46,7 +47,7 @@ export default async function Main() {
             <div className="flex flex-col h-full justify-between gap-10">
                 <div className="w-81 h-81 relative">
                     <Logo />
-                    <Airplane />
+                    <LogoAirplane />
                 </div>
                 <div className="flex flex-col gap-3 font-main-cute">
                     <div className="flex justify-center">
