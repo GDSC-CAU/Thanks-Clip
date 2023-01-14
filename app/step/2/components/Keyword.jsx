@@ -14,7 +14,7 @@ const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
         const findKeywordIndex = isSelected
             .map((item, idx) => {
                 if (item === true) return idx
-                else return -1
+                return -1
             })
             .filter((item) => item !== -1)
         letter.tags = KeywordTextList.filter((element) =>
@@ -28,10 +28,10 @@ const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
     }, [isSelected, setKeywordNum])
 
     const handleKeywordButton = (id) => {
-        setSelect([
-            ...isSelected.slice(0, id),
-            !isSelected[id],
-            ...isSelected.slice(id + 1),
+        setSelect((prevState) => [
+            ...prevState.slice(0, id),
+            !prevState[id],
+            ...prevState.slice(id + 1),
         ])
     }
 
