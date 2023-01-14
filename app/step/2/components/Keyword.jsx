@@ -21,11 +21,11 @@ const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
             findKeywordIndex.includes(element.id)
         )
         setLetter((letter) => ({ ...letter, tags: letter.tags }))
-    }, [isSelected])
+    }, [isSelected, letter, setLetter])
 
     const countKeywordNum = useCallback(() => {
         setKeywordNum(isSelected.filter((element) => true === element).length)
-    }, [isSelected])
+    }, [isSelected, setKeywordNum])
 
     const handleKeywordButton = (id) => {
         setSelect([
