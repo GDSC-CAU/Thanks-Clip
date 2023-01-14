@@ -5,30 +5,30 @@ import { KeywordButton } from "./KeywordButton"
 import { KeywordTextList } from "./KeywordTextList"
 
 const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
-    const [letter, setLetter] = useAtom(store.letter)
-    const [isSelected, setSelect] = useState(
+    const [, setLetter] = useAtom(store.letter)
+    const [isSelected, setIsSelected] = useState(
         new Array(KeywordTextList.length).fill(false)
     )
 
-    const getKeywordList = useCallback(() => {
+    const setKeywordTags = useCallback(() => {
         const findKeywordIndex = isSelected
             .map((item, idx) => {
                 if (item === true) return idx
                 return -1
             })
             .filter((item) => item !== -1)
-        letter.tags = KeywordTextList.filter((element) =>
+        const tags = KeywordTextList.filter((element) =>
             findKeywordIndex.includes(element.id)
         )
-        setLetter((letter) => ({ ...letter, tags: letter.tags }))
-    }, [isSelected, letter, setLetter])
+        setLetter((letter) => ({ ...letter, tags: tags }))
+    }, [isSelected, setLetter])
 
     const countKeywordNum = useCallback(() => {
         setKeywordNum(isSelected.filter((element) => true === element).length)
     }, [isSelected, setKeywordNum])
 
     const handleKeywordButton = (id) => {
-        setSelect((prevState) => [
+        setIsSelected((prevState) => [
             ...prevState.slice(0, id),
             !prevState[id],
             ...prevState.slice(id + 1),
@@ -37,8 +37,8 @@ const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
 
     useEffect(() => {
         countKeywordNum()
-        getKeywordList()
-    }, [isSelected, getKeywordList, countKeywordNum])
+        setKeywordTags()
+    }, [isSelected, setKeywordTags, countKeywordNum])
 
     useEffect(() => {
         getKeywordNum(keywordNum)
