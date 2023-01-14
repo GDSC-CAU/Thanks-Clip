@@ -48,6 +48,7 @@ const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
         <>
             {KeywordTextList.map((keyword) => (
                 <KeywordButton
+                    keywordNum={keywordNum}
                     key={keyword.id}
                     id={keyword.id}
                     isSelected={isSelected[keyword.id]}
