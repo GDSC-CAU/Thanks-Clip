@@ -68,7 +68,12 @@ const StaticStickers = ({ size, stickers }) => (
     </div>
 )
 
-const StickerManager = ({ size, stickerSize, active = false }) => {
+const StickerManager = ({
+    size,
+    stickerSize,
+    clickActiveAreaRatio = 1,
+    active = false,
+}) => {
     const { stickers, action } = useStickerManager()
     const activeSticker = useAtomValue(store.activeSticker)
     const [isCanvasDrag, setIsCanvasDrag] = useState(false)
@@ -95,11 +100,12 @@ const StickerManager = ({ size, stickerSize, active = false }) => {
                 const stickerPos = stickers[activeSticker]?.position
                 if (stickerPos) {
                     const isSelected =
-                        Math.abs(stickerPos.x - x) <= stickerSize &&
-                        Math.abs(stickerPos.y - y) <= stickerSize
-                    if (isSelected) {
-                        setIsCanvasDrag(true)
-                    }
+                        Math.abs(stickerPos.x - x) <=
+                            stickerSize * clickActiveAreaRatio &&
+                        Math.abs(stickerPos.y - y) <=
+                            stickerSize * clickActiveAreaRatio
+
+                    if (isSelected) setIsCanvasDrag(true)
                 } else {
                     setIsCanvasDrag(false)
                 }
