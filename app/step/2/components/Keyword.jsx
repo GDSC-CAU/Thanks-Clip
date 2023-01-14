@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from "react"
+import { useAtom } from "jotai"
+import { store } from "../../../../atoms"
 import { KeywordButton } from "./KeywordButton"
 import { KeywordTextList } from "./KeywordTextList"
 
 const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
-    const [, setKeywordList] = useState([])
+    const [letter, setLetter] = useAtom(store.letter)
     const [isSelected, setSelect] = useState(
         new Array(KeywordTextList.length).fill(false)
     )
@@ -15,11 +17,10 @@ const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
                 else return -1
             })
             .filter((item) => item !== -1)
-        setKeywordList(
-            KeywordTextList.filter((element) =>
-                findKeywordIndex.includes(element.id)
-            )
+        letter.tags = KeywordTextList.filter((element) =>
+            findKeywordIndex.includes(element.id)
         )
+        setLetter((letter) => ({ ...letter, tags: letter.tags }))
     }, [isSelected])
 
     const countKeywordNum = useCallback(() => {
