@@ -1,5 +1,5 @@
 import { Container } from "../../common/Container"
-import { ColorToolBarSelected } from "./ColorToolBarSelected"
+import { ColorToolBar } from "./ColorToolBar"
 
 const EditorToolBar = (props) => {
     const isActive = props.selectedOption !== ""
@@ -11,9 +11,7 @@ const EditorToolBar = (props) => {
                     : "opacity-0 scale-0 translate-y-12 pointer-events-none"
             } absolute bottom-3 left-1/2 -translate-x-1/2 transition-all duration-300`}
         >
-            {props.selectedOption === "color" && (
-                <ColorToolBarSelected></ColorToolBarSelected>
-            )}
+            {props.selectedOption === "color" && <ColorToolBar></ColorToolBar>}
         </Container>
     )
 }
