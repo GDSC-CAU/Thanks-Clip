@@ -1,18 +1,13 @@
-/**@typedef {import("../../../../../../../../atoms/sticker").Sticker} Sticker */
-
 import { CircleIcon } from "./Circle"
 import { HeartIcon } from "./Heart"
 import { StarIcon } from "./Star"
 
-/**
- * @param {{ type: Sticker["type"] }} stickerProps
- */
-const Sticker = ({ type }) => {
+const Sticker = ({ type, props = {} }) => {
     return (
         <>
-            {type === "circle" && <CircleIcon />}
-            {type === "heart" && <HeartIcon />}
-            {type === "star" && <StarIcon />}
+            {type === "circle" && <CircleIcon {...props} />}
+            {type === "star" && <StarIcon {...props} />}
+            {type === "heart" && <HeartIcon {...props} />}
         </>
     )
 }
