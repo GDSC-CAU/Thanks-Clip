@@ -1,30 +1,36 @@
 .airplane {
     position: absolute;
-    top: 11.3rem;
-    right: 6.7rem;
+    top: 41.2%;
+    right: 26.5%;
+    width: 18.5%;
     opacity: 100;
     animation: moveTo 3s ease-out;
 }
 
+.st0{fill:#B4B5B5;}
+.st1{fill:#EEEEEF;}
+.st2{fill:#DBDCDC;}
+
 @keyframes moveTo {
     0% {
-        top: 13rem;
-        right: 3rem;
+        top: 46.9%;
+        right: 21.8%;
         opacity: 0;
     }
     30% {
-        top: 13rem;
-        right: 3rem;
+        top: 46.9%;
+        right: 21.8%;
         opacity: 0;
     }
     100% {
-        top: 11.3rem;
-        right: 6.7rem;
+        top: 41.2%;
+        right: 26.5%;
         opacity: 100;
     }
 }
 
 .logo {
+    position: relative;
     fill: none;
     stroke-width: 0;
     stroke-linecap: round;
