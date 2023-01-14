@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAtomValue } from "jotai"
 import { store } from "../../../../../../../atoms"
 import { CircleIcon } from "./Sticker/Circle"
@@ -68,6 +68,35 @@ const StaticStickers = ({ size, stickers }) => (
     </div>
 )
 
+const useLockMobileTouch = (isLock) => {
+    // eslint-disable-next-line consistent-return
+    useEffect(() => {
+        const body = document.querySelector("body")
+        const editorLocation = 100
+
+        if (isLock) {
+            body.style.overflow = "hidden"
+
+            window.scrollTo({ top: editorLocation })
+
+            const blockTouchMoveAndFixViewport = (e) => {
+                e.preventDefault()
+            }
+            window.addEventListener("touchmove", blockTouchMoveAndFixViewport, {
+                passive: false,
+            })
+
+            return () => {
+                body.removeAttribute("style")
+                window.removeEventListener(
+                    "touchmove",
+                    blockTouchMoveAndFixViewport
+                )
+            }
+        }
+    }, [isLock])
+}
+
 const StickerManager = ({
     size,
     stickerSize,
@@ -77,6 +106,8 @@ const StickerManager = ({
     const { stickers, action } = useStickerManager()
     const activeSticker = useAtomValue(store.activeSticker)
     const [isCanvasDrag, setIsCanvasDrag] = useState(false)
+
+    useLockMobileTouch(active)
 
     if (stickers.length === 0) {
         return null
