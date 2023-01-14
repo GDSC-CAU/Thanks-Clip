@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from "@heroicons/react/24/solid"
+import { CheckIcon } from "@heroicons/react/24/outline"
 import { useAtom } from "jotai"
 import { store } from "../../../../../../atoms"
 
@@ -14,7 +14,7 @@ const colorKey = Object.keys(colors)
 
 const ColorSelectorButton = ({ handleClickColor, selectedColor, color }) => {
     const isActive = selectedColor === color
-    const buttonStyle = `mx-2 border-2 w-7 h-7 text-center leading-none rounded-full ${colors[color]}`
+    const buttonStyle = `mx-2 border w-7 h-7 text-center leading-none rounded-full flex justify-center items-center ${colors[color]}`
 
     return (
         <div
@@ -22,7 +22,9 @@ const ColorSelectorButton = ({ handleClickColor, selectedColor, color }) => {
                 handleClickColor(color)
             }}
         >
-            <div className={buttonStyle}>{isActive && <CheckCircleIcon />}</div>
+            <div className={buttonStyle}>
+                {isActive && <CheckIcon className="w-4 h-4" />}
+            </div>
         </div>
     )
 }
