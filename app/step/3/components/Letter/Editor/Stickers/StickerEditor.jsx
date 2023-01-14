@@ -15,7 +15,7 @@ const StickerEditor = () => {
 
     return (
         <div className="flex flex-row divide-x divide-gray-100">
-            <div className="flex flex-row justify-evenly items-center w-fit h-10">
+            <div className="flex flex-row justify-evenly items-center w-fit gap-5 px-4">
                 {stickerTypes.map((type) => (
                     <div
                         key={type}
@@ -23,14 +23,14 @@ const StickerEditor = () => {
                             action.deactivate(activeSticker)
                             action.create(type)
                         }}
-                        className="flex items-center justify-center origin-center scale-[60%] transform-gpu"
+                        className="flex items-center justify-center origin-center transform-gpu scale-150"
                     >
                         <Sticker type={type} />
                     </div>
                 ))}
             </div>
 
-            <div className="flex flex-row w-fit gap-2 px-4">
+            <div className="flex flex-row w-fit gap-2 px-3">
                 <StickerEditorButton
                     disabled={isDisabled}
                     onClick={() => {
