@@ -1,51 +1,54 @@
-"use client"
-
 import { useCallback, useEffect, useState } from "react"
+import { useAtom } from "jotai"
+import { store } from "../../../../atoms"
 import { KeywordButton } from "./KeywordButton"
 import { KeywordTextList } from "./KeywordTextList"
 
-const Keyword = () => {
-    const [, setKeywordList] = useState([])
-    const [, setKeywordNum] = useState(0)
-    const [isSelected, setSelect] = useState(
+const Keyword = ({ keywordNum, setKeywordNum, getKeywordNum }) => {
+    const [, setLetter] = useAtom(store.letter)
+    const [isSelected, setIsSelected] = useState(
         new Array(KeywordTextList.length).fill(false)
     )
 
-    const getKeywordList = useCallback(() => {
+    const setKeywordTags = useCallback(() => {
         const findKeywordIndex = isSelected
             .map((item, idx) => {
                 if (item === true) return idx
-                else return -1
+                return -1
             })
             .filter((item) => item !== -1)
-        setKeywordList(
-            KeywordTextList.filter((element) =>
-                findKeywordIndex.includes(element.id)
-            )
+        const tags = KeywordTextList.filter((element) =>
+            findKeywordIndex.includes(element.id)
         )
-    }, [isSelected])
+        setLetter((letter) => ({ ...letter, tags: tags }))
+    }, [isSelected, setLetter])
 
     const countKeywordNum = useCallback(() => {
         setKeywordNum(isSelected.filter((element) => true === element).length)
-    }, [isSelected])
+    }, [isSelected, setKeywordNum])
 
     const handleKeywordButton = (id) => {
-        setSelect([
-            ...isSelected.slice(0, id),
-            !isSelected[id],
-            ...isSelected.slice(id + 1),
+        setIsSelected((prevState) => [
+            ...prevState.slice(0, id),
+            !prevState[id],
+            ...prevState.slice(id + 1),
         ])
     }
 
     useEffect(() => {
         countKeywordNum()
-        getKeywordList()
-    }, [isSelected, getKeywordList, countKeywordNum])
+        setKeywordTags()
+    }, [isSelected, setKeywordTags, countKeywordNum])
+
+    useEffect(() => {
+        getKeywordNum(keywordNum)
+    }, [getKeywordNum, keywordNum])
 
     return (
         <>
             {KeywordTextList.map((keyword) => (
                 <KeywordButton
+                    keywordNum={keywordNum}
                     key={keyword.id}
                     id={keyword.id}
                     isSelected={isSelected[keyword.id]}
