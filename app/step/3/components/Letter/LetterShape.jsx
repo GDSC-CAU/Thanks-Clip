@@ -6,7 +6,7 @@ const colors = {
     ivory: "#f2f3ec",
     red: "#fff1f2",
     yellow: "#fefce6",
-    blue: "#dffaff",
+    blue: "#cbe1df",
 }
 
 const Hole = ({ color }) => {
