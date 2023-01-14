@@ -6,7 +6,6 @@ import { EditorToolBar, EditorToolBarSelector } from "./Editor"
 import { LetterShape } from "./LetterShape"
 import { LetterText } from "./LetterText"
 
-
 const useCanvasSize = ({ containerRef }) => {
     const [size, setSize] = useState(0)
 

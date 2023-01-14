@@ -1,46 +1,53 @@
 import { useAtomValue } from "jotai"
 import { store } from "../../../../../atoms"
 
-const Hole = () => {
+const colors = {
+    red: "#fff1f2",
+    yellow: "#fefce6",
+    blue: "#e8ffff",
+    purple: "#f6f3ff",
+    white: "#ffffff",
+}
+
+const Hole = ({ color }) => {
     return (
         <div style={{ display: "flex", flex: "1 1 0%" }}>
             <div
-                style={{ backgroundColor: "rgb(255 255 255)", flex: "1 1 0%" }}
+                style={{ backgroundColor: `${colors[color]}`, flex: "1 1 0%" }}
             />
             <div
                 style={{
                     width: "2rem",
                     height: "2rem",
-                    background:
-                        "radial-gradient(transparent 0.5rem,white 0.5rem)",
+                    background: `radial-gradient(transparent 0.5rem,${colors[color]} 0.5rem)`,
                 }}
             />
             <div
-                style={{ backgroundColor: "rgb(255 255 255)", flex: "1 1 0%" }}
+                style={{ backgroundColor: `${colors[color]}`, flex: "1 1 0%" }}
             />
         </div>
     )
 }
 
-const Holes = () => {
+const Holes = ({ color }) => {
     return (
         <>
-            <div style={{ height: "0.5rem", background: "rgb(255 255 255)" }} />
+            <div style={{ height: "0.5rem", background: `${colors[color]}` }} />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div
                     style={{
-                        backgroundColor: "rgb(255 255 255)",
+                        backgroundColor: `${colors[color]}`,
                         flex: "1 1 0%",
                     }}
                 />
-                <Hole />
-                <Hole />
-                <Hole />
-                <Hole />
-                <Hole />
-                <Hole />
-                <Hole />
-                <Hole />
+                <Hole color={color} />
+                <Hole color={color} />
+                <Hole color={color} />
+                <Hole color={color} />
+                <Hole color={color} />
+                <Hole color={color} />
+                <Hole color={color} />
+                <Hole color={color} />
                 <div
                     style={{
                         backgroundColor: "rgb(255 255 255)",
@@ -50,7 +57,7 @@ const Holes = () => {
             </div>
             <div
                 style={{
-                    backgroundColor: "rgb(255 255 255)",
+                    backgroundColor: `${colors[color]}`,
                     height: "0.5rem",
                 }}
             />
@@ -58,7 +65,7 @@ const Holes = () => {
     )
 }
 
-const LetterTorn = ({ children }) => {
+const LetterTorn = ({ children, color }) => {
     return (
         <div
             style={{
@@ -72,7 +79,7 @@ const LetterTorn = ({ children }) => {
                     width: "100%",
                     height: "100%",
                     padding: "2rem 2rem 3rem 2rem",
-                    backgroundColor: "#ffffff",
+                    backgroundColor: `${colors[color]}`,
                     clipPath:
                         "polygon(1%2%,5%1%,12%2%,20%0%,27%1%,32%0%,42%1%,49%1%,54%0%,63%1%,67%1%,80%0,85%1%,93%1%,95%0%,99%1%,100%5%,99%12%,99%15%,98%31%,99%35%,99%53%,100%58%,99%69%,100%75%,99%90%,100%97%,97%100%,90%99%,84%100%,80%100%,50%99%,43%100%,36%100%,30%99%,13%99%,9%100%,5%99%,0%99%,0%95%,1%91%,1%88%,0%84%,0%80%,1%70%,0%53%,0%50%,1%46%,1%28%,0%26%,1%9%,0%5%,1%2%)",
                 }}
@@ -80,8 +87,7 @@ const LetterTorn = ({ children }) => {
                 <div
                     style={{
                         height: "100%",
-                        background:
-                            "repeating-linear-gradient(white,white calc(1.5rem - 1px),#ccc calc(1.5rem - 1px),#ccc 1.5rem)",
+                        background: `repeating-linear-gradient(${colors[color]},${colors[color]} calc(1.5rem - 1px),#ccc calc(1.5rem - 1px),#ccc 1.5rem)`,
                         display: "flex",
                         flexDirection: "column",
                     }}
@@ -93,7 +99,7 @@ const LetterTorn = ({ children }) => {
     )
 }
 
-const LetterOverlap = ({ children }) => {
+const LetterOverlap = ({ children, color }) => {
     return (
         <div
             style={{
@@ -111,7 +117,7 @@ const LetterOverlap = ({ children }) => {
                     padding: "2rem",
                     position: "absolute",
                     transform: "rotate(-2deg)",
-                    backgroundColor: "#ffffff",
+                    backgroundColor: `${colors[color]}`,
                     zIndex: 1,
                 }}
             >
@@ -124,7 +130,7 @@ const LetterOverlap = ({ children }) => {
                     width: "280px",
                     height: "280px",
                     position: "absolute",
-                    backgroundColor: "#ffffff",
+                    backgroundColor: `${colors[color]}`,
                 }}
             />
             <div
@@ -134,14 +140,14 @@ const LetterOverlap = ({ children }) => {
                     height: "280px",
                     position: "absolute",
                     transform: "rotate(2deg)",
-                    backgroundColor: "#ffffff",
+                    backgroundColor: `${colors[color]}`,
                 }}
             />
         </div>
     )
 }
 
-const LetterHole = ({ children }) => {
+const LetterHole = ({ children, color }) => {
     return (
         <div
             style={{
@@ -152,12 +158,12 @@ const LetterHole = ({ children }) => {
                 flexDirection: "column",
             }}
         >
-            <Holes />
+            <Holes color={color} />
             <div
                 style={{
                     flex: "1 1 0%",
                     padding: "0 2rem 2rem 2rem",
-                    backgroundColor: "#ffffff",
+                    backgroundColor: `${colors[color]}`,
                 }}
             >
                 <div
@@ -165,8 +171,7 @@ const LetterHole = ({ children }) => {
                         width: "100%",
                         height: "100%",
                         padding: "0 1rem",
-                        background:
-                            "repeating-linear-gradient(#ffffff,#ffffff calc(1.5rem - 1px),#ccc calc(1.5rem - 1px),#ccc 1.5rem)",
+                        background: `repeating-linear-gradient(${colors[color]},${colors[color]} calc(1.5rem - 1px),#ccc calc(1.5rem - 1px),#ccc 1.5rem)`,
                         display: "flex",
                         flexDirection: "column",
                     }}
@@ -180,11 +185,18 @@ const LetterHole = ({ children }) => {
 
 const LetterShape = ({ children }) => {
     const type = useAtomValue(store.letter).letterType
+    const color = useAtomValue(store.letter).backgroundColor
     return (
         <>
-            {type === "torn" && <LetterTorn>{children}</LetterTorn>}
-            {type === "overlap" && <LetterOverlap>{children}</LetterOverlap>}
-            {type === "hole" && <LetterHole>{children}</LetterHole>}
+            {type === "torn" && (
+                <LetterTorn color={color}>{children}</LetterTorn>
+            )}
+            {type === "overlap" && (
+                <LetterOverlap color={color}>{children}</LetterOverlap>
+            )}
+            {type === "hole" && (
+                <LetterHole color={color}>{children}</LetterHole>
+            )}
         </>
     )
 }
