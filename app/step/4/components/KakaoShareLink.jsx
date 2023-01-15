@@ -1,5 +1,5 @@
 "use client"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { useAtomValue } from "jotai"
 import { store } from "../../../../atoms"
 
@@ -15,11 +15,7 @@ const KakaoShareLink = ({ children, params }) => {
         return () => document.body.removeChild(script)
     }, [])
 
-    useEffect(() => {
-        kakaoButton()
-    }, [])
-
-    const kakaoButton = () => {
+    const kakaoButton = useCallback(() => {
         if (window.Kakao) {
             const kakao = window.Kakao
             if (!kakao.isInitialized()) {
@@ -35,11 +31,16 @@ const KakaoShareLink = ({ children, params }) => {
                 },
             })
         }
-    }
+    }, [params.bucketName, params.from, params.region, to])
+
+    useEffect(() => {
+        kakaoButton()
+    }, [kakaoButton])
+
     return (
-        <button id="kakaotalk-sharing-btn" onClick={kakaoButton}>
+        <div id="kakaotalk-sharing-btn" onClick={kakaoButton}>
             {children}
-        </button>
+        </div>
     )
 }
 
