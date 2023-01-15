@@ -5,6 +5,7 @@ import { store } from "../../atoms"
 const ShareKakao = () => {
     const letter = useAtomValue(store.letter)
     const to = letter.to
+    const path = "step/2"
 
     useEffect(() => {
         kakaoButton()
@@ -23,6 +24,7 @@ const ShareKakao = () => {
                 templateArgs: {
                     title: "title입니다.",
                     to_user: `${to ? to : ""}`,
+                    path: path,
                 },
             })
         }
