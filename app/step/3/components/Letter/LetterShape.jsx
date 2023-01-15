@@ -205,4 +205,22 @@ const LetterShape = ({ children }) => {
     )
 }
 
-export { LetterShape }
+const LetterShapeStatic = ({ backgroundColor, type, children }) => {
+    return (
+        <>
+            {type === "torn" && (
+                <LetterTorn color={backgroundColor}>{children}</LetterTorn>
+            )}
+            {type === "overlap" && (
+                <LetterOverlap color={backgroundColor}>
+                    {children}
+                </LetterOverlap>
+            )}
+            {type === "hole" && (
+                <LetterHole color={backgroundColor}>{children}</LetterHole>
+            )}
+        </>
+    )
+}
+
+export { LetterShape, LetterShapeStatic }

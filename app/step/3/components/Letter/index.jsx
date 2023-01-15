@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Canvas } from "./Canvas"
 import { EditorToolBar, EditorToolBarSelector } from "./Editor"
 import { StickerManager } from "./Editor/Stickers/StickerManager"
+import { LetterCanvas } from "./LetterCanvas"
 import { LetterShape } from "./LetterShape"
 import { LetterText } from "./LetterText"
 
@@ -42,18 +42,18 @@ const Letter = () => {
             ref={letterContainerRef}
             className="flex items-center justify-center h-fit w-full relative"
         >
-            <Canvas size={size}>
+            <LetterCanvas size={size}>
                 <LetterShape>
                     <LetterText />
                 </LetterShape>
 
                 <StickerManager
-                    size={size}
-                    active={selectedOption === "sticker"}
+                    size={300}
                     stickerSize={24}
                     clickActiveAreaRatio={1.5}
+                    active={selectedOption === "sticker"}
                 />
-            </Canvas>
+            </LetterCanvas>
 
             <EditorToolBarSelector
                 handleClickOptions={handleClickOptions}
