@@ -15,7 +15,6 @@ export default async function Step4() {
         <div className="h-full flex flex-col justify-between">
             <h1 className="text-3xl font-bold">Thanks Clip!</h1>
             <KakaoShareLink
-                // path={"download?region=south&bucketName=s3&from=은서"}
                 params={{ from: "은서", bucketName: "s3", region: "seoul" }}
             >
                 <Button>카카오톡으로 Clip보내기</Button>

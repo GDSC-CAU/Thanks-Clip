@@ -19,9 +19,8 @@ const KakaoShareLink = ({ children, params }) => {
         if (window.Kakao) {
             const kakao = window.Kakao
             if (!kakao.isInitialized()) {
-                kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY) // 카카오에서 제공받은 javascript key를 넣어줌 -> .env파일에서 호출시킴
+                kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY)
             }
-            // createCustomButton()
             kakao.Share.createCustomButton({
                 container: "#kakaotalk-sharing-btn",
                 templateId: 88654,
