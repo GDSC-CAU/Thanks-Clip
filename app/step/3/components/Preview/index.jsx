@@ -24,12 +24,7 @@ const Preview = () => {
                 }}
             >
                 <div className="w-[330px] flex flex-col items-center justify-center gap-10">
-                    <div
-                        className="scale-110"
-                        onClick={() => {
-                            action.open()
-                        }}
-                    >
+                    <div className="scale-110">
                         <LetterStaticClient {...letter} size={letterSize} />
                     </div>
                     <div className="flex flex-row w-full gap-5">
