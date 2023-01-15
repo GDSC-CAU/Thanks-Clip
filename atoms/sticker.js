@@ -1,9 +1,11 @@
 /**@typedef {{ type: "circle" | "star" | "heart", position: { x: number, y: number }, isActive: boolean }} Sticker */
 
 import { atom } from "jotai"
+import { STORAGE_KEY } from "./letter"
 
 /**@type {Sticker[]} */
-const stickersInitialValue = []
+const stickersInitialValue =
+    JSON.parse(window?.localStorage.getItem(STORAGE_KEY))?.stickers ?? []
 const stickers = atom(stickersInitialValue)
 const activeSticker = atom((get) => {
     const stickersGet = get(stickers)
