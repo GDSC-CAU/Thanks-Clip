@@ -1,10 +1,19 @@
+"use client"
 import { useEffect } from "react"
 import { useAtomValue } from "jotai"
-import { store } from "../../atoms"
+import { store } from "../../../../atoms"
 
-const ShareKakao = ({ path }) => {
+const KakaoShareLink = ({ children, path }) => {
     const letter = useAtomValue(store.letter)
     const to = letter.to
+
+    useEffect(() => {
+        const script = document.createElement("script")
+        script.src = "https://developers.kakao.com/sdk/js/kakao.js"
+        script.async = true
+        document.body.appendChild(script)
+        return () => document.body.removeChild(script)
+    }, [])
 
     useEffect(() => {
         kakaoButton()
@@ -21,7 +30,6 @@ const ShareKakao = ({ path }) => {
                 container: "#kakaotalk-sharing-btn",
                 templateId: 88654,
                 templateArgs: {
-                    title: "title입니다.",
                     to_user: `${to ? to : ""}`,
                     path: path,
                 },
@@ -30,9 +38,9 @@ const ShareKakao = ({ path }) => {
     }
     return (
         <button id="kakaotalk-sharing-btn" onClick={kakaoButton}>
-            KakaoShare
+            {children}
         </button>
     )
 }
 
-export { ShareKakao }
+export { KakaoShareLink }
