@@ -6,6 +6,7 @@ export default function Head() {
                 content="width=device-width, initial-scale=1"
                 name="viewport"
             />
+            <link rel="icon" href="/logo/red.png" />
             <meta name="author" content="GDSC-CAU" />
             <meta name="keywords" content="Thanks Clip" />
             <meta
@@ -29,7 +30,6 @@ export default function Head() {
                 name="twitter:description"
                 content="쉽고 빠르게 짧은 동영상을 만들어 고마운 마음을 전해볼까요?"
             />
-            <link rel="icon" href="/favicon.ico" />
         </>
     )
 }
