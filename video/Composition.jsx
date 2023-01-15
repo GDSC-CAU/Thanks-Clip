@@ -1,45 +1,27 @@
-import {
-    AbsoluteFill,
-    interpolate,
-    spring,
-    useCurrentFrame,
-    useVideoConfig,
-} from "remotion"
+import { AbsoluteFill } from "remotion"
+import { Envelope } from "./components/Envelope"
+import { FRAME_PER_KEYWORD, Keywords } from "./components/Keywords"
+import { LogoSM } from "./components/LogoSM"
+import { DURATION_PAPERPLANE, PaperPlane } from "./components/PaperPlane"
+import { DURATION_TO, To } from "./components/To"
 
-// 테스팅 용 컴포넌트
-const TailwindTitle = ({ name }) => {
-    const frame = useCurrentFrame()
-    const { fps } = useVideoConfig()
-
-    const entrance = spring({
-        fps,
-        frame,
-        durationInFrames: 50,
-    })
-
-    const opacity = interpolate(frame, [20, 50], [0, 1], {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
-    })
-
-    return (
-        <h1
-            style={{
-                opacity: opacity,
-                transform: `scale(${entrance})`,
-                fontSize: "5rem",
-                fontWeight: 800,
-            }}
-        >
-            {name} / {frame}
-        </h1>
-    )
-}
-
-const RemotionComposition = ({ name }) => {
+const RemotionComposition = ({ to, tags }) => {
     return (
         <AbsoluteFill style={{ background: "white", padding: "1rem" }}>
-            <TailwindTitle name={name} />
+            <Keywords keywords={tags} />
+            <To delay={FRAME_PER_KEYWORD * tags.length}>{to}</To>
+            <PaperPlane
+                delay={FRAME_PER_KEYWORD * tags.length + DURATION_TO - 60}
+            />
+            <Envelope
+                delay={
+                    FRAME_PER_KEYWORD * tags.length +
+                    DURATION_TO +
+                    DURATION_PAPERPLANE -
+                    90
+                }
+            />
+            <LogoSM />
         </AbsoluteFill>
     )
 }

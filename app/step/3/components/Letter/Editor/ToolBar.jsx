@@ -1,7 +1,7 @@
 import { Container } from "../../common/Container"
 import { ColorToolBar } from "./ColorToolBar"
 import { FontToolBar } from "./FontToolBar"
-import { StickerEditor } from "./Stickers/StickerEditor"
+import { StickerToolBar } from "./Stickers/StickerToolBar"
 
 const EditorToolBar = ({ selectedOption }) => {
     const isActive = selectedOption !== "none"
@@ -15,7 +15,7 @@ const EditorToolBar = ({ selectedOption }) => {
         >
             {selectedOption === "color" && <ColorToolBar />}
             {selectedOption === "font" && <FontToolBar />}
-            {selectedOption === "sticker" && <StickerEditor />}
+            {selectedOption === "sticker" && <StickerToolBar />}
         </Container>
     )
 }

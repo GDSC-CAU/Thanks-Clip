@@ -1,10 +1,16 @@
 import { useEffect } from "react"
+import { useAtomValue } from "jotai"
+import { store } from "../../atoms"
+
 const ShareKakao = () => {
+    const letter = useAtomValue(store.letter)
+    const to = letter.to
+
     useEffect(() => {
         kakaoButton()
     }, [])
 
-    const kakaoButton = ({ to }) => {
+    const kakaoButton = () => {
         if (window.Kakao) {
             const kakao = window.Kakao
             if (!kakao.isInitialized()) {
@@ -15,7 +21,8 @@ const ShareKakao = () => {
                 container: "#kakaotalk-sharing-btn",
                 templateId: 88654,
                 templateArgs: {
-                    to_user: { to },
+                    title: "title입니다.",
+                    to_user: `${to ? to : ""}`,
                 },
             })
         }
