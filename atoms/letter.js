@@ -1,5 +1,5 @@
 //@ts-check
-import { atom } from "jotai"
+import { atomWithStorage } from "jotai/utils"
 
 /**@typedef {{ backgroundColor: "white" | "ivory" | "red" | "yellow" | "blue", from: string | null, to: string | null, letter: string | null, letterType: "torn" | "hole" | "overlap", stickers?: import("./sticker").Sticker[], font: "cute" | "hand" | "sans", tags: string[] | null }} Letter */
 /**@type {Letter} */
@@ -13,6 +13,7 @@ const letterInitialValue = {
     backgroundColor: "white",
 }
 
-const letter = atom(letterInitialValue)
+const STORAGE_KEY = "THANKS_CLIP_LETTER"
+const letter = atomWithStorage(STORAGE_KEY, letterInitialValue)
 
-export { letter }
+export { letter, STORAGE_KEY }
