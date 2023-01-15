@@ -6,18 +6,21 @@ import { useEffect, useState } from "react"
 import { Button } from "./common/Button"
 
 /**
- * @param {{ type: "cute" | "sans" | "hand", name: string }} svgParams
+ * @param {{ type: "cute" | "sans" | "hand", text: string }} svgParams
  * @returns {{ svg: null | string }}
  */
-const useSVG = ({ name, type }) => {
+const useSVG = ({ text, type }) => {
     const [svg, setSVG] = useState(null)
 
     useEffect(() => {
-        const fetchSVG = async ({ name, type }) => {
+        const fetchSVG = async ({ text, type }) => {
             try {
-                const res = await fetch(`/api/svg?type=${type}&name=${name}`)
-                const resJSON = await res.json()
-                setSVG(resJSON.svg)
+                const satoriResponse = await (
+                    await fetch(`/api/svg?type=${type}&text=${text}`)
+                ).json()
+
+                console.log(satoriResponse.svgString)
+                setSVG(satoriResponse.svgString)
             } catch (e) {
                 setSVG(null)
                 console.log(e)
@@ -25,10 +28,10 @@ const useSVG = ({ name, type }) => {
         }
 
         fetchSVG({
-            name,
+            text,
             type,
         })
-    }, [name, type])
+    }, [text, type])
 
     return {
         svg,
@@ -38,7 +41,8 @@ const useSVG = ({ name, type }) => {
 const SvgTest = () => {
     const [name, setName] = useState("JUNE")
     const [type, setType] = useState("cute")
-    const { svg } = useSVG({ name, type })
+    const { svg } = useSVG({ text: name, type })
+
     return (
         <>
             <input value={name} onChange={(e) => setName(e.target.value)} />
@@ -49,6 +53,10 @@ const SvgTest = () => {
                 <img
                     src={`data:image/svg+xml;utf8,${svg ?? ""}`}
                     alt="svgString"
+                    height={20}
+                    style={{
+                        height: 20,
+                    }}
                 />
             )}
             <div className="flex flex-row w-full justify-evenly gap-4">
