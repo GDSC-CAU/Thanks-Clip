@@ -5,7 +5,6 @@ export const config = {
     runtime: "edge",
 }
 
-// Make sure the font exists in the specified path:
 const font = {
     cute: fetch(new URL("../../public/font/cute.ttf", import.meta.url)).then(
         (res) => res.arrayBuffer()
@@ -18,35 +17,34 @@ const font = {
     ),
 }
 
-export default async function handler(Req) {
+/**편지지를 위한 텍스트 고정폭 */
+const fontWidth = 232
+/**편지지를 위한 텍스트 사이즈 1.1rem */
+const fontSize = 16 * 1.1
+
+export default async function handler(middleReq) {
     const {
         nextUrl: { search },
-    } = Req
+    } = middleReq
     const urlSearchParams = new URLSearchParams(search)
-    const { type, name } = Object.fromEntries(urlSearchParams.entries())
+    const { type, text } = Object.fromEntries(urlSearchParams.entries())
 
     try {
         const fontData = await font[type]
 
-        const svg = await satori(
+        const svgTextString = await satori(
             <div
                 style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    backgroundColor: "white",
-                    height: "100%",
-                    width: "100%",
-                    fontSize: 100,
+                    backgroundColor: "transparent",
+                    fontSize: `${fontSize}px`,
                     fontFamily: '"CustomFont"',
-                    paddingTop: "100px",
-                    paddingLeft: "50px",
                 }}
             >
-                Hello {name}!
+                {text}
             </div>,
             {
-                width: 500,
-                height: 500,
+                width: fontWidth,
+                height: fontSize,
                 fonts: [
                     {
                         name: "CustomFont",
@@ -56,7 +54,7 @@ export default async function handler(Req) {
             }
         )
         return NextResponse.json({
-            svg,
+            svgString: svgTextString,
         })
     } catch (e) {
         return NextResponse.json({
