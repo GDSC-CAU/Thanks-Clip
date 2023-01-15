@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useAtomValue } from "jotai"
 import { store } from "../../../../atoms"
 
-const KakaoShareLink = ({ children, path }) => {
+const KakaoShareLink = ({ children, params }) => {
     const letter = useAtomValue(store.letter)
     const to = letter.to
 
@@ -31,7 +31,7 @@ const KakaoShareLink = ({ children, path }) => {
                 templateId: 88654,
                 templateArgs: {
                     to_user: `${to ? to : ""}`,
-                    path: path,
+                    path: `download?region=${params.region}&bucketName=${params.bucketName}&from=${params.from}"`,
                 },
             })
         }
