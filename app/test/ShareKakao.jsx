@@ -2,10 +2,9 @@ import { useEffect } from "react"
 import { useAtomValue } from "jotai"
 import { store } from "../../atoms"
 
-const ShareKakao = () => {
+const ShareKakao = ({ path }) => {
     const letter = useAtomValue(store.letter)
     const to = letter.to
-    const path = "step/2"
 
     useEffect(() => {
         kakaoButton()

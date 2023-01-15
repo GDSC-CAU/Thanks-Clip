@@ -12,7 +12,7 @@ const TestForm = () => {
     }, [])
     return (
         <>
-            <ShareKakao url={"step/1"} />
+            <ShareKakao path={"step/1"} />
         </>
     )
 }
