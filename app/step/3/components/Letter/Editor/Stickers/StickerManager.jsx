@@ -55,7 +55,7 @@ const StickersStatic = ({ size, stickers }) => (
             backgroundColor: "transparent",
         }}
     >
-        {stickers.map(({ type, position }) => (
+        {stickers?.map(({ type, position }) => (
             <Movable
                 key={`${type}-${position.x}-${position.y}`}
                 position={position}
@@ -166,7 +166,7 @@ const StickerManager = ({
                 }
             }}
         >
-            {stickers.map(({ type, position, isActive }, stickerLocation) => {
+            {stickers?.map(({ type, position, isActive }, stickerLocation) => {
                 return (
                     <Movable
                         key={`${type}-${position.x}-${position.y}`}
