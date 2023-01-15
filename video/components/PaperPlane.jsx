@@ -5,7 +5,7 @@ import {
     staticFile,
     useCurrentFrame,
     useVideoConfig,
-} from "remotion/."
+} from "remotion"
 
 const DURATION_PAPER_PLANE = 90
 

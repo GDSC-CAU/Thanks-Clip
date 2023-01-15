@@ -1,4 +1,4 @@
-import { AbsoluteFill, Img, staticFile } from "remotion/."
+import { AbsoluteFill, Img, staticFile } from "remotion"
 
 const LogoSM = () => {
     return (

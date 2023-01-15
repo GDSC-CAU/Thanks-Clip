@@ -4,7 +4,7 @@ import {
     interpolate,
     useCurrentFrame,
     useVideoConfig,
-} from "remotion/."
+} from "remotion"
 
 const DURATION_ENVELOPE = 135
 
