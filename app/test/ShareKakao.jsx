@@ -4,7 +4,7 @@ const ShareKakao = () => {
         kakaoButton()
     }, [])
 
-    const kakaoButton = () => {
+    const kakaoButton = ({ to }) => {
         if (window.Kakao) {
             const kakao = window.Kakao
             if (!kakao.isInitialized()) {
@@ -15,8 +15,7 @@ const ShareKakao = () => {
                 container: "#kakaotalk-sharing-btn",
                 templateId: 88654,
                 templateArgs: {
-                    title: "제목 영역입니다.",
-                    description: "설명 영역입니다.",
+                    to_user: { to },
                 },
             })
         }
