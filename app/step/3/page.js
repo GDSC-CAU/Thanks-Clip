@@ -1,7 +1,6 @@
-import Link from "next/link"
-import { Button } from "../../common/Button"
 import { Title } from "../../common/Title"
 import { Letter } from "./components/Letter"
+import { Preview } from "./components/Preview"
 
 export default function Step3() {
     return (
@@ -13,9 +12,7 @@ export default function Step3() {
             <Letter />
 
             <div className="mt-auto mb-5">
-                <Link href="/step/4">
-                    <Button>계속하기</Button>
-                </Link>
+                <Preview />
             </div>
         </>
     )
