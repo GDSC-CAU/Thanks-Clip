@@ -7,7 +7,7 @@ import {
     useVideoConfig,
 } from "remotion/."
 
-const DURATION_PAPERPLANE = 90
+const DURATION_PAPER_PLANE = 90
 
 const PaperPlane = ({ delay = 180 }) => {
     const frame = useCurrentFrame()
@@ -44,4 +44,4 @@ const PaperPlane = ({ delay = 180 }) => {
     )
 }
 
-export { PaperPlane, DURATION_PAPERPLANE }
+export { PaperPlane, DURATION_PAPER_PLANE }

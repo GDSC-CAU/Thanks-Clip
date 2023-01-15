@@ -51,11 +51,11 @@ const Download = ({ encode }) => {
 
     useEffect(() => {
         /**@type {NodeJS.Timeout} */
-        let cleanup
+        let cleanupRequest
         if (progress.type === "progress") {
-            cleanup = progressRequest()
+            cleanupRequest = progressRequest()
         }
-        return () => clearTimeout(cleanup)
+        return () => clearTimeout(cleanupRequest)
     }, [progress, progress.type, progressRequest])
 
     return (

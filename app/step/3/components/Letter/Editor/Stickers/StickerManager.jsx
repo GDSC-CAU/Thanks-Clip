@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useAtomValue } from "jotai"
+import { useAtomValue, useSetAtom } from "jotai"
 import { store } from "../../../../../../../atoms"
 import { CircleIcon } from "./Sticker/Circle"
 import { HeartIcon } from "./Sticker/Heart"
@@ -46,7 +46,7 @@ const Movable = ({ position, children, size, isActive, onPointerEnter }) => {
 /**
  * @param {{size: number, stickers: Sticker[]}} props
  */
-const StaticStickers = ({ size, stickers }) => (
+const StickersStatic = ({ size, stickers }) => (
     <div
         style={{
             width: size,
@@ -68,13 +68,13 @@ const StaticStickers = ({ size, stickers }) => (
     </div>
 )
 
-const useLockMobileTouch = (isLock) => {
+const useLockMobileTouch = (isActive) => {
     // eslint-disable-next-line consistent-return
     useEffect(() => {
         const body = document.querySelector("body")
         const editorLocation = 100
 
-        if (isLock) {
+        if (isActive) {
             body.style.overflow = "hidden"
 
             window.scrollTo({ top: editorLocation })
@@ -94,7 +94,16 @@ const useLockMobileTouch = (isLock) => {
                 )
             }
         }
-    }, [isLock])
+    }, [isActive])
+}
+
+const useSaveStickers = (isActive, stickers) => {
+    const setLetter = useSetAtom(store.letter)
+    useEffect(() => {
+        if (isActive) {
+            setLetter((prev) => ({ ...prev, stickers }))
+        }
+    }, [isActive, stickers, setLetter])
 }
 
 const StickerManager = ({
@@ -107,6 +116,7 @@ const StickerManager = ({
     const activeSticker = useAtomValue(store.activeSticker)
     const [isCanvasDrag, setIsCanvasDrag] = useState(false)
 
+    useSaveStickers(active, stickers)
     useLockMobileTouch(active)
 
     if (stickers.length === 0) {
@@ -114,7 +124,7 @@ const StickerManager = ({
     }
 
     if (active === false) {
-        return <StaticStickers size={size} stickers={stickers} />
+        return <StickersStatic size={size} stickers={stickers} />
     }
 
     return (
@@ -176,4 +186,4 @@ const StickerManager = ({
     )
 }
 
-export { StickerManager, StaticStickers }
+export { StickerManager, StickersStatic }

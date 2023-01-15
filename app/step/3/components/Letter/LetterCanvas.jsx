@@ -1,18 +1,8 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useMounted } from "../../../RenderOnMount"
 
-const useMounted = () => {
-    const [isMounted, setIsMounted] = useState(false)
-
-    useEffect(() => {
-        setIsMounted(true)
-    }, [])
-
-    return { isMounted }
-}
-
-const Canvas = ({ children, size }) => {
+const LetterCanvas = ({ children, size }) => {
     const { isMounted } = useMounted()
 
     return (
@@ -34,4 +24,4 @@ const Canvas = ({ children, size }) => {
     )
 }
 
-export { Canvas }
+export { LetterCanvas }

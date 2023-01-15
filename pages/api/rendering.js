@@ -49,7 +49,7 @@ const encodeVideo = async (videoProps) => {
     }
 }
 
-/**@typedef {Promise<{type: "progress" | "success" | "error", downloadUrl: string | null, outputSize: number | null, errorMessage: string | null }>} RenderingProgress */
+/**@typedef {Promise<{type: "progress" | "success" | "error", downloadUrl: string | null, outputSize: number | null, errorMessage: string | null, bucketName: string | null, region: string | null }>} RenderingProgress */
 /**
  * @param {{renderId: string | null, bucketName: string | null, region: string | null}} renderProgress
  * @returns {RenderingProgress}
@@ -60,6 +60,8 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
             type: "error",
             downloadUrl: null,
             outputSize: null,
+            bucketName,
+            region,
             errorMessage: `Can't find ${bucketName} in ${region}`,
         }
     }
@@ -80,6 +82,8 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
             errorMessage: progress.errors
                 .map((e) => JSON.stringify(e))
                 .reduce((e) => `${e}\n`),
+            bucketName,
+            region,
             outputSize: null,
         }
     }
@@ -90,6 +94,8 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
             downloadUrl: null,
             errorMessage: null,
             outputSize: null,
+            bucketName,
+            region,
         }
     }
 
@@ -99,6 +105,8 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
             downloadUrl: progress.outputFile,
             outputSize: progress.outputSizeInBytes,
             errorMessage: null,
+            bucketName,
+            region,
         }
     }
 
@@ -107,6 +115,8 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
         downloadUrl: null,
         errorMessage: null,
         outputSize: null,
+        bucketName,
+        region,
     }
 }
 

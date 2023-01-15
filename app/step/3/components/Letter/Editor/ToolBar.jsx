@@ -1,6 +1,7 @@
 import { Container } from "../../common/Container"
 import { ColorToolBar } from "./ColorToolBar"
 import { FontToolBar } from "./FontToolBar"
+import { ShapeToolBar } from "./ShapeToolBar"
 import { StickerToolBar } from "./Stickers/StickerToolBar"
 
 const EditorToolBar = ({ selectedOption }) => {
@@ -16,6 +17,7 @@ const EditorToolBar = ({ selectedOption }) => {
             {selectedOption === "color" && <ColorToolBar />}
             {selectedOption === "font" && <FontToolBar />}
             {selectedOption === "sticker" && <StickerToolBar />}
+            {selectedOption === "type" && <ShapeToolBar />}
         </Container>
     )
 }
