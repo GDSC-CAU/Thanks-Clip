@@ -1,13 +1,12 @@
 .airplane {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 11rem;
+    right: 4rem;
     width: 18.5%;
     opacity: 100;
-    animation: airplaneMove 3s ease forwards;
+    animation: airplaneMove 2s ease infinite;
     will-change: transform;
 }
-
 
 .st0 {
     fill: #b4b5b5;
@@ -22,12 +21,12 @@
 @keyframes airplaneMove {
     0% {
         transform: translate(-80%, 270%) scale(0.5) rotate(20deg);
-        opacity: 0;
+        opacity: 0.25;
     }
 
     50% {
         transform: translate(-110%, 240%) scale(0.75) rotate(15deg);
-        opacity: 0.25;
+        opacity: 0.5;
     }
 
     100% {
@@ -35,4 +34,3 @@
         opacity: 1;
     }
 }
-

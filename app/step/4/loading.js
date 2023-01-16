@@ -25,11 +25,9 @@ const LogoAirplane = (props) => (
 export default function Step4Loading() {
     return (
         <div className="flex flex-col h-full items-center justify-center ">
-            {/* <div className="w-81 h-81 relative"> */}
             <LogoAirplane />
-            {/* </div> */}
-            <div className="text-lg text-black font-bold text-center leading-5">
-                열심히 영상을 만드는중이에요 !
+            <div className="text-lg text-black font-bold text-center leading-6">
+                열심히 영상을 만드는 중이에요 !
                 <br />
                 잠시만 기다려주세요
             </div>
