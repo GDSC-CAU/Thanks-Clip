@@ -43,9 +43,9 @@ const LogoAirplane = (props) => (
 
 export default async function Main() {
     return (
-        <main className="flex flex-col w-full h-screen min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-3 py-3 bg-white">
-            <div className="flex flex-col h-full justify-between gap-10">
-                <div className="w-81 h-81 relative">
+        <main className="flex flex-col w-full h-screen min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-3 py-12 bg-white justify-between">
+            <div className="">
+                <div className="relative">
                     <Logo />
                     <LogoAirplane />
                 </div>
@@ -60,14 +60,14 @@ export default async function Main() {
                         마음을 담아낸, 나만의 영상 편지
                     </div>
                 </div>
-                <Link href="/step/1">
-                    <Button className="mb-12">
-                        <span className="font-main-cute text-2xl">
-                            한번 만들어 볼까요?
-                        </span>
-                    </Button>
-                </Link>
             </div>
+            <Link href="/step/1">
+                <Button>
+                    <span className="font-main-cute text-2xl">
+                        한번 만들어 볼까요?
+                    </span>
+                </Button>
+            </Link>
         </main>
     )
 }

@@ -32,14 +32,16 @@ export default async function Step4() {
     const encode = await encodeVideo(transformedVideoProps)
 
     return (
-        <>
+        <div className="h-full flex flex-col justify-between">
             <LetterToName />
-            <ClipPreview videoClientProps={videoClientProps} />
+            <div className="h-full flex-1">
+                <ClipPreview videoClientProps={videoClientProps} />
+            </div>
             <LetterButton urlParams={{ ...encode, to: videoClientProps.to }} />
             <Download
                 encode={encode}
                 transformedVideoProps={transformedVideoProps}
             />
-        </>
+        </div>
     )
 }
