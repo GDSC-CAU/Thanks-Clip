@@ -3,7 +3,7 @@ import {
     interpolate,
     useCurrentFrame,
     useVideoConfig,
-} from "remotion/."
+} from "remotion"
 
 const DURATION_TO = 60
 

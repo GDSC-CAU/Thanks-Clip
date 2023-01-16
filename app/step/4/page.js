@@ -4,6 +4,7 @@ import {
     encodeVideo,
     transformVideoProps,
 } from "../../../pages/api/rendering.js"
+import { ClipPreview } from "./components/ClipPreview.jsx"
 import { Download } from "./components/Download.jsx"
 import { LetterButton } from "./components/LetterButton"
 import { LetterToName } from "./components/LetterToName"
@@ -20,6 +21,7 @@ export default async function Step4() {
     return (
         <>
             <LetterToName />
+            <ClipPreview />
             <LetterButton urlParams={{ ...encode, to: videoProps.to }} />
             <Download
                 encode={encode}

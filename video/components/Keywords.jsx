@@ -3,7 +3,7 @@ import {
     interpolate,
     useCurrentFrame,
     useVideoConfig,
-} from "remotion/."
+} from "remotion"
 
 const FRAME_PER_KEYWORD = 60
 
