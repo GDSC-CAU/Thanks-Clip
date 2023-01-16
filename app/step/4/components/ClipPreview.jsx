@@ -16,7 +16,12 @@ const ClipPreview = () => {
     return (
         <Player
             component={RemotionComposition}
-            style={{ width: "100%", borderRadius: "5px" }}
+            style={{
+                flex: "1 1 0",
+                width: "fit",
+                maxWidth: "100%",
+                borderRadius: "5px",
+            }}
             inputProps={SampleLetter}
             durationInFrames={VIDEO_CONFIG.durationInFrames}
             compositionWidth={VIDEO_CONFIG.width}

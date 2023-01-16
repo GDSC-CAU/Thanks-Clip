@@ -17,9 +17,9 @@ const LetterButton = () => {
     }
 
     return (
-        <div className="mb-auto pt-10">
+        <div className="flex flex-col gap-4 pt-10">
             <KakaoShareLink urlParams={{}} onClick={reset}>
-                <Button className="mb-5">카카오톡으로 Clip 보내기</Button>
+                <Button>카카오톡으로 Clip 보내기</Button>
             </KakaoShareLink>
 
             <Link href="/">

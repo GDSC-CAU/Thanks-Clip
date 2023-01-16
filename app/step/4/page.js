@@ -15,10 +15,12 @@ export default async function Step4() {
     // eslint-disable-next-line no-unused-vars
     const { bucketName, region, renderId } = encode
     return (
-        <>
+        <div className="h-full flex flex-col justify-between">
             <LetterToName />
-            <ClipPreview />
+            <div className="h-full flex-1">
+                <ClipPreview />
+            </div>
             <LetterButton />
-        </>
+        </div>
     )
 }

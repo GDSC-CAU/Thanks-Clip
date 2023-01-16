@@ -43,8 +43,8 @@ const LogoAirplane = (props) => (
 
 export default async function Main() {
     return (
-        <main className="flex flex-col w-full h-screen min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-6 py-12 bg-white justify-between">
-            <div className="py-12">
+        <main className="flex flex-col w-full h-screen min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-3 py-12 bg-white justify-between">
+            <div className="">
                 <div className="relative">
                     <Logo />
                     <LogoAirplane />

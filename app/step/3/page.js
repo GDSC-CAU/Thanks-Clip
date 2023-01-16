@@ -5,13 +5,14 @@ import { Preview } from "./components/Preview"
 export default function Step3() {
     return (
         <>
-            <div className="py-10">
-                <Title main="편지지를 꾸며볼까요?" />
+            <div className="flex-1">
+                <div className="py-10">
+                    <Title main="편지지를 꾸며볼까요?" />
+                </div>
+
+                <Letter />
             </div>
-
-            <Letter />
-
-            <div className="mt-auto mb-5">
+            <div className="sticky bottom-0 pb-3 z-50">
                 <Preview />
             </div>
         </>
