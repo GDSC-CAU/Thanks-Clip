@@ -27,7 +27,7 @@
         "@remotion/lambda": "3.3.27",
         "@remotion/player": "3.3.27",
         "cookies-next": "^2.1.1",
-        "jotai": "^1.13.0",
+        "jotai": "^1.13.1",
         "next": "^13.1.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",

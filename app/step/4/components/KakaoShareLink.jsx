@@ -26,7 +26,7 @@ const KakaoShareLink = ({ children, urlParams, onClick }) => {
                 templateId: 88654,
                 templateArgs: {
                     to_user: `${to ? to : ""}`,
-                    path: `download?region=${urlParams.region}&bucketName=${urlParams.bucketName}&from=${urlParams.from}"`,
+                    path: `download?region=${urlParams.region}&bucketName=${urlParams.bucketName}&to=${urlParams.to}&renderId=${urlParams.renderId}`,
                 },
             })
         }

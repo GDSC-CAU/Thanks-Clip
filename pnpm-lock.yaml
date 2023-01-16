@@ -25,7 +25,7 @@ specifiers:
   eslint-plugin-react: ^7.32.0
   eslint-plugin-react-hooks: ^4.6.0
   husky: ^8.0.3
-  jotai: ^1.13.0
+  jotai: ^1.13.1
   lint-staged: ^13.1.0
   lodash.chunk: ^4.2.0
   next: ^13.1.2
@@ -50,7 +50,7 @@ dependencies:
   '@remotion/lambda': 3.3.27_dlq3obld7xjmxahslnyiin3l3y
   '@remotion/player': 3.3.27_biqbaboplfbrettd7655fr4n2y
   cookies-next: 2.1.1
-  jotai: 1.13.0_react@18.2.0
+  jotai: 1.13.1_react@18.2.0
   next: 13.1.2_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -6154,8 +6154,8 @@ packages:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  /jotai/1.13.0_react@18.2.0:
-    resolution: {integrity: sha512-SPTO46Jw1aJTp2i18tiKgk++nKNKJTMNw4qYFy9QRTydceWvD2Eys+YgB7cb1S6pzbM9i0Ik/y7Yl7IH8k9Lig==}
+  /jotai/1.13.1_react@18.2.0:
+    resolution: {integrity: sha512-RUmH1S4vLsG3V6fbGlKzGJnLrDcC/HNb5gH2AeA9DzuJknoVxSGvvg8OBB7lke+gDc4oXmdVsaKn/xDUhWZ0vw==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@babel/core': '*'
