@@ -224,52 +224,10 @@ const LetterShapeStatic = ({ backgroundColor, type, children }) => {
     )
 }
 
-const ToString = ({ svgString, alt, height }) => (
+const LetterTextSVG = ({ svgString, alt }) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img
-        src={`data:image/svg+xml;utf8,${svgString}`}
-        alt={alt}
-        height={height}
-        style={{
-            height: 20,
-        }}
-    />
+    <img src={`data:image/svg+xml;utf8,${svgString}`} alt={alt} />
 )
-
-const LetterTextStatic = ({ from, to, letter }) => {
-    return (
-        <div
-            style={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-            }}
-        >
-            <div
-                style={{
-                    lineHeight: "1.5rem",
-                }}
-            >
-                <ToString svgString={from} alt={"from svg"} height="22%" />
-            </div>
-            <div
-                style={{
-                    lineHeight: "1.5rem",
-                }}
-            >
-                <ToString svgString={letter} alt="letter svg" height="70%" />
-            </div>
-            <div
-                style={{
-                    alignSelf: "flex-end",
-                    lineHeight: "1.5rem",
-                }}
-            >
-                <ToString svgString={to} alt="to svg" height="11%" />
-            </div>
-        </div>
-    )
-}
 
 const Sticker = ({ type }) => {
     return (
@@ -327,21 +285,15 @@ const Movable = ({ position, children, size, isActive, onPointerEnter }) => {
     )
 }
 
-/**@typedef {import("../../atoms/sticker.js").Sticker} Sticker */
-
 /**
  * Letter를 서버에서 정적으로 표현하는 컴포넌트
- * @param {{size: number, from: string, to: string, letter: string, stickers: Sticker[], letterType: "hole" | "overlap" | "torn", font: "cute" | "sans" | "hand", backgroundColor: "white" | "ivory" | "red" | "yellow" | "blue" }} clientProps
  */
 const Letter = ({
     size = 300,
-    from: fromSvgString,
-    to: toSvgString,
-    letter: letterSvgString,
-    letterType,
-    font,
     stickers,
+    letterType,
     backgroundColor,
+    letterTextSVG,
 }) => {
     return (
         <LetterCanvas size={size}>
@@ -349,12 +301,7 @@ const Letter = ({
                 backgroundColor={backgroundColor}
                 type={letterType}
             >
-                <LetterTextStatic
-                    font={font}
-                    from={fromSvgString}
-                    letter={letterSvgString}
-                    to={toSvgString}
-                />
+                <LetterTextSVG svgString={letterTextSVG} />
             </LetterShapeStatic>
 
             <StickersStatic size={size} stickers={stickers} />
