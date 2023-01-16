@@ -27,7 +27,7 @@ const KeywordForm = () => {
                     getKeywordNum={getKeywordNum}
                 />
             </div>
-            <div className="mt-auto mb-5">
+            <div>
                 <Link href="/step/3">
                     <Button disabled={isDisabled}>
                         {keywordNum === 0 && "키워드를 골라볼까요?"}
