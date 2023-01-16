@@ -7,7 +7,10 @@ import { store } from "../../../../atoms"
 import { Button } from "../../../common/Button"
 import { KakaoShareLink } from "./KakaoShareLink"
 
-const LetterButton = () => {
+/**
+ * @param {{ urlParams: {renderId: string | null; bucketName: string | null; region: string | null;, to: string} }} downloadProps
+ */
+const LetterButton = ({ urlParams }) => {
     const setLetter = useSetAtom(store.letter)
     const setStickers = useSetAtom(store.stickers)
 
@@ -17,9 +20,10 @@ const LetterButton = () => {
     }
 
     return (
+
         <div className="flex flex-col gap-4 pt-10">
-            <KakaoShareLink urlParams={{}} onClick={reset}>
-                <Button>카카오톡으로 Clip 보내기</Button>
+            <KakaoShareLink urlParams={urlParams}>
+                <Button className="mb-5">카카오톡으로 Clip 보내기</Button>
             </KakaoShareLink>
 
             <Link href="/">

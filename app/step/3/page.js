@@ -1,6 +1,6 @@
 import { Title } from "../../common/Title"
 import { Letter } from "./components/Letter"
-import { Preview } from "./components/Preview"
+import { PreviewLetter } from "./components/PreviewLetter"
 
 export default function Step3() {
     return (
@@ -9,11 +9,10 @@ export default function Step3() {
                 <div className="py-10">
                     <Title main="편지지를 꾸며볼까요?" />
                 </div>
-
                 <Letter />
             </div>
             <div className="sticky bottom-0 pb-3 z-50">
-                <Preview />
+                <PreviewLetter />
             </div>
         </>
     )

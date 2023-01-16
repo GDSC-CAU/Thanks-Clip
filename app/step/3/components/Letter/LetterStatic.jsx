@@ -1,4 +1,4 @@
-import { StickersStatic } from "./Editor/Stickers/StickerManager"
+import { LetterStickersStatic } from "./Editor/Stickers/StickerManager"
 import { LetterCanvas } from "./LetterCanvas"
 import { LetterShapeStatic } from "./LetterShape"
 import { LetterTextLocation, LetterTextStatic } from "./LetterText"
@@ -33,7 +33,7 @@ const LetterStaticClient = ({
                 />
             </LetterShapeStatic>
 
-            <StickersStatic size={size} stickers={stickers} />
+            <LetterStickersStatic size={size} stickers={stickers} />
         </LetterCanvas>
     )
 }
@@ -61,7 +61,7 @@ const LetterStaticServer = ({
                 />
             </LetterShapeStatic>
 
-            <StickersStatic size={size} stickers={stickers} />
+            <LetterStickersStatic size={size} stickers={stickers} />
         </LetterCanvas>
     )
 }

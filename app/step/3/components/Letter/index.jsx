@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { EditorToolBar, EditorToolBarSelector } from "./Editor"
-import { StickerManager } from "./Editor/Stickers/StickerManager"
+import { LetterStickerManager } from "./Editor/Stickers/StickerManager"
 import { LetterCanvas } from "./LetterCanvas"
 import { LetterShape } from "./LetterShape"
 import { LetterText } from "./LetterText"
@@ -47,7 +47,7 @@ const Letter = () => {
                     <LetterText />
                 </LetterShape>
 
-                <StickerManager
+                <LetterStickerManager
                     size={300}
                     stickerSize={24}
                     clickActiveAreaRatio={1.5}
