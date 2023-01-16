@@ -1,6 +1,6 @@
 import { Composition } from "remotion"
-import { RemotionComposition } from "./Composition.jsx"
 import "../app/index.css"
+import { RemotionCompositionServer } from "./CompositionServer"
 
 const VIDEO_CONFIG = {
     fps: 30,
@@ -14,7 +14,7 @@ const RemotionRoot = () => {
         <Composition
             //!TODO: deployConfig.js의 VIDEO_COMPOSITION_ID와 값이 반드시 동일해야 합니다!
             id="thanks-clip"
-            component={RemotionComposition}
+            component={RemotionCompositionServer}
             {...VIDEO_CONFIG}
         />
     )

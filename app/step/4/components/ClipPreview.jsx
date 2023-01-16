@@ -1,6 +1,6 @@
 "use client"
 import { Player } from "@remotion/player"
-import { RemotionCompositionClient } from "../../../../video/Composition.jsx"
+import { RemotionCompositionClient } from "../../../../video/CompositionClient.jsx"
 import { VIDEO_CONFIG } from "../video-config"
 
 const ClipPreview = ({ videoClientProps }) => {
