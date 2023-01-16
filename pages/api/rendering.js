@@ -36,7 +36,7 @@ const fetchSVG = async ({ from, to, letter, letterType, font }) => {
 
 /**
  * `videoProps`로 변환, server 전달
- * @param {Required<import("../../../atoms/letter").Letter>} letterProps
+ * @param {Required<import("../../atoms/letter").Letter>} letterProps
  * @returns {Promise<import("../../../video/Composition").LetterVideoProps>}
  */
 const transformVideoProps = async (letterProps) => {
@@ -100,7 +100,7 @@ const encodeVideo = async (videoProps) => {
             imageFormat: "jpeg",
             downloadBehavior: {
                 type: "download",
-                fileName: `thanks.clip.to.${videoProps.to.toLocaleLowerCase()}.mp4`,
+                fileName: "thanksClip.mp4",
             },
         })
 

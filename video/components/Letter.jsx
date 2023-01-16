@@ -224,9 +224,9 @@ const LetterShapeStatic = ({ backgroundColor, type, children }) => {
     )
 }
 
-const LetterTextSVG = ({ svgString, alt }) => (
+const LetterTextSVG = ({ svgString }) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={`data:image/svg+xml;utf8,${svgString}`} alt={alt} />
+    <img src={`data:image/svg+xml;utf8,${svgString}`} alt={"thanks clip"} />
 )
 
 const Sticker = ({ type }) => {
