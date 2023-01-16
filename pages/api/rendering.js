@@ -35,15 +35,6 @@ const fetchSVG = async ({ from, to, letter, letterType, font }) => {
 }
 
 /**
- * tag text 추출
- * ```ts
- * type Tag = { id: number, text: string }
- * type Tags = Tag[]
- * ```
- * */
-const toStringTags = (tags) => tags.map((tag) => tag.text)
-
-/**
  * `videoProps`로 변환, server 전달
  * @param {Required<import("../../../atoms/letter").Letter>} letterProps
  * @returns {Promise<import("../../../video/Composition").LetterVideoProps>}
@@ -60,9 +51,9 @@ const transformVideoProps = async (letterProps) => {
     if (isError) {
         return {
             size: 300,
-            to: letterProps.to,
             letterTextSVG: "",
-            tags: toStringTags(letterProps.tags),
+            to: letterProps.to,
+            tags: letterProps.tags,
             stickers: letterProps.stickers,
             letterType: letterProps.letterType,
             backgroundColor: letterProps.backgroundColor,
@@ -70,10 +61,10 @@ const transformVideoProps = async (letterProps) => {
     }
 
     return {
-        to: letterProps.to,
-        letterTextSVG,
         size: 300,
-        tags: toStringTags(letterProps.tags),
+        letterTextSVG,
+        to: letterProps.to,
+        tags: letterProps.tags,
         stickers: letterProps.stickers,
         letterType: letterProps.letterType,
         backgroundColor: letterProps.backgroundColor,
@@ -109,7 +100,7 @@ const encodeVideo = async (videoProps) => {
             imageFormat: "jpeg",
             downloadBehavior: {
                 type: "download",
-                fileName: `thanksClip.mp4`,
+                fileName: `thanks.clip.to.${videoProps.to.toLocaleLowerCase()}.mp4`,
             },
         })
 
