@@ -50,7 +50,7 @@ const Holes = ({ color }) => {
                 <Hole color={color} />
                 <div
                     style={{
-                        backgroundColor: "rgb(255 255 255)",
+                        backgroundColor: `${colors[color]}`,
                         flex: "1 1 0%",
                     }}
                 />
