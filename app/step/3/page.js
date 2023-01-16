@@ -1,6 +1,6 @@
 import { Title } from "../../common/Title"
 import { Letter } from "./components/Letter"
-import { Preview } from "./components/Preview"
+import { PreviewLetter } from "./components/PreviewLetter"
 
 export default function Step3() {
     return (
@@ -12,7 +12,7 @@ export default function Step3() {
             <Letter />
 
             <div className="mt-auto mb-5">
-                <Preview />
+                <PreviewLetter />
             </div>
         </>
     )
