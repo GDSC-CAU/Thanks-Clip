@@ -55,22 +55,27 @@ const Download = ({ encode }) => {
         if (progress.type === "progress") {
             cleanupRequest = progressRequest()
         }
+        if (progress.type === "error") {
+            cleanupRequest = null
+        }
         return () => clearTimeout(cleanupRequest)
     }, [progress, progress.type, progressRequest])
 
     return (
         <>
-            {progress.type === "success" ? (
+            {progress.type === "success" && (
                 <a href={progress.downloadUrl} download={"thanks clip"}>
                     <Button color="red">
                         다운로드 {byteToSize({ byte: progress.outputSize })}
                     </Button>
                 </a>
-            ) : (
+            )}
+            {progress.type === "progress" && (
                 <Button disabled color="gray">
                     <ArrowPathIcon className="animate-spin h-8 w-8" />
                 </Button>
             )}
+            {progress.type === "error" && <Button color="white">에러</Button>}
         </>
     )
 }

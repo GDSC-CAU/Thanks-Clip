@@ -40,11 +40,16 @@ const deployLambdaAndS3Bucket = async () => {
                     architecture: "arm64",
                     createCloudWatchLogGroup: true,
                     memorySizeInMb: DEPLOY_CONFIG.RAM,
+                    diskSizeInMb: DEPLOY_CONFIG.DISK,
                     timeoutInSeconds: DEPLOY_CONFIG.TIMEOUT,
                     region: awsRegion,
                 })
 
-                console.log(`${chalk.bold.greenBright(`${awsRegion}`)}`)
+                console.log(
+                    `${chalk.bold.greenBright(
+                        `REGION: ${awsRegion}\nRAM: ${DEPLOY_CONFIG.RAM}mb\nDISK: ${DEPLOY_CONFIG.DISK}mb`
+                    )}`
+                )
                 console.log(
                     `${chalk.bold.bgGreen(
                         alreadyExisted

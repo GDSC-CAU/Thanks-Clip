@@ -3,13 +3,14 @@
 import { useAtomValue } from "jotai"
 import Link from "next/link"
 import { store } from "../../../../../atoms"
+import { COOKIE_KEY, setPropsOnCookie } from "../../../../../constant/cookie"
 import { Button } from "../../../../common/Button"
 import { Modal, useModalState } from "../../../../common/Modal"
 import { LetterStaticClient } from "../Letter/LetterStatic"
 
 const letterSize = 300
 
-const Preview = () => {
+const PreviewLetter = () => {
     const { action, isClose } = useModalState()
     const letter = useAtomValue(store.letter)
 
@@ -31,8 +32,15 @@ const Preview = () => {
                         <Button color="gray" onClick={() => action.close()}>
                             수정하기
                         </Button>
+
                         <Link href="/step/4" className="w-full">
-                            <Button>Clip</Button>
+                            <Button
+                                onClick={() => {
+                                    setPropsOnCookie(COOKIE_KEY, letter)
+                                }}
+                            >
+                                Clip
+                            </Button>
                         </Link>
                     </div>
                 </div>
@@ -41,4 +49,4 @@ const Preview = () => {
     )
 }
 
-export { Preview }
+export { PreviewLetter }
