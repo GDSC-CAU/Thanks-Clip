@@ -46,7 +46,7 @@ const Movable = ({ position, children, size, isActive, onPointerEnter }) => {
 /**
  * @param {{size: number, stickers: Sticker[]}} props
  */
-const StickersStatic = ({ size, stickers }) => (
+const LetterStickersStatic = ({ size, stickers }) => (
     <div
         style={{
             width: size,
@@ -106,7 +106,7 @@ const useSaveStickers = (isActive, stickers) => {
     }, [isActive, stickers, setLetter])
 }
 
-const StickerManager = ({
+const LetterStickerManager = ({
     size,
     stickerSize,
     clickActiveAreaRatio = 1,
@@ -124,7 +124,7 @@ const StickerManager = ({
     }
 
     if (active === false) {
-        return <StickersStatic size={size} stickers={stickers} />
+        return <LetterStickersStatic size={size} stickers={stickers} />
     }
 
     return (
@@ -186,4 +186,4 @@ const StickerManager = ({
     )
 }
 
-export { StickerManager, StickersStatic }
+export { LetterStickerManager, LetterStickersStatic }
