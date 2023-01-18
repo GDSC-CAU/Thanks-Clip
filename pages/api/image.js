@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ImageResponse } from "@vercel/og"
-import { NextResponse } from "next/server"
 
 export const config = {
     runtime: "edge",
@@ -159,8 +158,6 @@ export default async function handler(middleReq) {
         return image
     } catch (e) {
         console.log(e)
-        return NextResponse.json({
-            image: null,
-        })
+        return null
     }
 }
