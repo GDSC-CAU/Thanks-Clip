@@ -1,6 +1,6 @@
 {
     "functions": {
-        "api/image.jsx": {
+        "pages/api/image.jsx": {
             "excludeFiles": "public/**/*"
         }
     }
