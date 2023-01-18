@@ -1,0 +1,8 @@
+{
+    "functions": {
+        "api/image.jsx": {
+            "regions": ["icn1"],
+            "excludeFiles": "public/**/*"
+        }
+    }
+}
