@@ -1,5 +1,5 @@
 import { VERSION } from "remotion/version"
-import { DEPLOY_CONFIG } from "../../constant/deployConfig.js"
+import { DEPLOY_CONFIG } from "../../../constant/deployConfig.js"
 
 const getDeployedLambdaFunctionName = () =>
     `remotion-render-${VERSION.replace(/\./g, "-")}-mem${

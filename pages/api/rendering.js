@@ -7,7 +7,7 @@ import {
     getRandomAWSRegion,
     getRandomAwsAccount,
     setEnvForRemotionAWSDeploy,
-} from "./aws.js"
+} from "./_aws/index.js"
 
 /**
  * `videoProps`로 변환, server 전달
