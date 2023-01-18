@@ -13,6 +13,7 @@ const nextConfig = {
         })
         return config
     },
+    pageExtensions: ["jsx", "js"],
 }
 
 export default nextConfig

@@ -39,18 +39,6 @@ const getLetterRenderProps = (middleReq) => {
     }
 }
 
-const cuteFont = fetch(
-    new URL("../../public/font/cute.ttf", import.meta.url)
-).then((res) => res.arrayBuffer())
-
-const handFont = fetch(
-    new URL("../../public/font/hand.ttf", import.meta.url)
-).then((res) => res.arrayBuffer())
-
-const sansFont = fetch(
-    new URL("../../public/font/sans.ttf", import.meta.url)
-).then((res) => res.arrayBuffer())
-
 const imageConfig = {
     width: 220,
     scale: 4,
@@ -65,35 +53,6 @@ const imageConfig = {
 export default async function handler(middleReq) {
     const { font, from, height, letter, to } = getLetterRenderProps(middleReq)
     try {
-        const cute = await cuteFont
-        const sans = await sansFont
-        const hand = await handFont
-
-        const fontOption = () => {
-            switch (font) {
-                case "cute":
-                    return {
-                        name: font,
-                        data: cute,
-                    }
-                case "hand":
-                    return {
-                        name: font,
-                        data: hand,
-                    }
-                case "sans":
-                    return {
-                        name: font,
-                        data: sans,
-                    }
-                default:
-                    return {
-                        name: "sans",
-                        data: sans,
-                    }
-            }
-        }
-
         const image = new ImageResponse(
             (
                 <div
@@ -150,7 +109,6 @@ export default async function handler(middleReq) {
             {
                 width: imageConfig.width * imageConfig.scale,
                 height: height * imageConfig.scale,
-                fonts: [fontOption()],
                 emoji: imageConfig.emoji,
             }
         )
