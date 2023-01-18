@@ -7,7 +7,7 @@ import { DURATION_PAPER_PLANE, PaperPlane } from "./components/PaperPlane"
 import { DURATION_TO, To } from "./components/To"
 
 /**@typedef {import("../atoms/sticker.js").Sticker} Sticker */
-/**@typedef  {{size: number, to: string, letterTextSVG: string, stickers: Sticker[], letterType: "hole" | "overlap" | "torn", backgroundColor: "white" | "ivory" | "red" | "yellow" | "blue", tags: string[] }} LetterVideoProps */
+/**@typedef  {{size: number, to: string, letterImageURL: string, stickers: Sticker[], letterType: "hole" | "overlap" | "torn", backgroundColor: "white" | "ivory" | "red" | "yellow" | "blue", tags: string[] }} LetterVideoProps */
 
 /**
  * video 서버용
@@ -17,7 +17,7 @@ const RemotionCompositionServer = ({
     to,
     tags,
     backgroundColor,
-    letterTextSVG,
+    letterImageURL,
     letterType,
     size,
     stickers,
@@ -41,7 +41,7 @@ const RemotionCompositionServer = ({
                     size={size}
                     stickers={stickers}
                     letterType={letterType}
-                    letterTextSVG={letterTextSVG}
+                    letterImageURL={letterImageURL}
                     backgroundColor={backgroundColor}
                 />
             </Envelope>

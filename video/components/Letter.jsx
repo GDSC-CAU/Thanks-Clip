@@ -224,9 +224,9 @@ const LetterShapeStatic = ({ backgroundColor, type, children }) => {
     )
 }
 
-const LetterTextSVG = ({ svgString }) => (
+const LetterImage = ({ letterImageURL }) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={`data:image/svg+xml;utf8,${svgString}`} alt={"thanks clip"} />
+    <img src={letterImageURL} alt={"thanks clip"} width={220} />
 )
 
 const Sticker = ({ type }) => {
@@ -293,7 +293,7 @@ const Letter = ({
     stickers,
     letterType,
     backgroundColor,
-    letterTextSVG,
+    letterImageURL,
 }) => {
     return (
         <LetterCanvas size={size}>
@@ -301,7 +301,7 @@ const Letter = ({
                 backgroundColor={backgroundColor}
                 type={letterType}
             >
-                <LetterTextSVG svgString={letterTextSVG} />
+                <LetterImage letterImageURL={letterImageURL} />
             </LetterShapeStatic>
 
             <StickersStatic size={size} stickers={stickers} />

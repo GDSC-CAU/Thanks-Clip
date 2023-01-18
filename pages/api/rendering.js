@@ -10,59 +10,16 @@ import {
 } from "./aws.js"
 
 /**
- * `from` / `to` / `letter`를 `svg`로 변환한 후, `svg` `string` 추출
- * @param {{from: string, to: string, letter: string, letterType: "torn" | "hole" | "overlap", font: "cute" | "sans" | "hand"}} svgProps
- */
-const fetchSVG = async ({ from, to, letter, letterType, font }) => {
-    try {
-        const satoriResponse = await (
-            await fetch(
-                `${pathBase}/api/svg?font=${font}&from=${from}&to=${to}&letter=${letter}&lettertype=${letterType}`
-            )
-        ).json()
-
-        return {
-            isError: false,
-            svg: satoriResponse.svg,
-        }
-    } catch (e) {
-        console.log(e)
-        return {
-            isError: true,
-            svg: null,
-        }
-    }
-}
-
-/**
  * `videoProps`로 변환, server 전달
  * @param {Required<import("../../atoms/letter").Letter>} letterProps
- * @returns {Promise<import("../../../video/Composition").LetterVideoProps>}
+ * @returns {Promise<import("../../video/CompositionServer").LetterVideoProps>}
  */
 const transformVideoProps = async (letterProps) => {
-    const { svg: letterTextSVG, isError } = await fetchSVG({
-        font: letterProps.font,
-        from: letterProps.from,
-        to: letterProps.to,
-        letter: letterProps.letter,
-        letterType: letterProps.letterType,
-    })
-
-    if (isError) {
-        return {
-            size: 300,
-            letterTextSVG: "",
-            to: letterProps.to,
-            tags: letterProps.tags,
-            stickers: letterProps.stickers,
-            letterType: letterProps.letterType,
-            backgroundColor: letterProps.backgroundColor,
-        }
-    }
+    const letterImageURL = `${pathBase}/api/image?font=${letterProps.font}&from=${letterProps.from}&to=${letterProps.to}&letter=${letterProps.letter}&lettertype=${letterProps.letterType}`
 
     return {
         size: 300,
-        letterTextSVG,
+        letterImageURL,
         to: letterProps.to,
         tags: letterProps.tags,
         stickers: letterProps.stickers,
@@ -198,4 +155,4 @@ export default async function handler(req, res) {
     res.status(200).json(progress)
 }
 
-export { encodeVideo, fetchSVG, transformVideoProps }
+export { encodeVideo, transformVideoProps }
