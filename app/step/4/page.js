@@ -38,7 +38,10 @@ export default async function Step4() {
                 <ClipPreview videoClientProps={videoClientProps} />
             </div>
             <LetterButton urlParams={{ ...encode, to: videoClientProps.to }} />
-            <Download encode={encode} />
+            <Download
+                encode={encode}
+                transformedVideoProps={transformedVideoProps}
+            />
         </div>
     )
 }
