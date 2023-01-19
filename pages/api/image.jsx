@@ -58,6 +58,7 @@ export default async function handler(middleReq) {
     const fontData = await fetch(getAWSFontURL(font)).then((res) =>
         res.arrayBuffer()
     )
+    console.log(fontData)
     try {
         const image = new ImageResponse(
             (
@@ -71,16 +72,16 @@ export default async function handler(middleReq) {
                         fontSize: `${
                             imageConfig.lineHeight * imageConfig.scale
                         }px`,
+                        fontFamily: `"${font}"`,
+                        color: "black",
                     }}
                 >
                     <div
                         style={{
                             height: "22%",
-                            fontFamily: `"${font}"`,
                             lineHeight: `${
                                 imageConfig.fontSize * imageConfig.scale
                             }px`,
-                            backgroundColor: "transparent",
                         }}
                     >
                         {to}
@@ -88,11 +89,9 @@ export default async function handler(middleReq) {
                     <div
                         style={{
                             height: "61%",
-                            fontFamily: `"${font}"`,
                             lineHeight: `${
                                 imageConfig.fontSize * imageConfig.scale
                             }px`,
-                            backgroundColor: "transparent",
                         }}
                     >
                         {letter}
@@ -100,12 +99,10 @@ export default async function handler(middleReq) {
                     <div
                         style={{
                             height: "11%",
-                            fontFamily: `"${font}"`,
                             lineHeight: `${
                                 imageConfig.fontSize * imageConfig.scale
                             }px`,
                             alignSelf: "flex-end",
-                            backgroundColor: "transparent",
                         }}
                     >
                         {from}
