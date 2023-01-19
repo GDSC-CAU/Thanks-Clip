@@ -46,12 +46,18 @@ const imageConfig = {
     lineHeight: 17.6,
     emoji: "twemoji",
 }
+const getAWSFontURL = (font) =>
+    `https://thanks-clip-font.s3.ap-northeast-2.amazonaws.com/${font}.ttf`
 
 /**
  * @param {import("next/server").NextRequest} middleReq
  */
 export default async function handler(middleReq) {
     const { font, from, height, letter, to } = getLetterRenderProps(middleReq)
+
+    const fontData = await fetch(getAWSFontURL(font)).then((res) =>
+        res.arrayBuffer()
+    )
     try {
         const image = new ImageResponse(
             (
@@ -60,7 +66,7 @@ export default async function handler(middleReq) {
                         display: "flex",
                         flexDirection: "column",
                         width: imageConfig.width * imageConfig.scale,
-                        height: `${100}%`,
+                        height: "100%",
                         backgroundColor: "transparent",
                         fontSize: `${
                             imageConfig.lineHeight * imageConfig.scale
@@ -110,6 +116,12 @@ export default async function handler(middleReq) {
                 width: imageConfig.width * imageConfig.scale,
                 height: height * imageConfig.scale,
                 emoji: imageConfig.emoji,
+                fonts: [
+                    {
+                        data: fontData,
+                        name: font,
+                    },
+                ],
             }
         )
 
