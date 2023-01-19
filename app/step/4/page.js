@@ -30,16 +30,18 @@ export default async function Step4() {
     const transformedVideoProps = await transformVideoProps(videoClientProps)
     console.log(
         pureVideoClientProps,
-        "---",
+        "---\n",
         videoClientProps,
-        "---",
+        "---\n",
         transformVideoProps
     )
     const encode = await encodeVideo(transformedVideoProps)
-    console.log("---", encode)
+    const downloadUrl = `https://s3.${encode.region}.amazonaws.com/${encode.bucketName}/renders/${encode.renderId}/out.mp4`
+    console.log("---\n", encode, "---\n", downloadUrl)
     return (
         <div className="h-full flex flex-col justify-between">
             <LetterToName />
+            <p className="font-bold">{downloadUrl}</p>
             <div className="h-full flex-1">
                 <ClipPreview videoClientProps={videoClientProps} />
             </div>

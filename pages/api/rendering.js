@@ -150,7 +150,8 @@ export default async function handler(req, res) {
     /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
     const encodeData = JSON.parse(req.body)
     console.log(encodeData)
-    await getVideoRenderingProgress(encodeData)
+    const progress = await getVideoRenderingProgress(encodeData)
+    console.log(progress)
 
     res.status(200)
 }
