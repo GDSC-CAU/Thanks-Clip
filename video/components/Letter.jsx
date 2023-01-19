@@ -1,3 +1,4 @@
+import { Img } from "remotion"
 import { CircleIcon } from "../../app/step/3/components/Letter/Editor/Stickers/Sticker/Circle.jsx"
 import { HeartIcon } from "../../app/step/3/components/Letter/Editor/Stickers/Sticker/Heart.jsx"
 import { StarIcon } from "../../app/step/3/components/Letter/Editor/Stickers/Sticker/Star.jsx"
@@ -226,7 +227,7 @@ const LetterShapeStatic = ({ backgroundColor, type, children }) => {
 
 const LetterImage = ({ letterImageURL }) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={letterImageURL} alt={"thanks clip"} width={220} />
+    <Img src={letterImageURL} alt={"thanks clip"} width={220} />
 )
 
 const Sticker = ({ type }) => {
