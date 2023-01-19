@@ -21,7 +21,8 @@ const byteToSize = ({ byte, type = "kb", ceilOn = 1 }) => {
  * @param {{ encode: {renderId: string | null; bucketName: string | null; region: string | null;} }} downloadProps
  * @returns
  */
-const Download = ({ encode }) => {
+const Download = ({ encode, transformedVideoProps }) => {
+    console.log(transformedVideoProps, encode)
     /**@type {[Progress, Dispatch<SetStateAction<Progress>>]} */
     const [progress, setProgress] = useState({
         type: "progress",
