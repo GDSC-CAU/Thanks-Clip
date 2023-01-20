@@ -50,7 +50,7 @@ const Letter = () => {
                 <LetterStickerManager
                     size={300}
                     stickerSize={24}
-                    clickActiveAreaRatio={1.5}
+                    clickActiveAreaRatio={2}
                     active={selectedOption === "sticker"}
                 />
             </LetterCanvas>
