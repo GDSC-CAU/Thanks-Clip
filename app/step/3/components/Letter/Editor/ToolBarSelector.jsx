@@ -39,7 +39,7 @@ const EditorToolBarSelector = (props) => {
         props.handleClickOptions(selectedType)
     }
     return (
-        <Container className="flex flex-cols gap-2 justify-end absolute right-2 top-2">
+        <Container className="flex flex-cols gap-2 justify-end absolute right-2 -top-9">
             {toolBarType.map((type) => (
                 <EditorToolBarSelectorButton
                     handleClick={handleClick}
