@@ -164,6 +164,7 @@ export default async function handler(req, res) {
         region,
         renderId,
     })
+    console.log("\n========== 프로그래스 ==========\n", progress)
 
     res.status(200).json({ progress })
 }
