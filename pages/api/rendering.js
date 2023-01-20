@@ -171,14 +171,31 @@ export default async function handler(req, res) {
     })
     /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
 
-    const progress = await getVideoRenderingProgress({
-        bucketName,
-        region,
-        renderId,
-    })
-    // console.log("\n========== 프로그래스 ==========\n", progress)
-
-    res.status(200).json({ progress: {} })
+    try {
+        const progress = await getVideoRenderingProgress({
+            bucketName,
+            region,
+            renderId,
+        })
+        console.log("\n========== 프로그래스 ==========\n", progress)
+        res.status(200).json({ progress })
+    } catch (e) {
+        console.log("========= error in api/rendering ========= ", e, {
+            bucketName,
+            region,
+            renderId,
+        })
+        res.status(403).json({
+            progress: {
+                type: "error",
+                downloadUrl: null,
+                outputSize: null,
+                errorMessage: e,
+                bucketName,
+                region,
+            },
+        })
+    }
 }
 
 export { encodeVideo, transformVideoProps }
