@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useAtomValue, useSetAtom } from "jotai"
+import { useAtomValue } from "jotai"
 import { store } from "../../../../../../../atoms"
 import { CircleIcon } from "./Sticker/Circle"
 import { HeartIcon } from "./Sticker/Heart"
@@ -97,15 +97,6 @@ const useLockMobileTouch = (isActive) => {
     }, [isActive])
 }
 
-const useSaveStickers = (isActive, stickers) => {
-    const setLetter = useSetAtom(store.letter)
-    useEffect(() => {
-        if (isActive) {
-            setLetter((prev) => ({ ...prev, stickers }))
-        }
-    }, [isActive, stickers, setLetter])
-}
-
 const LetterStickerManager = ({
     size,
     stickerSize,
@@ -114,9 +105,9 @@ const LetterStickerManager = ({
 }) => {
     const { stickers, action } = useStickerManager()
     const activeSticker = useAtomValue(store.activeSticker)
+
     const [isCanvasDrag, setIsCanvasDrag] = useState(false)
 
-    useSaveStickers(active, stickers)
     useLockMobileTouch(active)
 
     if (stickers.length === 0) {
@@ -153,6 +144,7 @@ const LetterStickerManager = ({
             }}
             onPointerUp={() => {
                 setIsCanvasDrag(false)
+                action.save(stickers)
             }}
             onPointerMove={(e) => {
                 if (isCanvasDrag) {
