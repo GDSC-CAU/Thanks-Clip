@@ -43,13 +43,15 @@ const LogoAirplane = (props) => (
 
 export default async function Main() {
     return (
-        <main className="flex flex-col w-full h-screen min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-3 py-12 bg-white justify-between">
-            <div className="">
-                <div className="relative">
-                    <Logo />
+        <main className="flex flex-col gap-4 w-full h-full min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-4 pt-12 pb-10 bg-white justify-between">
+            <div className="flex-1 flex flex-col justify-between">
+                <div className="flex-1 relative">
+                    <div className="object-cover object-center overflow-hidden h-60 sm:h-full ">
+                        <Logo />
+                    </div>
                     <LogoAirplane />
                 </div>
-                <div className="flex flex-col gap-3 font-main-cute">
+                <div className="flex flex-col gap-2 font-main-cute mb-4">
                     <div className="flex justify-center">
                         <h1 className="text-4xl">
                             Send your{" "}
