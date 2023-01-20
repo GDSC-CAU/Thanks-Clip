@@ -94,50 +94,61 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
         }
     }
 
-    const deployedLambdaFunctionName = getDeployedLambdaFunctionName()
-    console.log(
-        "\n========== 배포 함수 이름  ==========\n",
-        deployedLambdaFunctionName
-    )
+    try {
+        const deployedLambdaFunctionName = getDeployedLambdaFunctionName()
+        console.log(
+            "\n========== 배포 함수 이름  ==========\n",
+            deployedLambdaFunctionName
+        )
 
-    const progress = await getRenderProgress({
-        renderId,
-        bucketName,
-        region,
-        functionName: deployedLambdaFunctionName,
-    })
-    console.log("\n========== 프로그래스 first  ==========\n", progress)
+        const progress = await getRenderProgress({
+            renderId,
+            bucketName,
+            region,
+            functionName: deployedLambdaFunctionName,
+        })
+        console.log("\n========== 프로그래스 first  ==========\n", progress)
 
-    if (progress === null || progress.fatalErrorEncountered) {
+        if (progress === null || progress.fatalErrorEncountered) {
+            return {
+                type: "error",
+                downloadUrl: null,
+                errorMessage: progress.errors
+                    .map((e) => JSON.stringify(e))
+                    .reduce((e) => `${e}\n`),
+                bucketName,
+                region,
+                outputSize: null,
+            }
+        }
+
+        if (!progress.renderId || !progress.bucket) {
+            return {
+                type: "progress",
+                downloadUrl: null,
+                errorMessage: null,
+                outputSize: null,
+                bucketName,
+                region,
+            }
+        }
+
+        if (progress.outputFile) {
+            return {
+                type: "success",
+                downloadUrl: progress.outputFile,
+                outputSize: progress.outputSizeInBytes,
+                errorMessage: null,
+                bucketName,
+                region,
+            }
+        }
+    } catch (e) {
         return {
             type: "error",
             downloadUrl: null,
-            errorMessage: progress.errors
-                .map((e) => JSON.stringify(e))
-                .reduce((e) => `${e}\n`),
-            bucketName,
-            region,
+            errorMessage: e,
             outputSize: null,
-        }
-    }
-
-    if (!progress.renderId || !progress.bucket) {
-        return {
-            type: "progress",
-            downloadUrl: null,
-            errorMessage: null,
-            outputSize: null,
-            bucketName,
-            region,
-        }
-    }
-
-    if (progress.outputFile) {
-        return {
-            type: "success",
-            downloadUrl: progress.outputFile,
-            outputSize: progress.outputSizeInBytes,
-            errorMessage: null,
             bucketName,
             region,
         }
