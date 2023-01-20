@@ -149,6 +149,7 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
 export default async function handler(req, res) {
     /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
     const encodeData = JSON.parse(req.body)
+    console.log(encodeData, "요청 데이터 JSON.parse한것...")
     const progress = await getVideoRenderingProgress(encodeData)
     console.log(progress)
     console.log(JSON.stringify(progress))
