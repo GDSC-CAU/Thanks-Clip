@@ -11,10 +11,10 @@ const useCanvasSize = ({ containerRef }) => {
     const [size, setSize] = useState(0)
 
     useEffect(() => {
-        setSize(containerRef.current.offsetWidth)
+        setSize(containerRef.current.offsetWidth - 30)
 
         const resizeHandler = () => {
-            setSize(containerRef.current.offsetWidth)
+            setSize(containerRef.current.offsetWidth - 30)
         }
 
         window.addEventListener("resize", resizeHandler)
