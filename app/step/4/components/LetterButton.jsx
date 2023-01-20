@@ -20,13 +20,12 @@ const LetterButton = ({ urlParams }) => {
     }
 
     return (
-
-        <div className="flex flex-col gap-4 pt-10">
-            <KakaoShareLink urlParams={urlParams}>
-                <Button className="mb-5">카카오톡으로 Clip 보내기</Button>
+        <div className="flex flex-col">
+            <KakaoShareLink urlParams={urlParams} className="pb-4">
+                <Button>카카오톡으로 Clip 보내기</Button>
             </KakaoShareLink>
 
-            <Link href="/">
+            <Link href="/" className="pb-4">
                 <Button
                     className="bg-inherit text-gray-800 border-gray-800 border-solid border"
                     onClick={reset}
