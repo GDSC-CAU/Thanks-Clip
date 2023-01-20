@@ -22,7 +22,7 @@ const RenderOnMount = ({ children, ...props }) => {
     return (
         <main
             {...props}
-            className="flex flex-col w-full h-full min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-4 pt-3 pb-10 bg-white"
+            className="flex flex-col min-w-[22rem] w-full max-w-[30rem] h-full min-h-screen mx-auto sm:w-[30rem] px-4 pt-3 pb-10 bg-white shadow-md"
         >
             {children}
         </main>
