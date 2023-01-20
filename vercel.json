@@ -1,0 +1,7 @@
+{
+    "functions": {
+        "pages/api/image.jsx": {
+            "excludeFiles": "public/font/*.ttf"
+        }
+    }
+}
