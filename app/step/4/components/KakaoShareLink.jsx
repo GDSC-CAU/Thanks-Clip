@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react"
 import { useAtomValue } from "jotai"
 import { store } from "../../../../atoms"
 
-const KakaoShareLink = ({ children, urlParams, onClick = null }) => {
+const KakaoShareLink = ({ children, urlParams, onClick = null, className }) => {
     const letter = useAtomValue(store.letter)
     const to = letter.to
 
@@ -43,6 +43,7 @@ const KakaoShareLink = ({ children, urlParams, onClick = null }) => {
                 if (onClick !== null) onClick()
                 kakaoButton()
             }}
+            className={className}
         >
             {children}
         </div>

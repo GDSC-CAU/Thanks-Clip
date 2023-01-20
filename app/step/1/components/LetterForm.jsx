@@ -28,33 +28,32 @@ const LetterForm = () => {
     return (
         <>
             {isFromToFilled ? (
-                <div className="flex flex-col h-full justify-between gap-10">
+                <div className="flex flex-col h-full justify-between">
                     <div className="flex flex-col h-full">
-                        <label className="py-10">
+                        <label className="pt-8 pb-4">
                             <Title
                                 main="감사 편지를 적어볼까요?"
                                 sub={`Thanks to ${letter.to}!`}
                             />
                         </label>
 
-                        <div className="flex flex-col gap-24 md:gap-32">
+                        <div className="flex flex-col">
                             <Textarea
                                 onChange={setLetterText}
                                 value={letter.letter ?? ""}
                             />
                         </div>
                     </div>
-                    <div className="sticky bottom-0 pb-3">
-                        <Link href="/step/2">
-                            <Button disabled={!letter.letter}>
-                                키워드 선택하러 가기
-                            </Button>
-                        </Link>
-                    </div>
+
+                    <Link href="/step/2">
+                        <Button disabled={!letter.letter}>
+                            키워드 선택하러 가기
+                        </Button>
+                    </Link>
                 </div>
             ) : (
                 <div className="flex flex-col h-full justify-between">
-                    <div className="flex-1 flex flex-col gap-12 pt-10">
+                    <div className="flex-1 flex flex-col pt-10">
                         <div className="flex flex-col">
                             <label className={titleStyle}>From</label>
                             <Input
@@ -62,7 +61,7 @@ const LetterForm = () => {
                                 onChange={setFromText}
                             />
                         </div>
-
+                        <div className="h-12"></div>
                         <div className="flex flex-col">
                             <label className={titleStyle}>Thanks to!</label>
                             <Input
@@ -71,21 +70,18 @@ const LetterForm = () => {
                             />
                         </div>
                     </div>
-                    <div className="sticky bottom-0 pb-3">
-                        <Button
-                            onClick={() => setIsFilled(true)}
-                            disabled={!letter.from || !letter.to}
-                        >
-                            {!letter.from &&
-                                !letter.to &&
-                                "먼저 이름을 적어보아요"}
-                            {letter.from && !letter.to && "이름을 적어보아요"}
-                            {!letter.from &&
-                                letter.to &&
-                                "받는 분의 이름을 적어보아요"}
-                            {letter.from && letter.to && "편지를 적어볼까요?"}
-                        </Button>
-                    </div>
+
+                    <Button
+                        onClick={() => setIsFilled(true)}
+                        disabled={!letter.from || !letter.to}
+                    >
+                        {!letter.from && !letter.to && "먼저 이름을 적어보아요"}
+                        {letter.from && !letter.to && "이름을 적어보아요"}
+                        {!letter.from &&
+                            letter.to &&
+                            "받는 분의 이름을 적어보아요"}
+                        {letter.from && letter.to && "편지를 적어볼까요?"}
+                    </Button>
                 </div>
             )}
         </>

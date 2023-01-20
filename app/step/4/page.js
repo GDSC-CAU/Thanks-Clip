@@ -38,7 +38,7 @@ export default async function Step4() {
     return (
         <div className="h-full flex flex-col justify-between">
             <LetterToName />
-            <div className="h-full flex-1">
+            <div className="flex-1">
                 <ClipPreview videoClientProps={videoClientProps} />
             </div>
             <LetterButton urlParams={{ ...encode, to: videoClientProps.to }} />
