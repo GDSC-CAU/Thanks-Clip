@@ -30,6 +30,7 @@ specifiers:
   lodash.chunk: ^4.2.0
   next: ^13.1.2
   postcss: ^8.4.21
+  postcss-100vh-fix: ^1.0.2
   postcss-loader: 7.0.2
   postcss-preset-env: 7.8.3
   prettier: ^2.8.3
@@ -52,6 +53,7 @@ dependencies:
   cookies-next: 2.1.1
   jotai: 1.13.1_react@18.2.0
   next: 13.1.2_biqbaboplfbrettd7655fr4n2y
+  postcss-100vh-fix: 1.0.2_postcss@8.4.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   remotion: 3.3.27_biqbaboplfbrettd7655fr4n2y
@@ -6930,6 +6932,15 @@ packages:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /postcss-100vh-fix/1.0.2_postcss@8.4.21:
+    resolution: {integrity: sha512-t7vqk9AfjI4fXmWlQCEiMZFFhi1hro4WlECINI1TV6Qh1XapUJE++gCmNr95F5Hen/+bz1OmO+SiSB9TZmFmSg==}
+    engines: {node: '>=10.0'}
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      postcss: 8.4.21
+    dev: false
 
   /postcss-attribute-case-insensitive/5.0.2_postcss@8.4.21:
     resolution: {integrity: sha512-XIidXV8fDr0kKt28vqki84fRK8VW8eTuIa4PChv2MqKuT6C9UjmSKzen6KaWhWEoYvwxFCa7n/tC1SZ3tyq4SQ==}
