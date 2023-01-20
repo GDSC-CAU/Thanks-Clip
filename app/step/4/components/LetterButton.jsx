@@ -20,7 +20,6 @@ const LetterButton = ({ urlParams }) => {
     }
 
     return (
-
         <div className="flex flex-col gap-4 pt-10">
             <KakaoShareLink urlParams={urlParams}>
                 <Button className="mb-5">카카오톡으로 Clip 보내기</Button>
