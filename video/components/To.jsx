@@ -35,9 +35,10 @@ const To = ({ delay, children }) => {
     return (
         <AbsoluteFill
             style={{
-                fontSize: "3rem",
-                top: "calc(50% - 1.5rem)",
+                fontSize: "6rem",
+                top: "calc(50% - 3rem)",
                 textAlign: "center",
+                fontWeight: "bold",
                 opacity: opacity,
                 transform: `translateY(${translateY}rem)`,
             }}

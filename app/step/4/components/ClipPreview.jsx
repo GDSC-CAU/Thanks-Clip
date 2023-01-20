@@ -8,7 +8,7 @@ const ClipPreview = ({ videoClientProps }) => {
         <Player
             component={RemotionCompositionClient}
             style={{
-                width: "296px",
+                width: "100%",
                 borderRadius: "10px",
                 margin: "auto",
             }}

@@ -35,8 +35,8 @@ const Keyword = ({ keyword, idx }) => {
     return (
         <AbsoluteFill
             style={{
-                fontSize: "4rem",
-                top: "calc(50% - 2rem)",
+                fontSize: "8rem",
+                top: "calc(50% - 4rem)",
                 textAlign: "center",
                 opacity: opacity,
                 transform: `translateY(${translateY}rem)`,

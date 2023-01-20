@@ -7,7 +7,7 @@ const LogoSM = () => {
         >
             <Img
                 src={staticFile("logo/1line_red.png")}
-                style={{ width: "120px", marginBottom: "-20px" }}
+                style={{ width: "240px", marginBottom: "-40px" }}
             />
         </AbsoluteFill>
     )

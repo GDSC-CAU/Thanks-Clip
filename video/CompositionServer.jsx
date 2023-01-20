@@ -14,11 +14,11 @@ import { DURATION_TO, To } from "./components/To"
  * @param {LetterVideoProps} letterVideoProps
  */
 const RemotionCompositionServer = ({
-    to,
-    tags,
-    backgroundColor,
+    to = "테스트",
+    tags = ["테스트1", "테스트2", "테스트3", "테스트4"],
+    backgroundColor = "ivory",
     letterTextSVG,
-    letterType,
+    letterType = "hole",
     size,
     stickers,
 }) => {

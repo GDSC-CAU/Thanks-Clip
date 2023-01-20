@@ -8,13 +8,13 @@ import {
 
 const DURATION_ENVELOPE = 135
 
-const Envelope = ({ delay = 240, children }) => {
+const Envelope = ({ delay = 240, children, render }) => {
     const frame = useCurrentFrame()
     const { fps } = useVideoConfig()
     const entrance = interpolate(
         frame,
         [delay, delay + 1.5 * fps],
-        [-320, 270],
+        [-640, 540],
         {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
@@ -56,7 +56,7 @@ const Envelope = ({ delay = 240, children }) => {
     const exit = interpolate(
         frame,
         [delay + 3 * fps, delay + 4.5 * fps],
-        [0, 720],
+        [0, 1440],
         {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
@@ -67,12 +67,14 @@ const Envelope = ({ delay = 240, children }) => {
     return (
         <AbsoluteFill
             style={{
-                width: "400px",
-                height: "300px",
+                width: "800px",
+                height: "600px",
                 margin: "0 auto",
                 backgroundColor: "#dfdfdf",
                 top: entrance + exit + "px",
-                transform: `rotate(${8 * Math.sin(rotate)}deg)`,
+                transform: `rotate(${8 * Math.sin(rotate)}deg) ${
+                    render && "scale(2,2)"
+                }`,
                 // filter: "drop-shadow(0 1px 2px rgb(0 0 0 / 0.03)) drop-shadow(0 2px 20px rgb(0 0 0 / 0.04))",
             }}
         >
@@ -90,9 +92,9 @@ const Envelope = ({ delay = 240, children }) => {
                         position: "absolute",
                         width: 0,
                         height: 0,
-                        borderTop: "200px solid #f8f8f8",
-                        borderLeft: "200px solid transparent",
-                        borderRight: "200px solid transparent",
+                        borderTop: "400px solid #f8f8f8",
+                        borderLeft: "400px solid transparent",
+                        borderRight: "400px solid transparent",
                         top: 0,
                         left: 0,
                         zIndex: delay + fps * 2.5 > frame ? 4 : 1,
@@ -108,9 +110,9 @@ const Envelope = ({ delay = 240, children }) => {
                             position: "absolute",
                             width: 0,
                             height: 0,
-                            borderBottom: "150px solid #f4f4f4",
-                            borderLeft: "200px solid transparent",
-                            borderRight: "200px solid transparent",
+                            borderBottom: "300px solid #f4f4f4",
+                            borderLeft: "400px solid transparent",
+                            borderRight: "400px solid transparent",
                             bottom: 0,
                             left: 0,
                             zIndex: 3,
@@ -120,12 +122,12 @@ const Envelope = ({ delay = 240, children }) => {
                     <div
                         style={{
                             position: "absolute",
-                            borderBottom: "150px solid transparent",
-                            borderTop: "150px solid transparent",
+                            borderBottom: "300px solid transparent",
+                            borderTop: "300px solid transparent",
                             width: 0,
                             height: 0,
-                            borderRight: "201px solid transparent",
-                            borderLeft: "201px solid #ebeae4",
+                            borderRight: "401px solid transparent",
+                            borderLeft: "401px solid #ebeae4",
                             top: "0px",
                             left: "0px",
                             zIndex: 2,
@@ -135,12 +137,12 @@ const Envelope = ({ delay = 240, children }) => {
                     <div
                         style={{
                             position: "absolute",
-                            borderBottom: "150px solid transparent",
-                            borderTop: "150px solid transparent",
+                            borderBottom: "300px solid transparent",
+                            borderTop: "300px solid transparent",
                             width: 0,
                             height: 0,
-                            borderRight: "201px solid #ebeae4",
-                            borderLeft: "201px solid transparent",
+                            borderRight: "401px solid #ebeae4",
+                            borderLeft: "401px solid transparent",
                             top: "0px",
                             right: "0px",
                             zIndex: 2,
@@ -152,9 +154,9 @@ const Envelope = ({ delay = 240, children }) => {
                 style={{
                     position: "absolute",
                     left: "calc(50% - 148px)",
-                    bottom: (exit * 13) / 12 + "px",
+                    bottom: (exit * 13) / 12 + 151 + "px",
                     zIndex: 1,
-                    transform: `scale(${zoom})`,
+                    transform: `scale(${zoom * 2})`,
                 }}
             >
                 {children}

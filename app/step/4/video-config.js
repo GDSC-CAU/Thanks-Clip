@@ -1,7 +1,7 @@
 const VIDEO_CONFIG = {
     fps: 30,
-    width: 720,
-    height: 720,
+    width: 1440,
+    height: 1440,
     durationInFrames: 600,
 }
 

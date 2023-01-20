@@ -13,13 +13,18 @@ const PaperPlane = ({ delay = 180 }) => {
     const frame = useCurrentFrame()
     const { fps } = useVideoConfig()
     // const entrance = interpolate(frame, [0, 100])
-    const entrance = interpolate(frame, [delay, delay + fps * 3], [720, -500], {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
-        easing: Easing.bezier(0.92, -0.05, 0.4, 0.5),
-    })
+    const entrance = interpolate(
+        frame,
+        [delay, delay + fps * 3],
+        [1440, -1000],
+        {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+            easing: Easing.bezier(0.92, -0.05, 0.4, 0.5),
+        }
+    )
 
-    const scale = interpolate(frame, [delay, delay + fps * 3], [2, 0], {
+    const scale = interpolate(frame, [delay, delay + fps * 3], [4, 0], {
         extrapolateLeft: "clamp",
         extrapolateRight: "clamp",
     })
@@ -36,7 +41,7 @@ const PaperPlane = ({ delay = 180 }) => {
                 id="plane"
                 src={staticFile("logo/white.png")}
                 style={{
-                    width: 500,
+                    width: 1000,
                     transform: `scale(${scale})`,
                 }}
             />
