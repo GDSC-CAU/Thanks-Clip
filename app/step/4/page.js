@@ -42,7 +42,8 @@ export default async function Step4() {
         transformVideoProps,
         async () => await encodeVideo(transformedVideoProps)
     )
-    console.log(encode)
+
+    console.log(cache.getCache())
     const downloadUrl = `https://s3.${encode.region}.amazonaws.com/${encode.bucketName}/renders/${encode.renderId}/out.mp4`
     console.log("---\n", encode, "---\n", downloadUrl)
 
