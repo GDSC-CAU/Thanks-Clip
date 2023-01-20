@@ -23,7 +23,7 @@ const ShapeToolBar = () => {
                         onClick={() => {
                             setLetter((prev) => ({ ...prev, letterType: type }))
                         }}
-                        className="flex items-center justify-center origin-center transform-gpu scale-125"
+                        className="flex items-center justify-center origin-center transform-gpu scale-110"
                     >
                         <Icon fill={iconColor} stroke={iconColor} />
                     </div>

@@ -25,7 +25,7 @@ const LetterButton = ({ urlParams }) => {
                 <Button className="md-1">카카오톡으로 Clip 보내기</Button>
             </KakaoShareLink>
 
-            <Link href="/">
+            <Link href="/" className="pb-4">
                 <Button
                     className="bg-inherit text-gray-800 border-gray-800 border-solid border"
                     onClick={reset}

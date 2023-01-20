@@ -1,21 +1,16 @@
 "use client"
-import { Player } from "@remotion/player"
-import { RemotionCompositionClient } from "../../../../video/CompositionClient.jsx"
-import { VIDEO_CONFIG } from "../video-config"
+
+import { Suspense, lazy } from "react"
+
+const Viewer = lazy(() => import("./Viewer.jsx"))
+
+const loader = () => <>비디오 로딩중...</>
 
 const ClipPreview = ({ videoClientProps }) => {
     return (
-        <Player
-            component={RemotionCompositionClient}
-            style={{ width: "100%", height: "52vh", borderRadius: "10px" }}
-            durationInFrames={VIDEO_CONFIG.durationInFrames}
-            compositionWidth={VIDEO_CONFIG.width}
-            compositionHeight={VIDEO_CONFIG.height}
-            fps={VIDEO_CONFIG.fps}
-            controls
-            showVolumeControls={false}
-            inputProps={videoClientProps}
-        />
+        <Suspense fallback={loader()}>
+            <Viewer videoClientProps={videoClientProps} />
+        </Suspense>
     )
 }
 

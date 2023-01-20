@@ -18,10 +18,10 @@ const fontSans = importFont({
 export default function RootLayout({ children }) {
     return (
         <html
-            className={`${fontCute.variable} ${fontHand.variable} ${fontSans.variable}`}
+            className={`${fontCute.variable} ${fontHand.variable} ${fontSans.variable} h-full`}
         >
             <head />
-            <body className="bg-gray-100">{children}</body>
+            <body className="bg-white h-full">{children}</body>
         </html>
     )
 }

@@ -32,13 +32,18 @@ const Download = ({ encode }) => {
 
     const progressRequest = useCallback(() => {
         const getVideoProgress = async () => {
-            const res = await fetch("/api/rendering", {
-                method: "POST",
-                body: JSON.stringify(encode),
-            })
+            const res = await fetch(
+                `/api/rendering?renderId=${encode.renderId}&bucketName=${encode.bucketName}&region=${encode.region}`,
+                {
+                    headers: {
+                        Accept: "application/json",
+                    },
+                    method: "GET",
+                }
+            )
 
             /**@type {Progress} */
-            const progress = await res.json()
+            const { progress } = await res.json()
             setProgress(progress)
         }
 

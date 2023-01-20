@@ -15,13 +15,13 @@ const KeywordForm = () => {
     return (
         <div className="flex flex-col h-full justify-between">
             <div>
-                <div className="pt-10 pb-4">
+                <div className="pt-8 pb-3">
                     <Title
                         main={"감사 키워드를 골라주세요!"}
                         sub={"2~5개, 콕 집어주세요!"}
                     />
                 </div>
-                <div className="grid grid-cols-3 gap-y-2.5 gap-x-1.5 py-3 break-words ">
+                <div className="grid grid-cols-3 gap-y-2 gap-x-1.5 break-words ">
                     <Keyword
                         keywordNum={keywordNum}
                         setKeywordNum={setKeywordNum}
@@ -29,17 +29,14 @@ const KeywordForm = () => {
                     />
                 </div>
             </div>
-            <div className="sticky bottom-0 pb-3">
-                <Link href="/step/3" className="mt-auto">
-                    <Button disabled={isDisabled}>
-                        {keywordNum === 0 && "키워드를 골라볼까요?"}
-                        {keywordNum === 1 && "키워드를 더 선택해보아요"}
-                        {keywordNum >= 2 &&
-                            keywordNum <= 5 &&
-                            "편지 만들러 가보기"}
-                    </Button>
-                </Link>
-            </div>
+
+            <Link href="/step/3" className="mt-auto">
+                <Button disabled={isDisabled}>
+                    {keywordNum === 0 && "키워드를 골라볼까요?"}
+                    {keywordNum === 1 && "키워드를 더 선택해보아요"}
+                    {keywordNum >= 2 && keywordNum <= 5 && "편지 만들러 가보기"}
+                </Button>
+            </Link>
         </div>
     )
 }

@@ -5,6 +5,7 @@ export default function Head() {
             <meta
                 content="width=device-width, initial-scale=1"
                 name="viewport"
+                lang="ko-KR"
             />
             <link rel="icon" href="/logo/red.png" />
             <meta name="author" content="GDSC-CAU" />

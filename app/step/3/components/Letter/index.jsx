@@ -11,10 +11,10 @@ const useCanvasSize = ({ containerRef }) => {
     const [size, setSize] = useState(0)
 
     useEffect(() => {
-        setSize(containerRef.current.offsetWidth)
+        setSize(containerRef.current.offsetWidth - 30)
 
         const resizeHandler = () => {
-            setSize(containerRef.current.offsetWidth)
+            setSize(containerRef.current.offsetWidth - 30)
         }
 
         window.addEventListener("resize", resizeHandler)
@@ -50,7 +50,7 @@ const Letter = () => {
                 <LetterStickerManager
                     size={300}
                     stickerSize={24}
-                    clickActiveAreaRatio={1.5}
+                    clickActiveAreaRatio={2}
                     active={selectedOption === "sticker"}
                 />
             </LetterCanvas>
