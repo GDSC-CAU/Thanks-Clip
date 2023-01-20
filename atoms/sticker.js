@@ -4,9 +4,14 @@ import { atom } from "jotai"
 import { STORAGE_KEY } from "./letter"
 
 /**@type {Sticker[]} */
-const stickersInitialValue =
-    JSON.parse(window?.localStorage.getItem(STORAGE_KEY))?.stickers ?? []
-const stickers = atom(stickersInitialValue)
+const getStickersInitialValue = () => {
+    if (!window) {
+        return JSON.parse(window.localStorage.getItem(STORAGE_KEY))?.stickers
+    }
+    return []
+}
+
+const stickers = atom(getStickersInitialValue())
 const activeSticker = atom((get) => {
     const stickersGet = get(stickers)
     if (Array.isArray(stickersGet)) {
