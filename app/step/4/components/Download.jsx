@@ -33,20 +33,13 @@ const Download = ({ encode, transformedVideoProps }) => {
 
     const progressRequest = useCallback(() => {
         const getVideoProgress = async () => {
-            const res = await fetch("/api/rendering", {
-                method: "POST",
-                body: JSON.stringify(encode),
-            })
+            const res = await fetch(
+                `/api/rendering?renderId=${encode.renderId}&bucketName=${encode.bucketName}&region=${encode.region}`
+            )
 
             /**@type {Progress} */
             const { progress } = await res.json()
-            console.log(
-                progress,
-                "프로그래스",
-                "encode bucketname등...",
-                JSON.stringify(encode)
-            )
-
+            console.log(progress)
             setProgress(progress)
         }
 

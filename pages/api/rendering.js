@@ -147,12 +147,24 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
  * @returns
  */
 export default async function handler(req, res) {
+    const urlSearchParams = new URLSearchParams(req.query)
+
+    const bucketName = urlSearchParams.get("bucketName")
+    const region = urlSearchParams.get("region")
+    const renderId = urlSearchParams.get("renderId")
+    console.log({
+        bucketName,
+        region,
+        renderId,
+    })
     /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
-    const encodeData = JSON.parse(req.body)
-    console.log(encodeData, "요청 데이터 JSON.parse한것...")
-    const progress = await getVideoRenderingProgress(encodeData)
-    console.log(progress)
-    console.log(JSON.stringify(progress))
+
+    const progress = await getVideoRenderingProgress({
+        bucketName,
+        region,
+        renderId,
+    })
+
     res.status(200).json({ progress })
 }
 
