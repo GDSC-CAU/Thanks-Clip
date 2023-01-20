@@ -3,16 +3,15 @@
 import { atom } from "jotai"
 import { STORAGE_KEY } from "./letter"
 
-const isValueExist =
-    JSON.parse(window?.localStorage.getItem(STORAGE_KEY))?.stickers !==
-    undefined
-
 /**@type {Sticker[]} */
-const stickersInitialValue = isValueExist
-    ? JSON.parse(window?.localStorage.getItem(STORAGE_KEY))?.stickers
-    : []
+const getStickersInitialValue = () => {
+    if (!window) {
+        return JSON.parse(window.localStorage.getItem(STORAGE_KEY))?.stickers
+    }
+    return []
+}
 
-const stickers = atom(stickersInitialValue)
+const stickers = atom(getStickersInitialValue())
 const activeSticker = atom((get) => {
     const stickersGet = get(stickers)
     if (Array.isArray(stickersGet)) {
