@@ -95,6 +95,7 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
         // @ts-ignore
         region,
     })
+    console.log("\n========== 프로그래스 first  ==========\n", progress)
 
     if (progress === null || progress.fatalErrorEncountered) {
         return {
