@@ -1,5 +1,6 @@
 "use client"
 
+import { useCallback } from "react"
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { useAtomValue } from "jotai"
 import { store } from "../../../../../../../atoms"
@@ -9,9 +10,25 @@ import { useStickerManager } from "./useStickerManager"
 const stickerTypes = ["heart", "circle", "star"]
 
 const StickerToolBar = () => {
-    const { action } = useStickerManager()
-    const activeSticker = useAtomValue(store.activeSticker)
-    const isDisabled = activeSticker === -1
+    const { action, stickers } = useStickerManager()
+    const indexOfActiveSticker = useAtomValue(store.activeSticker)
+    const isDisabled = indexOfActiveSticker === -1
+
+    const addSticker = useCallback(
+        (type) => {
+            action.deactivate()
+            action.create(type)
+        },
+        [action]
+    )
+
+    const updateSticker = useCallback(
+        (stickers) => {
+            action.deactivate()
+            action.save(stickers)
+        },
+        [action]
+    )
 
     return (
         <div className="flex flex-row divide-x divide-gray-100">
@@ -19,11 +36,8 @@ const StickerToolBar = () => {
                 {stickerTypes.map((type) => (
                     <div
                         key={type}
-                        onClick={() => {
-                            action.deactivate(activeSticker)
-                            action.create(type)
-                        }}
-                        className="flex items-center justify-center origin-center transform-gpu scale-150"
+                        onClick={() => addSticker(type)}
+                        className="flex items-center justify-center origin-center transform-gpu scale-125"
                     >
                         <Sticker type={type} />
                     </div>
@@ -33,9 +47,7 @@ const StickerToolBar = () => {
             <div className="flex flex-row w-fit gap-2 px-3">
                 <StickerEditorButton
                     disabled={isDisabled}
-                    onClick={() => {
-                        action.deactivate(activeSticker)
-                    }}
+                    onClick={() => updateSticker(stickers)}
                     color="green"
                 >
                     <CheckIcon className="w-4 h-4" />
@@ -43,7 +55,7 @@ const StickerToolBar = () => {
                 <StickerEditorButton
                     disabled={isDisabled}
                     onClick={() => {
-                        action.delete(activeSticker)
+                        action.delete(indexOfActiveSticker)
                     }}
                     color="red"
                 >
