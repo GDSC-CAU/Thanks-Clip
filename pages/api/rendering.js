@@ -77,6 +77,12 @@ const encodeVideo = async (videoProps) => {
  * @returns {RenderingProgress}
  */
 const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
+    console.log(
+        "\n========== 배포 정보  ==========\n",
+        bucketName,
+        region,
+        renderId
+    )
     if (bucketName === null || region === null || renderId === null) {
         return {
             type: "error",
@@ -165,11 +171,11 @@ export default async function handler(req, res) {
     })
     /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
 
-    // const progress = await getVideoRenderingProgress({
-    //     bucketName,
-    //     region,
-    //     renderId,
-    // })
+    const progress = await getVideoRenderingProgress({
+        bucketName,
+        region,
+        renderId,
+    })
     // console.log("\n========== 프로그래스 ==========\n", progress)
 
     res.status(200).json({ progress: {} })
