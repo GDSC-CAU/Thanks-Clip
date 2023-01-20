@@ -88,12 +88,16 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
     }
 
     const deployedLambdaFunctionName = getDeployedLambdaFunctionName()
+    console.log(
+        "\n========== 배포 함수 이름  ==========\n",
+        deployedLambdaFunctionName
+    )
+
     const progress = await getRenderProgress({
         renderId,
         bucketName,
-        functionName: deployedLambdaFunctionName,
-        // @ts-ignore
         region,
+        functionName: deployedLambdaFunctionName,
     })
     console.log("\n========== 프로그래스 first  ==========\n", progress)
 

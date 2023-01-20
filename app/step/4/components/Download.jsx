@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react"
 import { ArrowPathIcon } from "@heroicons/react/24/outline"
-import { pathBase } from "../../../../constant/path"
 import { Button } from "../../../common/Button"
 /**@typedef {Awaited<import("../../../../api/video").RenderingProgress>} Progress*/
 
@@ -35,7 +34,7 @@ const Download = ({ encode, transformedVideoProps }) => {
     const progressRequest = useCallback(() => {
         const getVideoProgress = async () => {
             const res = await fetch(
-                `${pathBase}/api/rendering?renderId=${encode.renderId}&bucketName=${encode.bucketName}&region=${encode.region}`,
+                `/api/rendering?renderId=${encode.renderId}&bucketName=${encode.bucketName}&region=${encode.region}`,
                 {
                     headers: {
                         Accept: "application/json",
