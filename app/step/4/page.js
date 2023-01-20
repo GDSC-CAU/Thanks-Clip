@@ -5,7 +5,6 @@ import {
     transformVideoProps,
 } from "../../../pages/api/rendering.js"
 import { ClipPreview } from "./components/ClipPreview.jsx"
-import { Download } from "./components/Download.jsx"
 import { LetterButton } from "./components/LetterButton"
 import { LetterToName } from "./components/LetterToName"
 
@@ -32,16 +31,13 @@ export default async function Step4() {
     const encode = await encodeVideo(transformedVideoProps)
 
     return (
-        <div className="h-full flex flex-col justify-between">
-            <LetterToName />
-            <div className="h-full flex-1">
+        <>
+            <div className="flex-1">
+                <LetterToName />
                 <ClipPreview videoClientProps={videoClientProps} />
             </div>
+
             <LetterButton urlParams={{ ...encode, to: videoClientProps.to }} />
-            <Download
-                encode={encode}
-                transformedVideoProps={transformedVideoProps}
-            />
-        </div>
+        </>
     )
 }
