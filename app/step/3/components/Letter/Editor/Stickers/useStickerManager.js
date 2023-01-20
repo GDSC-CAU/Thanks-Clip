@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
-import { useAtom } from "jotai"
+import { useAtom, useSetAtom } from "jotai"
 import { store } from "../../../../../../../atoms"
 
 /**@typedef {import("../../../../../../../atoms/sticker").Sticker} Sticker */
@@ -10,6 +10,7 @@ const getRandomNumber = (min, max) => Math.random() * (max - min) + min
 
 const useStickerManager = () => {
     const [stickers, setStickers] = useAtom(store.stickers)
+    const setLetter = useSetAtom(store.letter)
 
     const action = useMemo(
         () => ({
@@ -60,14 +61,19 @@ const useStickerManager = () => {
             /**
              * @param {number} upIndex
              */
-            deactivate: (upIndex) => {
+            deactivate: () => {
                 setStickers((prev) =>
-                    prev.map((sticker, i) =>
-                        upIndex === i
-                            ? { ...sticker, isActive: false }
-                            : sticker
-                    )
+                    prev.map((sticker) => ({ ...sticker, isActive: false }))
                 )
+            },
+            /**
+             * @param {Sticker[]} updatedStickers
+             */
+            save: (updatedStickers) => {
+                setLetter((prev) => ({
+                    ...prev,
+                    stickers: updatedStickers,
+                }))
             },
         }),
         // eslint-disable-next-line react-hooks/exhaustive-deps
