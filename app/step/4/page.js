@@ -4,10 +4,13 @@ import {
     encodeVideo,
     transformVideoProps,
 } from "../../../pages/api/rendering.js"
+import { Cache } from "./cache.js"
 import { ClipPreview } from "./components/ClipPreview.jsx"
-// import { Download } from "./components/Download.jsx"
+import { Download } from "./components/Download.jsx"
 import { LetterButton } from "./components/LetterButton"
 import { LetterToName } from "./components/LetterToName"
+
+const cache = new Cache({ maxSize: 100 })
 
 /**
  * tag text 추출
@@ -35,9 +38,14 @@ export default async function Step4() {
         "---\n",
         transformVideoProps
     )
-    const encode = await encodeVideo(transformedVideoProps)
+    const encode = await cache.get(
+        transformVideoProps,
+        async () => await encodeVideo(transformedVideoProps)
+    )
+    console.log(encode)
     const downloadUrl = `https://s3.${encode.region}.amazonaws.com/${encode.bucketName}/renders/${encode.renderId}/out.mp4`
     console.log("---\n", encode, "---\n", downloadUrl)
+
     return (
         <div className="h-full flex flex-col justify-between">
             <LetterToName />
@@ -46,10 +54,10 @@ export default async function Step4() {
                 <ClipPreview videoClientProps={videoClientProps} />
             </div>
             <LetterButton urlParams={{ ...encode, to: videoClientProps.to }} />
-            {/* <Download
+            <Download
                 encode={encode}
                 transformedVideoProps={transformedVideoProps}
-            /> */}
+            />
         </div>
     )
 }
