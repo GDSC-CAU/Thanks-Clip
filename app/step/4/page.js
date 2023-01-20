@@ -41,6 +41,7 @@ export default async function Step4() {
             <div className="flex-1">
                 <ClipPreview videoClientProps={videoClientProps} />
             </div>
+
             <LetterButton urlParams={{ ...encode, to: videoClientProps.to }} />
         </div>
     )

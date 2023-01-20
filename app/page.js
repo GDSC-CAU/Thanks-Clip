@@ -65,9 +65,7 @@ export default async function Main() {
             </div>
             <Link href="/step/1">
                 <Button>
-                    <span className="font-main-cute text-2xl">
-                        한번 만들어 볼까요?
-                    </span>
+                    <span>한번 만들어 볼까요?</span>
                 </Button>
             </Link>
         </main>

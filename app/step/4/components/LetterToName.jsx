@@ -9,7 +9,7 @@ const LetterToName = () => {
 
     return (
         <>
-            <div className="pt-8 pb-4">
+            <div className="pt-10 pb-4">
                 <Title
                     main="Thanks Clip 🙌"
                     sub={`${letter.to} 님을 위한 Thanks Clip이 완성되었습니다!`}
