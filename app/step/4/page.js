@@ -31,22 +31,13 @@ export default async function Step4() {
         tags: toStringTags(pureVideoClientProps.tags),
     }
     const transformedVideoProps = await transformVideoProps(videoClientProps)
-    console.log(
-        pureVideoClientProps,
-        "---\n",
-        videoClientProps,
-        "---\n",
-        transformVideoProps
-    )
     const encode = await cache.get(
         transformVideoProps,
         async () => await encodeVideo(transformedVideoProps)
     )
 
-    console.log(cache.getCache())
     const downloadUrl = `https://s3.${encode.region}.amazonaws.com/${encode.bucketName}/renders/${encode.renderId}/out.mp4`
-    console.log("---\n", encode, "---\n", downloadUrl)
-
+    // 여기까지문제 없음
     return (
         <div className="h-full flex flex-col justify-between">
             <LetterToName />
@@ -57,7 +48,7 @@ export default async function Step4() {
             <LetterButton urlParams={{ ...encode, to: videoClientProps.to }} />
             <Download
                 encode={encode}
-                transformedVideoProps={transformedVideoProps}
+                // transformedVideoProps={transformedVideoProps}
             />
         </div>
     )
