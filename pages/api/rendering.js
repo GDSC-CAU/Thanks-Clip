@@ -1,9 +1,7 @@
-//@ts-check
-/* eslint-disable consistent-return */
-/* eslint-disable no-undef */
 /* eslint-disable no-console */
 import { getRenderProgress, renderMediaOnLambda } from "@remotion/lambda/client"
 import { DEPLOY_CONFIG } from "../../constant/deployConfig.js"
+import { pathBase } from "../../constant/path.js"
 import {
     getDeployedLambdaFunctionName,
     getRandomAWSRegion,
@@ -11,10 +9,75 @@ import {
     setEnvForRemotionAWSDeploy,
 } from "./aws.js"
 
+/**
+ * `from` / `to` / `letter`를 `svg`로 변환한 후, `svg` `string` 추출
+ * @param {{from: string, to: string, letter: string, letterType: "torn" | "hole" | "overlap", font: "cute" | "sans" | "hand"}} svgProps
+ */
+const fetchSVG = async ({ from, to, letter, letterType, font }) => {
+    try {
+        const satoriResponse = await (
+            await fetch(
+                `${pathBase}/api/svg?font=${font}&from=${from}&to=${to}&letter=${letter}&lettertype=${letterType}`
+            )
+        ).json()
+
+        return {
+            isError: false,
+            svg: satoriResponse.svg,
+        }
+    } catch (e) {
+        console.log(e)
+        return {
+            isError: true,
+            svg: null,
+        }
+    }
+}
+
+/**
+ * `videoProps`로 변환, server 전달
+ * @param {Required<import("../../atoms/letter").Letter>} letterProps
+ * @returns {Promise<import("../../../video/Composition").LetterVideoProps>}
+ */
+const transformVideoProps = async (letterProps) => {
+    const { svg: letterTextSVG, isError } = await fetchSVG({
+        font: letterProps.font,
+        from: letterProps.from,
+        to: letterProps.to,
+        letter: letterProps.letter,
+        letterType: letterProps.letterType,
+    })
+
+    if (isError) {
+        return {
+            size: 300,
+            letterTextSVG: "",
+            to: letterProps.to,
+            tags: letterProps.tags,
+            stickers: letterProps.stickers,
+            letterType: letterProps.letterType,
+            backgroundColor: letterProps.backgroundColor,
+        }
+    }
+
+    return {
+        size: 300,
+        letterTextSVG,
+        to: letterProps.to,
+        tags: letterProps.tags,
+        stickers: letterProps.stickers,
+        letterType: letterProps.letterType,
+        backgroundColor: letterProps.backgroundColor,
+    }
+}
+
+/**
+ * Remotion video `aws lambda` 렌더링 -> `aws bucket` 호스팅
+ * @param {import("../../../video/Composition").LetterVideoProps} videoProps
+ */
 const encodeVideo = async (videoProps) => {
-    // 모든 지역에 배포된 aws lambda함수 중, 임의의 lambda호출
+    // 분산 렌더링
     const randomRegion = getRandomAWSRegion()
-    // 랜덤한 aws 계정 가져오기
     const randomAccount = getRandomAwsAccount()
 
     try {
@@ -27,8 +90,9 @@ const encodeVideo = async (videoProps) => {
             functionName: deployedLambdaFunctionName,
             serveUrl: DEPLOY_CONFIG.SITE_NAME,
             composition: DEPLOY_CONFIG.VIDEO_COMPOSITION_ID,
+            framesPerLambda: DEPLOY_CONFIG.FRAMES_PER_LAMBDA,
 
-            inputProps: videoProps, //!TODO: 영상을 제작할 때 필요한 props => !! cookies로 사용을 해야됨 클라이언트 상태를 조회할 수 없음 !!
+            inputProps: videoProps, // 필요한 정보 수집
 
             codec: "h264",
             maxRetries: 1,
@@ -36,9 +100,8 @@ const encodeVideo = async (videoProps) => {
             imageFormat: "jpeg",
             downloadBehavior: {
                 type: "download",
-                fileName: `thanksClip.mp4`,
+                fileName: "thanksClip.mp4",
             },
-            framesPerLambda: 10,
         })
 
         return { renderId, bucketName, region: randomRegion }
@@ -51,6 +114,7 @@ const encodeVideo = async (videoProps) => {
 
 /**@typedef {Promise<{type: "progress" | "success" | "error", downloadUrl: string | null, outputSize: number | null, errorMessage: string | null, bucketName: string | null, region: string | null }>} RenderingProgress */
 /**
+ * `aws s3` -> video 렌더링 상태 조회
  * @param {{renderId: string | null, bucketName: string | null, region: string | null}} renderProgress
  * @returns {RenderingProgress}
  */
@@ -134,4 +198,4 @@ export default async function handler(req, res) {
     res.status(200).json(progress)
 }
 
-export { encodeVideo }
+export { encodeVideo, fetchSVG, transformVideoProps }

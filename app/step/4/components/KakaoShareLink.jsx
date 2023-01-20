@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react"
 import { useAtomValue } from "jotai"
 import { store } from "../../../../atoms"
 
-const KakaoShareLink = ({ children, params }) => {
+const KakaoShareLink = ({ children, urlParams, onClick = null }) => {
     const letter = useAtomValue(store.letter)
     const to = letter.to
 
@@ -26,18 +26,24 @@ const KakaoShareLink = ({ children, params }) => {
                 templateId: 88654,
                 templateArgs: {
                     to_user: `${to ? to : ""}`,
-                    path: `download?region=${params.region}&bucketName=${params.bucketName}&from=${params.from}"`,
+                    path: `download?region=${urlParams.region}&bucketName=${urlParams.bucketName}&to=${urlParams.to}&renderId=${urlParams.renderId}`,
                 },
             })
         }
-    }, [params.bucketName, params.from, params.region, to])
+    }, [urlParams.bucketName, urlParams.from, urlParams.region, to])
 
     useEffect(() => {
         kakaoButton()
     }, [kakaoButton])
 
     return (
-        <div id="kakaotalk-sharing-btn" onClick={kakaoButton}>
+        <div
+            id="kakaotalk-sharing-btn"
+            onClick={() => {
+                if (onClick !== null) onClick()
+                kakaoButton()
+            }}
+        >
             {children}
         </div>
     )

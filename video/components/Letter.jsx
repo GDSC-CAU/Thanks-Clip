@@ -1,5 +1,24 @@
-import { useAtomValue } from "jotai"
-import { store } from "../../../../../atoms"
+import { CircleIcon } from "../../app/step/3/components/Letter/Editor/Stickers/Sticker/Circle.jsx"
+import { HeartIcon } from "../../app/step/3/components/Letter/Editor/Stickers/Sticker/Heart.jsx"
+import { StarIcon } from "../../app/step/3/components/Letter/Editor/Stickers/Sticker/Star.jsx"
+
+const LetterCanvas = ({ children, size }) => {
+    return (
+        <div
+            style={{
+                width: size,
+                height: size,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+                backgroundColor: "transparent",
+            }}
+        >
+            {children}
+        </div>
+    )
+}
 
 const colors = {
     white: "#ffffff",
@@ -187,24 +206,6 @@ const LetterHole = ({ children, color }) => {
     )
 }
 
-const LetterShape = ({ children }) => {
-    const type = useAtomValue(store.letter).letterType
-    const color = useAtomValue(store.letter).backgroundColor
-    return (
-        <>
-            {type === "torn" && (
-                <LetterTorn color={color}>{children}</LetterTorn>
-            )}
-            {type === "overlap" && (
-                <LetterOverlap color={color}>{children}</LetterOverlap>
-            )}
-            {type === "hole" && (
-                <LetterHole color={color}>{children}</LetterHole>
-            )}
-        </>
-    )
-}
-
 const LetterShapeStatic = ({ backgroundColor, type, children }) => {
     return (
         <>
@@ -223,4 +224,89 @@ const LetterShapeStatic = ({ backgroundColor, type, children }) => {
     )
 }
 
-export { LetterShape, LetterShapeStatic }
+const LetterTextSVG = ({ svgString }) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={`data:image/svg+xml;utf8,${svgString}`} alt={"thanks clip"} />
+)
+
+const Sticker = ({ type }) => {
+    return (
+        <>
+            {type === "circle" && <CircleIcon />}
+            {type === "heart" && <HeartIcon />}
+            {type === "star" && <StarIcon />}
+        </>
+    )
+}
+
+/**
+ * @param {{size: number, stickers: Sticker[]}} props
+ */
+const StickersStatic = ({ size, stickers }) => (
+    <div
+        style={{
+            width: size,
+            height: size,
+            zIndex: 0,
+            backgroundColor: "transparent",
+        }}
+    >
+        {stickers?.map(({ type, position }) => (
+            <Movable
+                key={`${type}-${position.x}-${position.y}`}
+                position={position}
+                isActive={false}
+                onPointerEnter={null}
+            >
+                <Sticker type={type} />
+            </Movable>
+        ))}
+    </div>
+)
+
+const Movable = ({ position, children, size, isActive, onPointerEnter }) => {
+    return (
+        <div
+            onPointerEnter={onPointerEnter}
+            style={{
+                position: "absolute",
+                width: size,
+                height: size,
+                transform: `translate(${position.x}px, ${position.y}px)`,
+                opacity: isActive ? 0.5 : 1,
+                transition: "opacity ease 0.25s",
+                zIndex: 100,
+                pointerEvents: isActive ? "none" : "auto",
+                userSelect: "none",
+            }}
+        >
+            {children}
+        </div>
+    )
+}
+
+/**
+ * Letter를 서버에서 정적으로 표현하는 컴포넌트
+ */
+const Letter = ({
+    size = 300,
+    stickers,
+    letterType,
+    backgroundColor,
+    letterTextSVG,
+}) => {
+    return (
+        <LetterCanvas size={size}>
+            <LetterShapeStatic
+                backgroundColor={backgroundColor}
+                type={letterType}
+            >
+                <LetterTextSVG svgString={letterTextSVG} />
+            </LetterShapeStatic>
+
+            <StickersStatic size={size} stickers={stickers} />
+        </LetterCanvas>
+    )
+}
+
+export { Letter }

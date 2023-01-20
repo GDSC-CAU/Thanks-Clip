@@ -4,7 +4,7 @@ import {
     interpolate,
     useCurrentFrame,
     useVideoConfig,
-} from "remotion/."
+} from "remotion"
 
 const DURATION_ENVELOPE = 135
 
@@ -157,13 +157,6 @@ const Envelope = ({ delay = 240, children }) => {
                     transform: `scale(${zoom})`,
                 }}
             >
-                <div
-                    style={{
-                        width: "296px",
-                        height: "296px",
-                        backgroundColor: "#555555",
-                    }}
-                ></div>
                 {children}
             </div>
         </AbsoluteFill>

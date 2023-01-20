@@ -19,9 +19,9 @@ const Modal = ({ children, isClose, onClose, opacity = "25" }) => {
             }`}
         >
             <div
-                className={`flex items-center justify-center ${modalWidth} z-10 fixed top-1/2 left-1/2 translate-x-[-50%] transition-modal duration-300 transform-gpu ${
+                className={`flex items-center justify-center ${modalWidth} z-[100] fixed top-1/2 left-1/2 translate-x-[-50%] transition-modal duration-300 transform-gpu ${
                     isClose
-                        ? "opacity-0 scale-75 translate-y-4"
+                        ? "opacity-0 scale-75 translate-y-[-40%]"
                         : "opacity-100 scale-100 translate-y-[-50%]"
                 }`}
             >
@@ -30,7 +30,7 @@ const Modal = ({ children, isClose, onClose, opacity = "25" }) => {
 
             <div
                 onClick={onClose}
-                className={`fixed top-0 left-0 right-0 bottom-0 bg-black transition-opacity transform-gpu ${
+                className={`fixed top-0 left-0 right-0 bottom-0 bg-black transition-opacity transform-gpu z-50 ${
                     isClose ? "opacity-0" : modalOpacity[opacity]
                 }`}
             />

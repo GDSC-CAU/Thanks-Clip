@@ -46,7 +46,7 @@ const Movable = ({ position, children, size, isActive, onPointerEnter }) => {
 /**
  * @param {{size: number, stickers: Sticker[]}} props
  */
-const StickersStatic = ({ size, stickers }) => (
+const LetterStickersStatic = ({ size, stickers }) => (
     <div
         style={{
             width: size,
@@ -55,7 +55,7 @@ const StickersStatic = ({ size, stickers }) => (
             backgroundColor: "transparent",
         }}
     >
-        {stickers.map(({ type, position }) => (
+        {stickers?.map(({ type, position }) => (
             <Movable
                 key={`${type}-${position.x}-${position.y}`}
                 position={position}
@@ -106,7 +106,7 @@ const useSaveStickers = (isActive, stickers) => {
     }, [isActive, stickers, setLetter])
 }
 
-const StickerManager = ({
+const LetterStickerManager = ({
     size,
     stickerSize,
     clickActiveAreaRatio = 1,
@@ -124,7 +124,7 @@ const StickerManager = ({
     }
 
     if (active === false) {
-        return <StickersStatic size={size} stickers={stickers} />
+        return <LetterStickersStatic size={size} stickers={stickers} />
     }
 
     return (
@@ -166,7 +166,7 @@ const StickerManager = ({
                 }
             }}
         >
-            {stickers.map(({ type, position, isActive }, stickerLocation) => {
+            {stickers?.map(({ type, position, isActive }, stickerLocation) => {
                 return (
                     <Movable
                         key={`${type}-${position.x}-${position.y}`}
@@ -186,4 +186,4 @@ const StickerManager = ({
     )
 }
 
-export { StickerManager, StickersStatic }
+export { LetterStickerManager, LetterStickersStatic }

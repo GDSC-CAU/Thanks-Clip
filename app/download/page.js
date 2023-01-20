@@ -5,19 +5,26 @@ import { DownloadTitle } from "./components/DownloadTitle"
 import { Envelop } from "./components/Envelope"
 
 /**
- * @param {{params: any, searchParams: { region: string, bucketName: string, from: string }}} param0
- * @returns
+ * @param {{params: any, searchParams: {renderId: string | null; bucketName: string | null; region: string | null; from: string}}} param0
  */
 export default function DownloadVideo({ searchParams }) {
-    const downloadUrl = `${searchParams}`
-    // const isInvalid =
-    //     !searchParams.bucketName || !searchParams.from || !searchParams.region
+    /** 실제 param 검증
+    const isInvalid =
+        !searchParams.bucketName ||
+        !searchParams.from ||
+        !searchParams.region ||
+        !searchParams.renderId
+    */
     const isInvalid = false
+
+    const { bucketName, region, renderId, from } = searchParams
+    const downloadUrl = `https://s3.${region}.amazonaws.com/${bucketName}/renders/${renderId}/out.mp4`
+
     if (isInvalid) {
         return (
             <main className="flex flex-col w-full h-screen min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-3 py-3 bg-white ">
                 <div className="h-full flex flex-col justify-between">
-                    <DownloadTitle from={searchParams.from} />
+                    <DownloadTitle from={from} />
                     <div className="w-81 h-81 relative">
                         <Envelop />
                     </div>
@@ -30,6 +37,7 @@ export default function DownloadVideo({ searchParams }) {
             </main>
         )
     }
+
     return (
         <main className="flex flex-col w-full h-screen min-h-screen mx-auto sm:w-4/5 md:w-3/5 lg:w-2/5 px-3 py-3 bg-white ">
             <Confetti />
