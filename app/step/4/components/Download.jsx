@@ -44,7 +44,6 @@ const Download = ({ encode }) => {
 
             /**@type {Progress} */
             const { progress } = await res.json()
-            console.log(progress)
             setProgress(progress)
         }
 

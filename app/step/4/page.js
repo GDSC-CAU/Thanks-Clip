@@ -6,7 +6,6 @@ import {
 } from "../../../pages/api/rendering.js"
 import { Cache } from "./cache.js"
 import { ClipPreview } from "./components/ClipPreview.jsx"
-import { Download } from "./components/Download.jsx"
 import { LetterButton } from "./components/LetterButton"
 import { LetterToName } from "./components/LetterToName"
 
@@ -36,20 +35,13 @@ export default async function Step4() {
         async () => await encodeVideo(transformedVideoProps)
     )
 
-    const downloadUrl = `https://s3.${encode.region}.amazonaws.com/${encode.bucketName}/renders/${encode.renderId}/out.mp4`
-    // 여기까지문제 없음
     return (
         <div className="h-full flex flex-col justify-between">
             <LetterToName />
-            <p className="font-bold">{downloadUrl}</p>
             <div className="h-full flex-1">
                 <ClipPreview videoClientProps={videoClientProps} />
             </div>
             <LetterButton urlParams={{ ...encode, to: videoClientProps.to }} />
-            <Download
-                encode={encode}
-                // transformedVideoProps={transformedVideoProps}
-            />
         </div>
     )
 }

@@ -58,7 +58,6 @@ export default async function handler(middleReq) {
     const fontData = await fetch(getAWSFontURL(font)).then((res) =>
         res.arrayBuffer()
     )
-    console.log(fontData)
     try {
         const image = new ImageResponse(
             (
@@ -124,7 +123,6 @@ export default async function handler(middleReq) {
 
         return image
     } catch (e) {
-        console.log(e)
-        return null
+        throw new Error(e)
     }
 }

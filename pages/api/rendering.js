@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import { getRenderProgress, renderMediaOnLambda } from "@remotion/lambda/client"
 import { DEPLOY_CONFIG } from "../../constant/deployConfig.js"
 import { pathBase } from "../../constant/path.js"
@@ -77,12 +77,6 @@ const encodeVideo = async (videoProps) => {
  * @returns {RenderingProgress}
  */
 const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
-    console.log(
-        "\n========== 배포 정보  ==========\n",
-        bucketName,
-        region,
-        renderId
-    )
     if (bucketName === null || region === null || renderId === null) {
         return {
             type: "error",
@@ -96,10 +90,6 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
 
     try {
         const deployedLambdaFunctionName = getDeployedLambdaFunctionName()
-        console.log(
-            "\n========== 배포 함수 이름  ==========\n",
-            deployedLambdaFunctionName
-        )
 
         const progress = await getRenderProgress({
             renderId,
@@ -107,7 +97,6 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
             region,
             functionName: deployedLambdaFunctionName,
         })
-        console.log("\n========== 프로그래스 first  ==========\n", progress)
 
         if (progress === null || progress.fatalErrorEncountered) {
             return {
@@ -175,27 +164,16 @@ export default async function handler(req, res) {
     const bucketName = urlSearchParams.get("bucketName")
     const region = urlSearchParams.get("region")
     const renderId = urlSearchParams.get("renderId")
-    console.log({
-        bucketName,
-        region,
-        renderId,
-    })
-    /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
 
     try {
+        /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
         const progress = await getVideoRenderingProgress({
             bucketName,
             region,
             renderId,
         })
-        console.log("\n========== 프로그래스 ==========\n", progress)
         res.status(200).json({ progress })
     } catch (e) {
-        console.log("========= error in api/rendering ========= ", e, {
-            bucketName,
-            region,
-            renderId,
-        })
         res.status(403).json({
             progress: {
                 type: "error",
