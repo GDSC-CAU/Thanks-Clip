@@ -153,7 +153,7 @@ export default async function handler(req, res) {
     const progress = await getVideoRenderingProgress(encodeData)
     console.log("---\n", progress)
 
-    res.status(200)
+    res.status(200).json(progress)
 }
 
 export { encodeVideo, transformVideoProps }
