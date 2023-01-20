@@ -39,7 +39,9 @@ const Download = ({ encode, transformedVideoProps }) => {
             })
 
             /**@type {Progress} */
-            const progress = await res.json()
+            const { progress } = await res.json()
+            console.log(progress)
+
             setProgress(progress)
         }
 
