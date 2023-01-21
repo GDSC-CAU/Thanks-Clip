@@ -4,9 +4,9 @@ import {
     encodeVideo,
     transformVideoProps,
 } from "../../../pages/api/rendering.js"
-import { ClipPreview } from "./components/ClipPreview.jsx"
 import { LetterButton } from "./components/LetterButton"
 import { LetterToName } from "./components/LetterToName"
+import { Viewer } from "./components/Viewer"
 
 /**
  * tag text 추출
@@ -32,7 +32,7 @@ export default async function Step4() {
     return (
         <div className="h-full flex flex-col justify-between">
             <LetterToName />
-            <ClipPreview videoClientProps={videoClientProps} />
+            <Viewer videoClientProps={videoClientProps} />
             <LetterButton
                 urlParams={{
                     ...encode,
