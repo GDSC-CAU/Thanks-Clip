@@ -1,5 +1,5 @@
 const button =
-    "flex items-center justify-center gap-1 px-7 py-3 text-lg border-solid border-2 rounded-full transition h-fit active:scale-95 hover:opacity-80 select-none"
+    "flex items-center justify-center gap-1 px-7 py-3 text-lg border-solid border-2 rounded-full transition h-fit active:scale-[0.975] hover:opacity-80 select-none"
 
 const buttonDisabled = "opacity-50 cursor-not-allowed"
 
