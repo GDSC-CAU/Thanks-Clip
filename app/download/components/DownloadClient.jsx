@@ -14,10 +14,12 @@ const DownloadClientPage = () => {
     const from = searchParams.get("from")
     const bucketName = searchParams.get("bucketName")
     const renderId = searchParams.get("renderId")
-    const region = searchParams.get("bucketName")
+    const region = searchParams.get("region")
 
     const isValid =
-        searchParams.bucketName && searchParams.region && searchParams.renderId
+        ((searchParams.bucketName !== "") | null | undefined &&
+            (searchParams.region !== "") | null | undefined &&
+            (searchParams.renderId !== "") | null | undefined) === 1
 
     const videoDownloadURL = `https://s3.${region}.amazonaws.com/${bucketName}/renders/${renderId}/out.mp4`
 
