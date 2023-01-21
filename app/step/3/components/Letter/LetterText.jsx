@@ -64,6 +64,7 @@ const LetterTextLocation = ({ from, to, letter, font }) => {
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
+                userSelect: "none",
             }}
             className={fontType}
         >

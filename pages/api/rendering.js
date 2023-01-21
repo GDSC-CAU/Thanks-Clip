@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import { getRenderProgress, renderMediaOnLambda } from "@remotion/lambda/client"
 import { DEPLOY_CONFIG } from "../../constant/deployConfig.js"
 import { pathBase } from "../../constant/path.js"
@@ -7,62 +8,19 @@ import {
     getRandomAWSRegion,
     getRandomAwsAccount,
     setEnvForRemotionAWSDeploy,
-} from "./aws.js"
-
-/**
- * `from` / `to` / `letter`를 `svg`로 변환한 후, `svg` `string` 추출
- * @param {{from: string, to: string, letter: string, letterType: "torn" | "hole" | "overlap", font: "cute" | "sans" | "hand"}} svgProps
- */
-const fetchSVG = async ({ from, to, letter, letterType, font }) => {
-    try {
-        const satoriResponse = await (
-            await fetch(
-                `${pathBase}/api/svg?font=${font}&from=${from}&to=${to}&letter=${letter}&lettertype=${letterType}`
-            )
-        ).json()
-
-        return {
-            isError: false,
-            svg: satoriResponse.svg,
-        }
-    } catch (e) {
-        console.log(e)
-        return {
-            isError: true,
-            svg: null,
-        }
-    }
-}
+} from "./_aws/index.js"
 
 /**
  * `videoProps`로 변환, server 전달
  * @param {Required<import("../../atoms/letter").Letter>} letterProps
- * @returns {Promise<import("../../../video/Composition").LetterVideoProps>}
+ * @returns {Promise<import("../../video/CompositionServer").LetterVideoProps>}
  */
 const transformVideoProps = async (letterProps) => {
-    const { svg: letterTextSVG, isError } = await fetchSVG({
-        font: letterProps.font,
-        from: letterProps.from,
-        to: letterProps.to,
-        letter: letterProps.letter,
-        letterType: letterProps.letterType,
-    })
-
-    if (isError) {
-        return {
-            size: 300,
-            letterTextSVG: "",
-            to: letterProps.to,
-            tags: letterProps.tags,
-            stickers: letterProps.stickers,
-            letterType: letterProps.letterType,
-            backgroundColor: letterProps.backgroundColor,
-        }
-    }
+    const letterImageURL = `${pathBase}/api/image?font=${letterProps.font}&from=${letterProps.from}&to=${letterProps.to}&letter=${letterProps.letter}&lettertype=${letterProps.letterType}`
 
     return {
         size: 300,
-        letterTextSVG,
+        letterImageURL,
         to: letterProps.to,
         tags: letterProps.tags,
         stickers: letterProps.stickers,
@@ -130,45 +88,56 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
         }
     }
 
-    const deployedLambdaFunctionName = getDeployedLambdaFunctionName()
-    const progress = await getRenderProgress({
-        renderId,
-        bucketName,
-        functionName: deployedLambdaFunctionName,
-        // @ts-ignore
-        region,
-    })
+    try {
+        const deployedLambdaFunctionName = getDeployedLambdaFunctionName()
 
-    if (progress === null || progress.fatalErrorEncountered) {
+        const progress = await getRenderProgress({
+            renderId,
+            bucketName,
+            region,
+            functionName: deployedLambdaFunctionName,
+        })
+
+        if (progress === null || progress.fatalErrorEncountered) {
+            return {
+                type: "error",
+                downloadUrl: null,
+                errorMessage: progress.errors
+                    .map((e) => JSON.stringify(e))
+                    .reduce((e) => `${e}\n`),
+                bucketName,
+                region,
+                outputSize: null,
+            }
+        }
+
+        if (!progress.renderId || !progress.bucket) {
+            return {
+                type: "progress",
+                downloadUrl: null,
+                errorMessage: null,
+                outputSize: null,
+                bucketName,
+                region,
+            }
+        }
+
+        if (progress.outputFile) {
+            return {
+                type: "success",
+                downloadUrl: progress.outputFile,
+                outputSize: progress.outputSizeInBytes,
+                errorMessage: null,
+                bucketName,
+                region,
+            }
+        }
+    } catch (e) {
         return {
             type: "error",
             downloadUrl: null,
-            errorMessage: progress.errors
-                .map((e) => JSON.stringify(e))
-                .reduce((e) => `${e}\n`),
-            bucketName,
-            region,
+            errorMessage: e,
             outputSize: null,
-        }
-    }
-
-    if (!progress.renderId || !progress.bucket) {
-        return {
-            type: "progress",
-            downloadUrl: null,
-            errorMessage: null,
-            outputSize: null,
-            bucketName,
-            region,
-        }
-    }
-
-    if (progress.outputFile) {
-        return {
-            type: "success",
-            downloadUrl: progress.outputFile,
-            outputSize: progress.outputSizeInBytes,
-            errorMessage: null,
             bucketName,
             region,
         }
@@ -190,12 +159,32 @@ const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
  * @returns
  */
 export default async function handler(req, res) {
-    /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
-    const encodeData = JSON.parse(req.body)
+    const urlSearchParams = new URLSearchParams(req.query)
 
-    const progress = await getVideoRenderingProgress(encodeData)
+    const bucketName = urlSearchParams.get("bucketName")
+    const region = urlSearchParams.get("region")
+    const renderId = urlSearchParams.get("renderId")
 
-    res.status(200).json(progress)
+    try {
+        /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
+        const progress = await getVideoRenderingProgress({
+            bucketName,
+            region,
+            renderId,
+        })
+        res.status(200).json({ progress })
+    } catch (e) {
+        res.status(403).json({
+            progress: {
+                type: "error",
+                downloadUrl: null,
+                outputSize: null,
+                errorMessage: e,
+                bucketName,
+                region,
+            },
+        })
+    }
 }
 
-export { encodeVideo, fetchSVG, transformVideoProps }
+export { encodeVideo, transformVideoProps }
