@@ -6,7 +6,7 @@ import { DownloadClientPage } from "./components/DownloadClient"
  */
 export default function DownloadVideo() {
     return (
-        <main className="flex flex-col min-w-[20rem] w-full max-w-[30rem] h-full min-h-screen mx-auto px-3 py-3 bg-white shadow-md">
+        <main className="flex flex-col min-w-[20rem] w-full max-w-[30rem] h-full min-h-screen mx-auto px-4 pt-3 pb-10 bg-white shadow-md">
             <DownloadClientPage />
         </main>
     )
