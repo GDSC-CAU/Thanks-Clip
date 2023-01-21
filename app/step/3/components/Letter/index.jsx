@@ -40,7 +40,7 @@ const Letter = () => {
     return (
         <div
             ref={letterContainerRef}
-            className="flex items-center justify-center h-fit w-full relative"
+            className="flex items-center justify-center h-fit w-full relative min-w-[22rem]"
         >
             <LetterCanvas size={size}>
                 <LetterShape>

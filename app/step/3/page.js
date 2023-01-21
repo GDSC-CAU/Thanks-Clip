@@ -8,8 +8,9 @@ export default function Step3() {
             <div className="pt-8">
                 <Title main="편지지를 꾸며볼까요?" />
             </div>
-            <Letter />
-
+            <div className="flex justify-center">
+                <Letter />
+            </div>
             <PreviewLetter />
         </>
     )
