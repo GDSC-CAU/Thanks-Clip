@@ -43,7 +43,7 @@ const LogoAirplane = (props) => (
 
 export default async function Main() {
     return (
-        <main className="flex flex-col gap-4 w-full min-w-[22rem] max-w-[30rem] h-full min-h-screen mx-auto sm:w-[30rem] md:w-[30rem] lg:w-[30rem] px-4 pt-12 pb-10 bg-white shadow-md justify-between">
+        <main className="flex flex-col gap-4 w-full min-w-[20rem] max-w-[30rem] h-full min-h-screen mx-auto sm:w-[30rem] md:w-[30rem] lg:w-[30rem] px-4 pt-12 pb-10 bg-white shadow-md justify-between">
             <div className="flex-1 flex flex-col justify-between">
                 <div className="flex-1 relative">
                     <div className="object-cover object-center overflow-hidden h-60 sm:h-full ">
