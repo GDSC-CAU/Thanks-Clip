@@ -6,7 +6,7 @@ import {
 } from "../../../pages/api/rendering.js"
 import { LetterButton } from "./components/LetterButton"
 import { LetterToName } from "./components/LetterToName"
-import Viewer from "./components/Viewer.jsx"
+import { Viewer } from "./components/Viewer"
 
 /**
  * tag text 추출

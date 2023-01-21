@@ -58,4 +58,4 @@ const Viewer = ({ videoClientProps }) => {
     )
 }
 
-export default Viewer
+export { Viewer }
