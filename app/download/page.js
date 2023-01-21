@@ -19,7 +19,8 @@ export default function DownloadVideo({ searchParams }) {
     const { bucketName, region, renderId, from, to } = searchParams
     const downloadUrl = `https://s3.${region}.amazonaws.com/${bucketName}/renders/${renderId}/out.mp4`
 
-    if (isInvalid) {
+    // 테스트용
+    if (!isInvalid) {
         return (
             <main className="flex flex-col min-w-[22rem] w-full max-w-[30rem] h-screen min-h-screen mx-auto px-3 py-3 bg-white shadow-md">
                 <div className="h-full flex flex-col justify-between">
