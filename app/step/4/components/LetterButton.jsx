@@ -8,7 +8,7 @@ import { Button } from "../../../common/Button"
 import { KakaoShareLink } from "./KakaoShareLink"
 
 /**
- * @param {{ urlParams: {renderId: string | null; bucketName: string | null; region: string | null;, to: string} }} downloadProps
+ * @param {{ urlParams: import("../../../download/page").DownloadURLParams }} downloadProps
  */
 const LetterButton = ({ urlParams }) => {
     const setLetter = useSetAtom(store.letter)
