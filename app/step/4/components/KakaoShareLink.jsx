@@ -1,16 +1,9 @@
 "use client"
 import { useCallback, useEffect } from "react"
+import Script from "next/script"
 
 const KakaoShareLink = ({ children, urlParams, onClick = null, className }) => {
-    useEffect(() => {
-        const script = document.createElement("script")
-        script.src = "https://developers.kakao.com/sdk/js/kakao.js"
-        script.async = true
-        document.body.appendChild(script)
-        return () => document.body.removeChild(script)
-    }, [])
-
-    const kakaoButton = useCallback(() => {
+    const openKakaoShare = useCallback(() => {
         if (window.Kakao) {
             const kakao = window.Kakao
             if (!kakao.isInitialized()) {
@@ -29,20 +22,27 @@ const KakaoShareLink = ({ children, urlParams, onClick = null, className }) => {
     }, [urlParams])
 
     useEffect(() => {
-        kakaoButton()
-    }, [kakaoButton])
+        openKakaoShare()
+    }, [openKakaoShare])
 
     return (
-        <div
-            id="kakaotalk-sharing-btn"
-            onClick={() => {
-                if (onClick !== null) onClick()
-                kakaoButton()
-            }}
-            className={className}
-        >
-            {children}
-        </div>
+        <>
+            <Script
+                async
+                beforeInteractive
+                src="https://developers.kakao.com/sdk/js/kakao.js"
+            />
+            <div
+                id="kakaotalk-sharing-btn"
+                onClick={() => {
+                    if (onClick !== null) onClick()
+                    openKakaoShare()
+                }}
+                className={className}
+            >
+                {children}
+            </div>
+        </>
     )
 }
 
