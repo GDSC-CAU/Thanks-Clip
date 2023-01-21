@@ -5,8 +5,12 @@ import { STORAGE_KEY } from "./letter"
 
 /**@type {Sticker[]} */
 const getStickersInitialValue = () => {
-    if (!window) {
-        return JSON.parse(window.localStorage.getItem(STORAGE_KEY))?.stickers
+    if (window) {
+        const savedStickers = JSON.parse(
+            window.localStorage.getItem(STORAGE_KEY)
+        )?.stickers
+
+        return savedStickers ?? []
     }
     return []
 }
