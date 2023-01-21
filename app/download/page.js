@@ -15,12 +15,11 @@ export default function DownloadVideo({ searchParams }) {
         !searchParams.bucketName ||
         !searchParams.region ||
         !searchParams.renderId
-
     const { bucketName, region, renderId, from, to } = searchParams
     const downloadUrl = `https://s3.${region}.amazonaws.com/${bucketName}/renders/${renderId}/out.mp4`
+    console.log(searchParams, downloadUrl)
 
-    // 테스트용
-    if (!isInvalid) {
+    if (isInvalid) {
         return (
             <main className="flex flex-col min-w-[22rem] w-full max-w-[30rem] h-screen min-h-screen mx-auto px-3 py-3 bg-white shadow-md">
                 <div className="h-full flex flex-col justify-between">
@@ -52,7 +51,7 @@ export default function DownloadVideo({ searchParams }) {
                             {to}님의 Clip 열어보기
                         </Button>
                     </a>
-                    <Link href="/step1/">
+                    <Link href="/step/1">
                         <Button className="bg-inherit text-gray-800 border-gray-800 border-solid border z-50">
                             저도 만들어볼래요 🙌
                         </Button>
