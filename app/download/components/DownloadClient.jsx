@@ -30,7 +30,7 @@ const DownloadClientPage = () => {
             <div className="h-full flex flex-col justify-between">
                 <DownloadTitle from={from} />
 
-                <div className="w-81 h-81 relative">
+                <div className="flex justify-center w-81 h-81 relative">
                     <Envelop />
                 </div>
 

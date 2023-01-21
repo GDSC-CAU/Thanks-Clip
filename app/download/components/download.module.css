@@ -1,9 +1,7 @@
 .envelop {
     opacity: 100;
-    width: 60%;
-    position: absolute;
-    top: 0;
-    right: 20%;
+    width: 80%;
+    height: 80%;
     will-change: transform;
     animation: envelopMove 3.5s ease-in-out infinite;
 }
