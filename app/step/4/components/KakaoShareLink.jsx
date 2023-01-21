@@ -1,14 +1,14 @@
 "use client"
 import { useCallback, useEffect } from "react"
-import Script from "next/script"
 
 const KakaoShareLink = ({ children, urlParams, onClick = null, className }) => {
     const openKakaoShare = useCallback(() => {
-        if (window.Kakao) {
-            const kakao = window.Kakao
+        const kakao = window.Kakao
+        if (kakao) {
             if (!kakao.isInitialized()) {
                 kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY)
             }
+
             kakao.Share.createCustomButton({
                 container: "#kakaotalk-sharing-btn",
                 templateId: 88654,
@@ -22,27 +22,29 @@ const KakaoShareLink = ({ children, urlParams, onClick = null, className }) => {
     }, [urlParams])
 
     useEffect(() => {
+        if (!window.Kakao) {
+            const script = document.createElement("script")
+            script.src = "https://developers.kakao.com/sdk/js/kakao.js"
+            script.async = true
+            document.body.appendChild(script)
+        }
+    }, [])
+
+    useEffect(() => {
         openKakaoShare()
     }, [openKakaoShare])
 
     return (
-        <>
-            <Script
-                async
-                beforeInteractive
-                src="https://developers.kakao.com/sdk/js/kakao.js"
-            />
-            <div
-                id="kakaotalk-sharing-btn"
-                onClick={() => {
-                    if (onClick !== null) onClick()
-                    openKakaoShare()
-                }}
-                className={className}
-            >
-                {children}
-            </div>
-        </>
+        <div
+            id="kakaotalk-sharing-btn"
+            onClick={() => {
+                if (onClick !== null) onClick()
+                openKakaoShare()
+            }}
+            className={className}
+        >
+            {children}
+        </div>
     )
 }
 

@@ -2,6 +2,20 @@
 
 import { useEffect, useState } from "react"
 
+/**
+ * 카카오톡 셋업을 미리 시작
+ */
+const useSetupKakao = () => {
+    useEffect(() => {
+        const kakao = window.Kakao
+        if (kakao) {
+            if (!kakao.isInitialized()) {
+                kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY)
+            }
+        }
+    }, [])
+}
+
 const useMounted = () => {
     const [isMounted, setIsMounted] = useState(false)
 
@@ -13,6 +27,7 @@ const useMounted = () => {
 }
 
 const RenderOnMount = ({ children, ...props }) => {
+    useSetupKakao()
     const { isMounted } = useMounted()
 
     if (isMounted === false) {
