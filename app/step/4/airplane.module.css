@@ -1,8 +1,8 @@
 .airplane {
     position: absolute;
-    top: 11rem;
-    right: 4rem;
-    width: 18.5%;
+    top: 0;
+    left: 50%;
+    width: 10rem;
     opacity: 100;
     animation: airplaneMove 2s ease infinite;
     will-change: transform;
@@ -20,17 +20,17 @@
 
 @keyframes airplaneMove {
     0% {
-        transform: translate(-80%, 270%) scale(0.5) rotate(20deg);
+        transform: translate(-10%, 0%) scale(0.5) rotate(20deg);
         opacity: 0.25;
     }
 
     50% {
-        transform: translate(-110%, 240%) scale(0.75) rotate(15deg);
+        transform: translate(-40%, -25%) scale(0.75) rotate(15deg);
         opacity: 0.5;
     }
 
     100% {
-        transform: translate(-145.5%, 225%) scale(1) rotate(0deg);
+        transform: translate(-70%, -40%) scale(1) rotate(0deg);
         opacity: 1;
     }
 }
