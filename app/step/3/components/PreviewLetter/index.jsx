@@ -28,12 +28,12 @@ const PreviewLetter = () => {
                     <div className="scale-110">
                         <LetterStaticClient {...letter} size={letterSize} />
                     </div>
-                    <div className="flex flex-row w-full gap-5">
+                    <div className="grid grid-cols-2 w-full gap-5">
                         <Button color="gray" onClick={() => action.close()}>
                             수정하기
                         </Button>
 
-                        <Link href="/step/4" className="w-full">
+                        <Link href="/step/4">
                             <Button
                                 onClick={() => {
                                     setPropsOnCookie(COOKIE_KEY, letter)
