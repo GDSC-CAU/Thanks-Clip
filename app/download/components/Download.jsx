@@ -68,7 +68,7 @@ const Download = ({ to, bucketName, region, renderId, account }) => {
         <>
             {progress.type === "success" && (
                 <a href={progress.downloadUrl} download={"thanks clip"}>
-                    <Button color="red" className="mb-5 z-50 gap-2">
+                    <Button color="red" className="mb-5 z-50 gap-4">
                         {to}님의 Clip 열어보기
                         <p className="text-xs font-normal">
                             {byteToSize({ byte: progress.outputSize })}
