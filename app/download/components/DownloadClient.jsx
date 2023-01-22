@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Button } from "../../common/Button"
 import { Confetti } from "./Confetti"
+import { Download } from "./Download"
 import { DownloadTitle } from "./DownloadTitle"
 import { Envelop } from "./Envelope"
 
@@ -22,7 +23,7 @@ const DownloadClientPage = () => {
             (searchParams.renderId !== "") | null | undefined) === 1
 
     const videoDownloadURL = `https://s3.${region}.amazonaws.com/${bucketName}/renders/${renderId}/out.mp4`
-
+    console.log(videoDownloadURL)
     return (
         <>
             {isValid && <Confetti />}
@@ -36,11 +37,12 @@ const DownloadClientPage = () => {
 
                 <div className="mt-auto mb-5">
                     {isValid ? (
-                        <a href={videoDownloadURL} download={"thanks clip"}>
-                            <Button className="mb-5 z-50">
-                                {to}님의 Clip 열어보기
-                            </Button>
-                        </a>
+                        <Download
+                            to={to}
+                            region={region}
+                            renderId={renderId}
+                            bucketName={bucketName}
+                        />
                     ) : (
                         <Button color="red" className="mb-5 z-50">
                             지금은 Clip을 열 수 없어요 😭
