@@ -39,7 +39,8 @@ const encodeVideo = async (videoProps) => {
     const randomAccount = getRandomAwsAccount()
 
     try {
-        setEnvForRemotionAWSDeploy(randomAccount)
+        //TODO: 환경 변수 설정 문제인지 파악해보기
+        setEnvForRemotionAWSDeploy(2)
 
         const deployedLambdaFunctionName = getDeployedLambdaFunctionName()
 
@@ -78,6 +79,9 @@ const encodeVideo = async (videoProps) => {
  * @returns {RenderingProgress}
  */
 const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
+    //TODO: 환경 변수 설정 문제인지 파악해보기
+    setEnvForRemotionAWSDeploy(2)
+
     if (bucketName === null || region === null || renderId === null) {
         return {
             type: "error",
@@ -173,17 +177,16 @@ export default async function handler(req, res) {
             region,
             renderId,
         })
-        res.status(200).json({ progress })
+        console.log("서버에서 연산", progress)
+        res.status(200).json(progress)
     } catch (e) {
         res.status(403).json({
-            progress: {
-                type: "error",
-                downloadUrl: null,
-                outputSize: null,
-                errorMessage: e,
-                bucketName,
-                region,
-            },
+            type: "error",
+            downloadUrl: null,
+            outputSize: null,
+            errorMessage: e,
+            bucketName,
+            region,
         })
     }
 }
