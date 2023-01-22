@@ -6,20 +6,23 @@ const GoogleAnalytics = ({ googleAnalyticsID }) => (
             <>
                 <Script
                     strategy="worker"
+                    type="text/partytown"
                     src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsID}`}
                 />
                 <script
-                    data-partytown-config
+                    strategy="worker"
+                    type="text/partytown"
                     dangerouslySetInnerHTML={{
                         __html: `
                             partytown = {
-                                lib: "/_next/static/~partytown/",
+                                lib: "/~partytown/",
                                 forward: ["dataLayer.push", "gtag"],
                             };
                         `,
                     }}
                 />
                 <script
+                    strategy="worker"
                     type="text/partytown"
                     dangerouslySetInnerHTML={{
                         __html: `

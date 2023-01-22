@@ -23,11 +23,11 @@ export default function RootLayout({ children }) {
             <html
                 className={`${fontCute.variable} ${fontHand.variable} ${fontSans.variable} h-full`}
             >
-                <head />
+                <head>
+                    <GoogleAnalytics googleAnalyticsID="G-H23MXPE2MN" />
+                    <KakaoScript />
+                </head>
                 <body className="bg-white h-full">{children}</body>
-
-                <KakaoScript />
-                <GoogleAnalytics googleAnalyticsID="G-H23MXPE2MN" />
             </html>
         </>
     )
