@@ -39,8 +39,7 @@ const encodeVideo = async (videoProps) => {
     const randomAccount = getRandomAwsAccount()
 
     try {
-        //TODO: 환경 변수 설정 문제인지 파악해보기
-        setEnvForRemotionAWSDeploy(2)
+        setEnvForRemotionAWSDeploy(randomAccount)
 
         const deployedLambdaFunctionName = getDeployedLambdaFunctionName()
 
@@ -64,23 +63,37 @@ const encodeVideo = async (videoProps) => {
             },
         })
 
-        return { renderId, bucketName, region: randomRegion }
+        return {
+            renderId,
+            bucketName,
+            region: randomRegion,
+            account: randomAccount,
+        }
     } catch (err) {
         console.warn(`error is occurred in ${randomRegion}`)
         console.warn(err)
-        return { renderId: null, bucketName: null, region: null }
+        return {
+            renderId: null,
+            bucketName: null,
+            region: null,
+            account: randomAccount,
+        }
     }
 }
 
 /**@typedef {Promise<{type: "progress" | "success" | "error", downloadUrl: string | null, outputSize: number | null, errorMessage: string | null, bucketName: string | null, region: string | null }>} RenderingProgress */
 /**
  * `aws s3` -> video 렌더링 상태 조회
- * @param {{renderId: string | null, bucketName: string | null, region: string | null}} renderProgress
+ * @param {{renderId: string | null, bucketName: string | null, region: string | null, account: number}} renderProgress
  * @returns {RenderingProgress}
  */
-const getVideoRenderingProgress = async ({ bucketName, region, renderId }) => {
-    //TODO: 환경 변수 설정 문제인지 파악해보기
-    setEnvForRemotionAWSDeploy(2)
+const getVideoRenderingProgress = async ({
+    bucketName,
+    region,
+    renderId,
+    account,
+}) => {
+    setEnvForRemotionAWSDeploy(account)
 
     if (bucketName === null || region === null || renderId === null) {
         return {
@@ -169,6 +182,7 @@ export default async function handler(req, res) {
     const bucketName = urlSearchParams.get("bucketName")
     const region = urlSearchParams.get("region")
     const renderId = urlSearchParams.get("renderId")
+    const account = urlSearchParams.get("account")
 
     try {
         /**@type {{renderId: string | null; bucketName: string | null; region: string | null;}} */
@@ -176,8 +190,8 @@ export default async function handler(req, res) {
             bucketName,
             region,
             renderId,
+            account,
         })
-        console.log("서버에서 연산", progress)
         res.status(200).json(progress)
     } catch (e) {
         res.status(403).json({
