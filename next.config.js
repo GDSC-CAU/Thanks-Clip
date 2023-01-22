@@ -4,6 +4,7 @@ const nextConfig = {
     swcMinify: true,
     experimental: {
         appDir: true,
+        nextScriptWorkers: true,
     },
     webpack: (config) => {
         config.module.rules.push({
