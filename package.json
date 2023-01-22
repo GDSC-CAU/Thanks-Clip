@@ -20,6 +20,7 @@
         "prepare": "husky install"
     },
     "dependencies": {
+        "@builder.io/partytown": "^0.7.5",
         "@heroicons/react": "^2.0.13",
         "@next/font": "^13.1.2",
         "@remotion/bundler": "3.3.27",

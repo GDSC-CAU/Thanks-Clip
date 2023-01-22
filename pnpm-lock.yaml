@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@aws-sdk/signature-v4-crt': ^3.226.0
+  '@builder.io/partytown': ^0.7.5
   '@heroicons/react': ^2.0.13
   '@next/font': ^13.1.2
   '@remotion/bundler': 3.3.27
@@ -45,6 +46,7 @@ specifiers:
   webpack: ^5.75.0
 
 dependencies:
+  '@builder.io/partytown': 0.7.5
   '@heroicons/react': 2.0.13_react@18.2.0
   '@next/font': 13.1.4
   '@remotion/bundler': 3.3.27_biqbaboplfbrettd7655fr4n2y
@@ -2666,6 +2668,11 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
     dev: true
+
+  /@builder.io/partytown/0.7.5:
+    resolution: {integrity: sha512-Zbr2Eo0AQ4yzmQr/36/h+6LKjmdVBB3Q5cGzO6rtlIKB/IOpbQVUZW+XAnhpJmJr9sIF97OZjgbhG9k7Sjn4yw==}
+    hasBin: true
+    dev: false
 
   /@csstools/postcss-cascade-layers/1.1.1_postcss@8.4.21:
     resolution: {integrity: sha512-+KdYrpKC5TgomQr2DlZF4lDEpHcoxnj5IGddYYfBWJAKfj1JtuHUIqMa+E1pJJ+z3kvDViWMqyqPlG4Ja7amQA==}
