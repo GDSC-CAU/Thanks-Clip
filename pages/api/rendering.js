@@ -54,7 +54,7 @@ const encodeVideo = async (videoProps) => {
 
             codec: "h264",
             maxRetries: 1,
-            scale: 2,
+            scale: 1.5,
             privacy: "public",
             imageFormat: "jpeg",
             downloadBehavior: {

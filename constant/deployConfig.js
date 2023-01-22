@@ -20,7 +20,7 @@ const DEPLOY_CONFIG = {
     SITE_NAME: "thanks-clip",
     VIDEO_COMPOSITION_ID: "thanks-clip",
     VIDEO_ENTRY_POINT: "video/index.jsx",
-    FRAMES_PER_LAMBDA: 10,
+    FRAMES_PER_LAMBDA: 15,
 }
 //!TODO: 배포전 체크리스트 확인 https://www.remotion.dev/docs/lambda/checklist
 
