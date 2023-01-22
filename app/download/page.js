@@ -1,6 +1,6 @@
 import { DownloadClientPage } from "./components/DownloadClient"
 
-/**@typedef {{renderId: string | null; bucketName: string | null; region: string | null; from: string, to: string} DownloadURLParams} */
+/**@typedef {{account: number; renderId: string | null; bucketName: string | null; region: string | null; from: string, to: string} DownloadURLParams} */
 /**
  * @param {{params: any, searchParams: DownloadURLParams}} props
  */

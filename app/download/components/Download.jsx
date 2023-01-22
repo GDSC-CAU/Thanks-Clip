@@ -1,9 +1,8 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
-import { ArrowPathIcon } from "@heroicons/react/24/outline"
-import { Button } from "../../../common/Button"
-/**@typedef {Awaited<import("../../../../api/video").RenderingProgress>} Progress*/
+import { Button } from "../../common/Button"
+/**@typedef {Awaited<import("../../../pages/api/rendering").RenderingProgress>} Progress*/
 
 const byteToSize = ({ byte, type = "kb", ceilOn = 1 }) => {
     const conversionFactors = {
@@ -18,10 +17,9 @@ const byteToSize = ({ byte, type = "kb", ceilOn = 1 }) => {
 }
 
 /**
- * @param {{ encode: {renderId: string | null; bucketName: string | null; region: string | null;} }} downloadProps
- * @returns
+ * @param {{to: string; account: number; renderId: string | null; bucketName: string | null; region: string | null}} renderInfo
  */
-const Download = ({ encode }) => {
+const Download = ({ to, bucketName, region, renderId, account }) => {
     /**@type {[Progress, Dispatch<SetStateAction<Progress>>]} */
     const [progress, setProgress] = useState({
         type: "progress",
@@ -32,8 +30,10 @@ const Download = ({ encode }) => {
 
     const progressRequest = useCallback(() => {
         const getVideoProgress = async () => {
-            const res = await fetch(
-                `/api/rendering?renderId=${encode.renderId}&bucketName=${encode.bucketName}&region=${encode.region}`,
+            const progressRes = await fetch(
+                `/api/rendering?renderId=${renderId}&bucketName=${bucketName}&region=${region}&account=${String(
+                    account
+                )}`,
                 {
                     headers: {
                         Accept: "application/json",
@@ -41,9 +41,7 @@ const Download = ({ encode }) => {
                     method: "GET",
                 }
             )
-
-            /**@type {Progress} */
-            const { progress } = await res.json()
+            const progress = await progressRes.json()
             setProgress(progress)
         }
 
@@ -52,7 +50,7 @@ const Download = ({ encode }) => {
         }, 500)
 
         return cleanupProgressRequest
-    }, [encode, setProgress])
+    }, [account, region, renderId, bucketName, setProgress])
 
     useEffect(() => {
         /**@type {NodeJS.Timeout} */
@@ -70,17 +68,28 @@ const Download = ({ encode }) => {
         <>
             {progress.type === "success" && (
                 <a href={progress.downloadUrl} download={"thanks clip"}>
-                    <Button color="red">
-                        다운로드 {byteToSize({ byte: progress.outputSize })}
+                    <Button color="red" className="mb-5 z-50 gap-4">
+                        {to}님의 Clip 열어보기
+                        <p className="text-xs font-normal">
+                            {byteToSize({ byte: progress.outputSize })}
+                        </p>
                     </Button>
                 </a>
             )}
             {progress.type === "progress" && (
-                <Button disabled color="gray">
-                    <ArrowPathIcon className="animate-spin h-8 w-8" />
+                <Button
+                    disabled
+                    color="gray"
+                    className="mb-5 z-50 animate-pulse"
+                >
+                    Clip을 만들고 있어요!
                 </Button>
             )}
-            {progress.type === "error" && <Button color="white">에러</Button>}
+            {progress.type === "error" && (
+                <Button color="red" className="mb-5 z-50">
+                    지금은 Clip을 열 수 없어요 😭
+                </Button>
+            )}
         </>
     )
 }

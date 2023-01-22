@@ -1,6 +1,9 @@
 "use client"
 import { useCallback, useEffect } from "react"
 
+/**
+ * @param {{children: React.ReactNode, urlParams: import("../../../download/page").DownloadURLParams, onClick: null | () => void, className?: string}} props
+ */
 const KakaoShareLink = ({ children, urlParams, onClick = null, className }) => {
     const openKakaoShare = useCallback(() => {
         const kakao = window.Kakao
@@ -15,7 +18,7 @@ const KakaoShareLink = ({ children, urlParams, onClick = null, className }) => {
                 templateArgs: {
                     to: urlParams.to,
                     from: urlParams.from,
-                    path: `download?from=${urlParams.from}&to=${urlParams.to}&region=${urlParams.region}&bucketName=${urlParams.bucketName}&renderId=${urlParams.renderId}`,
+                    path: `download?from=${urlParams.from}&to=${urlParams.to}&region=${urlParams.region}&bucketName=${urlParams.bucketName}&renderId=${urlParams.renderId}&account=${urlParams.account}`,
                 },
             })
         }
