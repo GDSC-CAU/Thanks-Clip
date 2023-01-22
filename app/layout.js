@@ -1,5 +1,6 @@
 import importFont from "@next/font/local"
-import Script from "next/script"
+import { GoogleAnalytics } from "./service/GoogleAnalytics"
+import { KakaoScript } from "./service/KakaoScript"
 
 import "./index.css"
 
@@ -25,10 +26,8 @@ export default function RootLayout({ children }) {
                 <head />
                 <body className="bg-white h-full">{children}</body>
 
-                <Script
-                    strategy="lazyOnload"
-                    src="https://developers.kakao.com/sdk/js/kakao.js"
-                />
+                <KakaoScript />
+                <GoogleAnalytics googleAnalyticsID="G-H23MXPE2MN" />
             </html>
         </>
     )
