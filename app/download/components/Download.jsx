@@ -17,9 +17,9 @@ const byteToSize = ({ byte, type = "kb", ceilOn = 1 }) => {
 }
 
 /**
- * @param {{to: string; renderId: string | null; bucketName: string | null; region: string | null}} renderInfo
+ * @param {{to: string; account: number; renderId: string | null; bucketName: string | null; region: string | null}} renderInfo
  */
-const Download = ({ to, bucketName, region, renderId }) => {
+const Download = ({ to, bucketName, region, renderId, account }) => {
     /**@type {[Progress, Dispatch<SetStateAction<Progress>>]} */
     const [progress, setProgress] = useState({
         type: "progress",
@@ -30,8 +30,10 @@ const Download = ({ to, bucketName, region, renderId }) => {
 
     const progressRequest = useCallback(() => {
         const getVideoProgress = async () => {
-            const res = await fetch(
-                `/api/rendering?renderId=${renderId}&bucketName=${bucketName}&region=${region}`,
+            const progressRes = await fetch(
+                `/api/rendering?renderId=${renderId}&bucketName=${bucketName}&region=${region}&account=${String(
+                    account
+                )}`,
                 {
                     headers: {
                         Accept: "application/json",
@@ -39,8 +41,7 @@ const Download = ({ to, bucketName, region, renderId }) => {
                     method: "GET",
                 }
             )
-            const progress = await res.json()
-            console.log(progress)
+            const progress = await progressRes.json()
             setProgress(progress)
         }
 
@@ -49,7 +50,7 @@ const Download = ({ to, bucketName, region, renderId }) => {
         }, 500)
 
         return cleanupProgressRequest
-    }, [region, renderId, bucketName, setProgress])
+    }, [account, region, renderId, bucketName, setProgress])
 
     useEffect(() => {
         /**@type {NodeJS.Timeout} */
@@ -67,9 +68,11 @@ const Download = ({ to, bucketName, region, renderId }) => {
         <>
             {progress.type === "success" && (
                 <a href={progress.downloadUrl} download={"thanks clip"}>
-                    <Button color="red" className="mb-5 z-50">
+                    <Button color="red" className="mb-5 z-50 gap-2">
                         {to}님의 Clip 열어보기
-                        {byteToSize({ byte: progress.outputSize })}
+                        <p className="text-xs font-normal">
+                            {byteToSize({ byte: progress.outputSize })}
+                        </p>
                     </Button>
                 </a>
             )}

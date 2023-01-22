@@ -16,14 +16,13 @@ const DownloadClientPage = () => {
     const bucketName = searchParams.get("bucketName")
     const renderId = searchParams.get("renderId")
     const region = searchParams.get("region")
+    const account = Number(searchParams.get("account"))
 
     const isValid =
-        ((searchParams.bucketName !== "") | null | undefined &&
-            (searchParams.region !== "") | null | undefined &&
-            (searchParams.renderId !== "") | null | undefined) === 1
+        ((bucketName !== "") | null | undefined &&
+            (region !== "") | null | undefined &&
+            (renderId !== "") | null | undefined) === 1
 
-    const videoDownloadURL = `https://s3.${region}.amazonaws.com/${bucketName}/renders/${renderId}/out.mp4`
-    console.log(videoDownloadURL)
     return (
         <>
             {isValid && <Confetti />}
@@ -39,6 +38,7 @@ const DownloadClientPage = () => {
                     {isValid ? (
                         <Download
                             to={to}
+                            account={account}
                             region={region}
                             renderId={renderId}
                             bucketName={bucketName}
