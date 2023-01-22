@@ -2,30 +2,28 @@ import Script from "next/script"
 
 const GoogleAnalytics = ({ googleAnalyticsID }) => (
     <>
-        {process.env.NODE_ENV === "production" && (
-            <>
-                <Script
-                    strategy="worker"
-                    type="text/partytown"
-                    src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsID}`}
-                />
-                <script
-                    strategy="worker"
-                    type="text/partytown"
-                    dangerouslySetInnerHTML={{
-                        __html: `
+        {/* {process.env.NODE_ENV === "production" && ( */}
+        <>
+            <Script
+                strategy="worker"
+                src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsID}`}
+            />
+            <script
+                data-partytown-config
+                dangerouslySetInnerHTML={{
+                    __html: `
                             partytown = {
-                                lib: "/~partytown/",
+                                lib: "/_next/static/~partytown/",
                                 forward: ["dataLayer.push", "gtag"],
                             };
                         `,
-                    }}
-                />
-                <script
-                    strategy="worker"
-                    type="text/partytown"
-                    dangerouslySetInnerHTML={{
-                        __html: `
+                }}
+            />
+            <script
+                strategy="worker"
+                type="text/partytown"
+                dangerouslySetInnerHTML={{
+                    __html: `
                             window.dataLayer = window.dataLayer || [];
                             window.gtag = function gtag(){window.dataLayer.push(arguments);};
                             gtag('js', new Date());
@@ -37,10 +35,10 @@ const GoogleAnalytics = ({ googleAnalyticsID }) => (
                                 }
                             );
                         `,
-                    }}
-                />
-            </>
-        )}
+                }}
+            />
+        </>
+        {/* )} */}
     </>
 )
 
