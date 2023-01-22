@@ -6,6 +6,7 @@ export default function Head() {
                 content="width=device-width, initial-scale=1"
                 name="viewport"
                 lang="ko-KR"
+                charSet="utf-8"
             />
             <link rel="icon" href="/logo/red.png" />
             <meta name="author" content="GDSC-CAU" />
@@ -31,6 +32,10 @@ export default function Head() {
                 name="twitter:description"
                 content="쉽고 빠르게 짧은 동영상을 만들어 고마운 마음을 전해볼까요?"
             />
+
+            <meta name="robots" content="all" />
+            <meta name="googlebot" content="all" />
+            <meta name="NaverBot" content="all" />
         </>
     )
 }
