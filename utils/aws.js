@@ -1,12 +1,16 @@
 import { VERSION } from "remotion/version"
-import { DEPLOY_CONFIG } from "../../../constant/deployConfig.js"
+import { DEPLOY_CONFIG } from "../constant/deployConfig.js"
 
+/**
+ * @note `AWS lambda`에 배포된 `remotion` 함수 이름
+ */
 const getDeployedLambdaFunctionName = () =>
     `remotion-render-${VERSION.replace(/\./g, "-")}-mem${
-        DEPLOY_CONFIG.RAM
-    }mb-disk${DEPLOY_CONFIG.DISK}mb-${DEPLOY_CONFIG.TIMEOUT}sec`
+        DEPLOY_CONFIG.LAMBDA.RAM
+    }mb-disk${DEPLOY_CONFIG.LAMBDA.DISK}mb-${DEPLOY_CONFIG.LAMBDA.TIMEOUT}sec`
 
-/** 배포할 AWS 지역 목록입니다.
+/** 
+ * @note 배포할 `AWS` region 목록
  * @returns {[
     "us-east-1",
     "us-east-2",
@@ -46,11 +50,17 @@ const getAWSRegions = () => [
     "eu-west-3",
 ]
 
+/**
+ * @note random한 `AWS` region을 가져옵니다
+ */
 const getRandomAWSRegion = () => {
     const regions = getAWSRegions()
     return regions[Math.floor(Math.random() * regions.length)]
 }
 
+/**
+ * @note `.env`에 저장된 `AWS` 계정의 갯수를 가져옵니다
+ */
 const getAWSAccountCount = () => {
     let count = 0
     while (
@@ -63,25 +73,28 @@ const getAWSAccountCount = () => {
     return count
 }
 
+/**
+ * @note `.env`에 저장된 임의의 `AWS` 계정의 순서를 가져옵니다
+ */
 const getRandomAwsAccount = () =>
     Math.ceil(Math.random() * getAWSAccountCount())
 
 /**
- * remotion을 위한 aws환경 변수를 설정합니다.
+ * @note `remotion`을 위한 `AWS` 환경 변수를 설정합니다
  * ```bash
- * # 환경변수는 다음과 같이 저장해주세요
  * AWS_KEY_1=유저1
  * AWS_SECRET_1=유저1_배포_키
- *
- * AWS_KEY_2=유저2
- * AWS_SECRET_2=유저2_배포_키
+ * # 변환 결과
+ * REMOTION_AWS_ACCESS_KEY_ID=유저1
+ * REMOTION_AWS_SECRET_ACCESS_KEY=유저1_배포_키
  * ```
- * @param {number} keyOrder
+ * @param {number} accountCount `getAWSAccountCount()`를 인자로 받습니다
  */
-const setEnvForRemotionAWSDeploy = (keyOrder) => {
-    process.env.REMOTION_AWS_ACCESS_KEY_ID = process.env[`AWS_KEY_${keyOrder}`]
+const setEnvForRemotionAWSDeploy = (accountCount) => {
+    process.env.REMOTION_AWS_ACCESS_KEY_ID =
+        process.env[`AWS_KEY_${accountCount}`]
     process.env.REMOTION_AWS_SECRET_ACCESS_KEY =
-        process.env[`AWS_SECRET_${keyOrder}`]
+        process.env[`AWS_SECRET_${accountCount}`]
 }
 
 export {
