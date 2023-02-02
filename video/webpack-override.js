@@ -1,8 +1,9 @@
 /**
+ * @note `tailwindcss` remotion 셋팅, (현재 불필요)
  * @param {Parameters<import("remotion").WebpackOverrideFn>[0]} currentConfiguration
  * @returns {ReturnType<import("remotion").WebpackOverrideFn>}
  */
-const webpackOverride = (currentConfiguration) => {
+const tailwindcssWebpackOverride = (currentConfiguration) => {
     return {
         ...currentConfiguration,
         module: {
@@ -44,4 +45,4 @@ const webpackOverride = (currentConfiguration) => {
     }
 }
 
-export { webpackOverride }
+export { tailwindcssWebpackOverride }
