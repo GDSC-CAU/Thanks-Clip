@@ -9,7 +9,7 @@ import {
     getAWSAccountCount,
     getAWSRegions,
     setEnvForRemotionAWSDeploy,
-} from "../pages/api/_aws/index.js"
+} from "../utils/aws.js"
 
 dotenv.config()
 
@@ -39,15 +39,15 @@ const deployLambdaAndS3Bucket = async () => {
                 const { functionName, alreadyExisted } = await deployFunction({
                     architecture: "arm64",
                     createCloudWatchLogGroup: true,
-                    memorySizeInMb: DEPLOY_CONFIG.RAM,
-                    diskSizeInMb: DEPLOY_CONFIG.DISK,
-                    timeoutInSeconds: DEPLOY_CONFIG.TIMEOUT,
+                    memorySizeInMb: DEPLOY_CONFIG.LAMBDA.RAM,
+                    diskSizeInMb: DEPLOY_CONFIG.LAMBDA.DISK,
+                    timeoutInSeconds: DEPLOY_CONFIG.LAMBDA.TIMEOUT,
                     region: awsRegion,
                 })
 
                 console.log(
                     `${chalk.bold.greenBright(
-                        `REGION: ${awsRegion}\nRAM: ${DEPLOY_CONFIG.RAM}mb\nDISK: ${DEPLOY_CONFIG.DISK}mb`
+                        `REGION: ${awsRegion}\nRAM: ${DEPLOY_CONFIG.LAMBDA.RAM}mb\nDISK: ${DEPLOY_CONFIG.LAMBDA.DISK}mb`
                     )}`
                 )
                 console.log(
@@ -63,10 +63,10 @@ const deployLambdaAndS3Bucket = async () => {
                 })
                 const { serveUrl } = await deploySite({
                     bucketName,
-                    siteName: DEPLOY_CONFIG.SITE_NAME,
+                    siteName: DEPLOY_CONFIG.BUCKET.SITE_NAME,
                     entryPoint: path.join(
                         process.cwd(),
-                        DEPLOY_CONFIG.VIDEO_ENTRY_POINT
+                        DEPLOY_CONFIG.BUCKET.VIDEO_ENTRY_POINT
                     ),
                     region: awsRegion,
                 })

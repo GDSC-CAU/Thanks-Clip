@@ -9,7 +9,7 @@ import {
     getAWSAccountCount,
     getAWSRegions,
     setEnvForRemotionAWSDeploy,
-} from "../pages/api/_aws/index.js"
+} from "../utils/aws.js"
 
 dotenv.config()
 
