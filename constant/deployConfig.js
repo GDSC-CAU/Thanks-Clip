@@ -1,27 +1,46 @@
-/** 
- * 배포 설정 상수
- * @type {{
-    DURATION: number;
-    RAM: number;
-    DISK: number;
-    TIMEOUT: number;
-    SITE_NAME: "thanks-clip";
-    VIDEO_ENTRY_POINT: "video/index.jsx";
-    VIDEO_COMPOSITION_ID: "thanks-clip";
-    // 몇 프레임당, 람다 함수 1개 호출할거야? -> 적을수록 고성능 / 동시성 증가
-    FRAMES_PER_LAMBDA: number,
-}} 
-*/
+/**
+ * @note `AWS lambda` 배포 옵션
+ * @link [`remotion` 배포 옵션 필독 ](https://www.remotion.dev/docs/lambda/checklist)
+ */
 const DEPLOY_CONFIG = {
-    DURATION: 1100,
-    RAM: 2048,
-    DISK: 512,
-    TIMEOUT: 240,
-    SITE_NAME: "thanks-clip",
+    // lambda 함수 옵션
+    LAMBDA: {
+        /**
+         * 가상 머신 ram 크기, 커질수록 비용 증가
+         */
+        RAM: 2048,
+        /**
+         * 가상 머신 disk(hard drive) 크기, 커질수록 비용 증가
+         */
+        DISK: 512,
+        TIMEOUT: 240,
+    },
+
+    BUCKET: {
+        /**
+         * s3 bucketName
+         */
+        SITE_NAME: "thanks-clip",
+        /**
+         * remotion 접근 root point
+         */
+        VIDEO_ENTRY_POINT: "video/index.jsx",
+    },
+
+    /**
+     * remotion video render root
+     */
     VIDEO_COMPOSITION_ID: "thanks-clip",
-    VIDEO_ENTRY_POINT: "video/index.jsx",
+
+    /**
+     * frame당 lambda 함수 갯수, 커질수록 비용 증가
+     */
     FRAMES_PER_LAMBDA: 15,
+
+    /**
+     * resolution scale 비율, 커질수록 비용 증가
+     */
+    RESOLUTION_SCALE: 1.5,
 }
-//!TODO: 배포전 체크리스트 확인 https://www.remotion.dev/docs/lambda/checklist
 
 export { DEPLOY_CONFIG }
