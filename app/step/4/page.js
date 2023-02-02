@@ -9,6 +9,7 @@ import { LetterToName } from "./components/LetterToName"
 import { Viewer } from "./components/Viewer"
 
 /**
+ * @param {{ id: number, text: string }[]} tags
  * tag text 추출
  * ```ts
  * type Tag = { id: number, text: string }
