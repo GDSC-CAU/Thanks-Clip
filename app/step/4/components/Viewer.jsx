@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Player } from "@remotion/player"
+import { VIDEO_CONFIG } from "../../../../constant/videoConfig.js"
 import { RemotionCompositionClient } from "../../../../video/CompositionClient.jsx"
-import { VIDEO_CONFIG } from "../video-config"
 
 const useViewerSize = ({ containerRef }) => {
     const [size, setSize] = useState(0)
