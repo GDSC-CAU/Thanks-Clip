@@ -26,7 +26,7 @@ export default function Step4Loading() {
     return (
         <div className="flex flex-col h-full items-center justify-center gap-4">
             <div className="relative w-full h-20">
-                <div className="abosolute">
+                <div className="absolute">
                     <LogoAirplane />
                 </div>
             </div>
