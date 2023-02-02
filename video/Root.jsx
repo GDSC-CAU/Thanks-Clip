@@ -12,7 +12,9 @@ const VIDEO_CONFIG = {
 const RemotionRoot = () => {
     return (
         <Composition
-            //!TODO: deployConfig.js의 VIDEO_COMPOSITION_ID와 값이 반드시 동일해야 합니다!
+            /**
+             * @note `VIDEO_COMPOSITION_ID`와 값이 반드시 동일해야 함
+             */
             id="thanks-clip"
             component={RemotionCompositionServer}
             {...VIDEO_CONFIG}
