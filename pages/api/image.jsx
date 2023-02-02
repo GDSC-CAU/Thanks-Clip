@@ -1,27 +1,28 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ImageResponse } from "@vercel/og"
+import { getSearchParams } from "../../utils/params"
 
 export const config = {
     runtime: "edge",
 }
 
 /**
- * 예시 요청
- * `/api/image?font=cute&from=june&to=me&letter=안녕&lettertype=torn`
+ * ```ts
+ * // 예시 요청 URL
+ * const URL = `/api/image?font=cute&from=june&to=me&letter=안녕&lettertype=torn`
+ * ```
  * @param {import("next/server").NextRequest} middleReq
  */
-const getLetterRenderProps = (middleReq) => {
+const getLetterServerRenderProps = (middleReq) => {
     const {
         nextUrl: { search },
     } = middleReq
-    const urlSearchParams = new URLSearchParams(search)
-
-    const font = urlSearchParams.get("font")
-    const from = `From. ${urlSearchParams.get("from")}`
-    const to = `To. ${urlSearchParams.get("to")}`
-    const letter = urlSearchParams.get("letter")
-    const letterType = urlSearchParams.get("lettertype")
+    const { font, from, letter, letterType, to } = getSearchParams({
+        params: search,
+        search: ["font", "from", "to", "letter", "letterType"],
+        type: "server",
+    })
 
     const calculateHeight = () => {
         if (letterType === "torn") return 216
@@ -31,8 +32,8 @@ const getLetterRenderProps = (middleReq) => {
     }
 
     return {
-        to,
-        from,
+        to: `To. ${to}`,
+        from: `From. ${from}`,
         letter,
         font,
         height: calculateHeight(),
@@ -46,20 +47,30 @@ const imageConfig = {
     lineHeight: 17.6,
     emoji: "twemoji",
 }
-const getAWSFontURL = (font) =>
-    `https://thanks-clip-font.s3.ap-northeast-2.amazonaws.com/${font}.ttf`
+/**
+ * @note `AWS s3`에서 호스팅 되고 있는 폰트를 가져옵니다
+ * @example
+ * ```bash
+ * # Font 호스팅 s3 bucket 주소
+ * AWS_FONT=https://aws...
+ * ```
+ * @param {"cute" | "hand" | "sans"} font
+ */
+const getAWSFontURL = (font) => `${process.env.AWS_FONT}/${font}.ttf`
 
 /**
  * @param {import("next/server").NextRequest} middleReq
  */
 export default async function handler(middleReq) {
-    const { font, from, height, letter, to } = getLetterRenderProps(middleReq)
+    const { font, from, height, letter, to } =
+        getLetterServerRenderProps(middleReq)
 
-    const fontData = await fetch(getAWSFontURL(font)).then((res) =>
-        res.arrayBuffer()
-    )
     try {
-        const image = new ImageResponse(
+        const fontDataFromS3 = await fetch(getAWSFontURL(font)).then((res) =>
+            res.arrayBuffer()
+        )
+
+        const letterTextImage = new ImageResponse(
             (
                 <div
                     style={{
@@ -114,14 +125,14 @@ export default async function handler(middleReq) {
                 emoji: imageConfig.emoji,
                 fonts: [
                     {
-                        data: fontData,
+                        data: fontDataFromS3,
                         name: font,
                     },
                 ],
             }
         )
 
-        return image
+        return letterTextImage
     } catch (e) {
         throw new Error(e)
     }
