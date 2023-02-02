@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
+import { getSearchParams } from "../../../utils/params"
 import { Button } from "../../common/Button"
 import { Confetti } from "./Confetti"
 import { Download } from "./Download"
@@ -11,21 +12,26 @@ import { Envelop } from "./Envelope"
 const DownloadClientPage = () => {
     const searchParams = useSearchParams()
 
-    const to = searchParams.get("to")
-    const from = searchParams.get("from")
-    const bucketName = searchParams.get("bucketName")
-    const renderId = searchParams.get("renderId")
-    const region = searchParams.get("region")
-    const account = Number(searchParams.get("account"))
+    const { account, bucketName, from, region, renderId, to } = getSearchParams(
+        {
+            params: searchParams,
+            search: [
+                "to",
+                "from",
+                "bucketName",
+                "renderId",
+                "region",
+                "account",
+            ],
+            type: "client",
+        }
+    )
 
-    const isValid =
-        ((bucketName !== "") | null | undefined &&
-            (region !== "") | null | undefined &&
-            (renderId !== "") | null | undefined) === 1
+    const isRenderValid = bucketName && renderId && region
 
     return (
         <>
-            {isValid && <Confetti />}
+            {isRenderValid && <Confetti />}
 
             <div className="h-full flex flex-col justify-between">
                 <DownloadTitle from={from} />
@@ -35,7 +41,7 @@ const DownloadClientPage = () => {
                 </div>
 
                 <div className="mt-auto mb-5">
-                    {isValid ? (
+                    {isRenderValid ? (
                         <Download
                             to={to}
                             account={account}
