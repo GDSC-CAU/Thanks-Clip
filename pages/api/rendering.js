@@ -2,24 +2,28 @@
 /* eslint-disable no-unused-vars */
 import { getRenderProgress, renderMediaOnLambda } from "@remotion/lambda/client"
 import { DEPLOY_CONFIG } from "../../constant/deployConfig.js"
+import { LETTER_SIZE } from "../../constant/letter.js"
 import { pathBase } from "../../constant/path.js"
 import {
     getDeployedLambdaFunctionName,
     getRandomAWSRegion,
     getRandomAwsAccount,
     setEnvForRemotionAWSDeploy,
-} from "./_aws/index.js"
+} from "../../utils/aws.js"
 
 /**
- * `videoProps`로 변환, server 전달
+ * @note `client letterProps`를 `server videoProps`로 변환
  * @param {Required<import("../../atoms/letter").Letter>} letterProps
  * @returns {Promise<import("../../video/CompositionServer").LetterVideoProps>}
  */
-const transformVideoProps = async (letterProps) => {
+const getServerVideoProps = async (letterProps) => {
+    /**
+     * @note `remotion`에서 요청할 letter Text `Image`경로
+     */
     const letterImageURL = `${pathBase}/api/image?font=${letterProps.font}&from=${letterProps.from}&to=${letterProps.to}&letter=${letterProps.letter}&lettertype=${letterProps.letterType}`
 
     return {
-        size: 300,
+        size: LETTER_SIZE,
         letterImageURL,
         to: letterProps.to,
         tags: letterProps.tags,
@@ -30,8 +34,8 @@ const transformVideoProps = async (letterProps) => {
 }
 
 /**
- * Remotion video `aws lambda` 렌더링 -> `aws bucket` 호스팅
- * @param {import("../../../video/Composition").LetterVideoProps} videoProps
+ * @note `AWS lambda` 렌더링 시도, `AWS bucket`에 업로드
+ * @param {import("../../../video/Composition").LetterVideoProps} videoProps video rendering `server` props, passing to `<CompositionServer {...inputProps} />`
  */
 const encodeVideo = async (videoProps) => {
     // 분산 렌더링
@@ -46,11 +50,12 @@ const encodeVideo = async (videoProps) => {
         const { renderId, bucketName } = await renderMediaOnLambda({
             region: randomRegion,
             functionName: deployedLambdaFunctionName,
-            serveUrl: DEPLOY_CONFIG.SITE_NAME,
+            serveUrl: DEPLOY_CONFIG.BUCKET.SITE_NAME,
+
             composition: DEPLOY_CONFIG.VIDEO_COMPOSITION_ID,
             framesPerLambda: DEPLOY_CONFIG.FRAMES_PER_LAMBDA,
 
-            inputProps: videoProps, // 필요한 정보 수집
+            inputProps: videoProps,
 
             codec: "h264",
             maxRetries: 1,
@@ -83,7 +88,7 @@ const encodeVideo = async (videoProps) => {
 
 /**@typedef {Promise<{type: "progress" | "success" | "error", downloadUrl: string | null, outputSize: number | null, errorMessage: string | null, bucketName: string | null, region: string | null }>} RenderingProgress */
 /**
- * `aws s3` -> video 렌더링 상태 조회
+ * @note `AWS s3` ~ 렌더링 상태 조회
  * @param {{renderId: string | null, bucketName: string | null, region: string | null, account: number}} renderProgress
  * @returns {RenderingProgress}
  */
@@ -205,4 +210,4 @@ export default async function handler(req, res) {
     }
 }
 
-export { encodeVideo, transformVideoProps }
+export { encodeVideo, getServerVideoProps as transformVideoProps }

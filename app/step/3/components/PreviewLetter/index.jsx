@@ -3,12 +3,12 @@
 import { useAtomValue } from "jotai"
 import Link from "next/link"
 import { store } from "../../../../../atoms"
-import { COOKIE_KEY, setPropsOnCookie } from "../../../../../constant/cookie"
+import { COOKIE_KEY } from "../../../../../constant/cookie"
+import { LETTER_SIZE } from "../../../../../constant/letter"
+import { setPropsOnCookie } from "../../../../../utils/cookie"
 import { Button } from "../../../../common/Button"
 import { Modal, useModalState } from "../../../../common/Modal"
 import { LetterStaticClient } from "../Letter/LetterStatic"
-
-const letterSize = 300
 
 const PreviewLetter = () => {
     const { action, isClose } = useModalState()
@@ -26,7 +26,7 @@ const PreviewLetter = () => {
             >
                 <div className="w-[330px] flex flex-col items-center justify-center gap-10">
                     <div className="scale-110">
-                        <LetterStaticClient {...letter} size={letterSize} />
+                        <LetterStaticClient {...letter} size={LETTER_SIZE} />
                     </div>
                     <div className="grid grid-cols-2 w-full gap-5">
                         <Button color="gray" onClick={() => action.close()}>

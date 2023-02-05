@@ -58,11 +58,11 @@ const Download = ({ to, bucketName, region, renderId, account }) => {
         if (progress.type === "progress") {
             cleanupRequest = progressRequest()
         }
-        if (progress.type === "error") {
+        if (progress.type === "error" || progress.type === "success") {
             cleanupRequest = null
         }
         return () => clearTimeout(cleanupRequest)
-    }, [progress, progress.type, progressRequest])
+    }, [progress.type, progressRequest])
 
     return (
         <>

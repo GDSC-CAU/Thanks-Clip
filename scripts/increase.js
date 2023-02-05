@@ -6,7 +6,7 @@ import {
     getAWSAccountCount,
     getAWSRegions,
     setEnvForRemotionAWSDeploy,
-} from "../pages/api/_aws/index.js"
+} from "../utils/aws.js"
 
 dotenv.config()
 
@@ -23,8 +23,8 @@ console.log(
 )
 
 /**
- * 등록된 aws계정(N개)에 lambda concurrency limit 제한량을 1000으로 올리는 요청을 합니다
- * @note 동영상 렌더링 속도를 올리기 위해 필요한 과정입니다
+ * @note 등록된 `AWS` 계정(`N`개)에 `lambda concurrency limit` 제한량을 `1000`으로 올리는 요청을 합니다
+ * @note 동영상 렌더링 속도를 올리기 위해 필요한 과정 (동시성 증가)
  */
 const increaseLambdaQuota = async () => {
     for (
