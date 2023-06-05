@@ -1,5 +1,3 @@
-# README 시안
-
 # 💌 Thanks Clip
 
 ---
