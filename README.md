@@ -87,17 +87,17 @@
     
 2. 영상 `client`
     
-    서버에서 영상을 만드는 동안 로딩화면이 표시됩니다.
+   - 서버에서 영상을 만드는 동안 로딩화면이 표시됩니다.
     
-<center>
-    <img src="./readme/10.png" width="70%">
-</center>
+    <center>
+        <img src="./readme/10.png" width="70%">
+    </center>
 
-    만들어진 편지 clip을 공유하기 전에 확인할 수 있습니다.
+    - 만들어진 편지 clip을 공유하기 전에 확인할 수 있습니다.
     
-<center>
-    <img src="./readme/11.png" width="70%">
-</center>
+    <center>
+        <img src="./readme/11.png" width="70%">
+    </center>
 
 ### 5. 카카오톡 공유
 
